@@ -42,6 +42,7 @@
     "i18next": "^21.8.10",
     "i18next-http-backend": "^1.4.1",
     "postcss": "^8.4.14",
+    "postcss-each": "^1.1.0",
     "prettier": "^2.7.1",
     "react-i18next": "^11.17.2",
     "storybook-addon-next": "^1.6.6",

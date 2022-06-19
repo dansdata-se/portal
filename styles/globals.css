@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @each $token in primary, on-primary, primary-container, on-primary-container,
+    secondary, on-secondary, secondary-container, on-secondary-container,
+    tertiary, on-tertiary, tertiary-container, on-tertiary-container, error,
+    on-error, error-container, on-error-container, outline, background,
+    on-background, surface, on-surface, surface-variant, on-surface-variant,
+    inverse-surface, inverse-on-surface
+  {
+    .bg-md-sys-color-$(token),
+    .bg-$(token) {
+      @apply bg-md-sys-color-$(token)-light dark:bg-md-sys-color-$(token)-dark;
+    }
+    .text-md-sys-color-$(token),
+    .text-$(token) {
+      @apply text-md-sys-color-$(token)-light dark:text-md-sys-color-$(token)-dark;
+    }
+  }
+
+  hr {
+    @apply text-md-sys-color-outline-light dark:text-md-sys-color-outline-dark;
+  }
+}
