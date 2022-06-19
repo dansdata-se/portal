@@ -38,6 +38,19 @@ The portal uses supabase as its backend. For more details on local development u
 supabase during local development, please see the
 [official guide](https://supabase.com/docs/guides/local-development).
 
+### Storybook
+
+Components are documented using [Storybook](https://storybook.js.org/).
+
+You can view this documentation by running
+
+```bash
+npm run storybook
+```
+
+Stories should be located next to their respective components in a `[component].stories.mdx` file.
+Note that `mdx` is the preferred format for this project, though `tsx` is also supported if `mdx` does not offer enough flexibility.
+
 ## About Dansdata.se
 
 Dansdata (lit. "dance data") is an open API for information relating to social dancing in Sweden.

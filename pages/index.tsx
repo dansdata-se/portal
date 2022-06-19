@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>{t("Hello World")}</h1>
+        <h1 className="dark:text-white">{t("Hello World")}</h1>
         <Link
           href="/"
           locale={router.locale === "en" ? "sv" : "en"}
