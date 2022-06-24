@@ -43,6 +43,10 @@ export default function Document() {
           name="theme-color"
           content="#006877"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Norican&family=Roboto+Flex:opsz@8..144&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

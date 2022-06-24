@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className={styles.main}>
+      <main className={styles.main + " prose"}>
         <h1 className="text-primary">{t("Hello World")}</h1>
         <Link
           href="/"
