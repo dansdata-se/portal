@@ -1,6 +1,8 @@
 module.exports = {
   stories: [
     "./readme.stories.mdx",
+    "../components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../styles/index.stories.mdx",
     "../styles/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../pages/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],

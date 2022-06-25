@@ -3,6 +3,6 @@
 @import "./typography.css";
 
 @import "tailwindcss/components";
-@import "./components/button.css";
+@import "./components/button";
 
 @import "tailwindcss/utilities";

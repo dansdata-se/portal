@@ -48,8 +48,7 @@ You can view this documentation by running
 npm run storybook
 ```
 
-Stories should be located next to their respective components in a `[component].stories.mdx` file.
-Note that `mdx` is the preferred format for this project, though `tsx` is also supported if `mdx` does not offer enough flexibility.
+Stories should be located next to their respective components in a `[component].stories.(mdx|tsx)` file.
 
 ## About Dansdata.se
 

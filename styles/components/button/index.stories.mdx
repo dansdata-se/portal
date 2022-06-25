@@ -1,0 +1,74 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+import LinkTo from "@storybook/addon-links/react";
+import resolveConfig from "tailwindcss/resolveConfig";
+import { Plus } from "react-feather";
+import classNames from "classnames";
+
+<Meta
+  title="Styles/Components/Button"
+  argTypes={{
+    type: {
+      options: ["elevated", "filled", "tonal", "outlined", "text"],
+      control: {
+        type: "select",
+      },
+    },
+  }}
+/>
+
+# Button
+
+## Common Buttons
+
+_Note: There exists a <LinkTo kind="components-button">helper component for buttons</LinkTo>_
+
+_Icon Buttons should NOT use this style. See separate section for Icon Buttons._
+
+Common buttons are created using the `.btn` class and `.btn-${variant}` modifiers.
+The expected target element is `button`.
+
+Direct children of the `button` element must be contained in an element:
+
+```html
+<!-- ✅ Do this ✅ -->
+<button class="btn btn-text">
+  <span>Click me!</span>
+</button>
+
+<!-- ❌ Not this ❌ -->
+<button class="btn btn-text">Click me!</button>
+```
+
+The button supports `<img />` and `<svg />` icons:
+
+```html
+<button class="btn btn-text">
+  <img src="someicon.png" />
+  <span>Click me!</span>
+</button>
+```
+
+<Canvas>
+  <Story
+    name="Common"
+    args={{
+      type: "elevated",
+      icon: false,
+      disabled: false,
+      "w-full": false,
+      label: "Click me!",
+    }}
+  >
+    {({ type, icon, disabled, label, "w-full": w_full }) => (
+      <button
+        className={classNames("btn", `btn-${type}`, {
+          "w-full": w_full,
+        })}
+        disabled={disabled}
+      >
+        {icon && <Plus />}
+        {label && <span>{label}</span>}
+      </button>
+    )}
+  </Story>
+</Canvas>

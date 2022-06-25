@@ -1,0 +1,31 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+import resolveConfig from "tailwindcss/resolveConfig";
+import { Plus } from "react-feather";
+import classNames from "classnames";
+
+<Meta title="Styles/README" />
+
+# Dansdata Style Guide
+
+The design for the Dansdata portal is based on [Material Design 3](https://m3.material.io/).
+
+The project uses [tailwindcss](https://tailwindcss.com/) for styling and
+[Feather Icons](https://feathericons.com/) for icons.
+
+Since there are not yet any Material Design 3 compatible component frameworks available,
+I decided to add components using tailwindcss based on the guidelines and project needs.
+This is probably a bad idea (considering the extra work), but now I'm commited.
+
+## Design Tokens
+
+This project tries to stay true to Material Design 3, which includes the use of
+[design tokens](https://m3.material.io/foundations/design-tokens/overview).
+
+Shortforms are acceptable when warranted (e.g. `bg-primary` instead of
+`bg-md-sys-color-primary`) but the long version should preferably still be declared.
+
+I admit this policy is due to lack of experience on my part.
+
+## Assets
+
+See the [design repository](https://github.com/dansdata-se/design) for design assets.

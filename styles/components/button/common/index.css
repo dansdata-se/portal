@@ -4,14 +4,29 @@
 
 @layer components {
   .btn {
-    @apply relative flex items-center justify-center rounded-[1.25rem] min-h-[2.5rem] px-6 label-large overflow-hidden before:absolute before:top-0 before:left-0 before:h-full before:w-full;
+    @apply relative flex items-center justify-center rounded-[1.25rem] min-h-[2.5rem] label-large before:absolute before:top-0 before:left-0 before:right-0 before:bottom-0 before:rounded-[1.25rem];
+  }
+  /* Note that index 0 is the ::before pseudo-element */
+  .btn > :nth-child(1) {
+    @apply ml-6;
+  }
+  .btn > svg:nth-child(1):not(:last-child),
+  .btn > img:nth-child(1):not(:last-child) {
+    @apply ml-4;
+  }
+  .btn > :nth-child(n + 2) {
+    @apply ml-2;
+  }
+  .btn > :last-child {
+    @apply mr-6;
   }
   .btn > svg,
   .btn > img {
-    @apply -ml-2 h-[1.125rem] w-[1.125rem];
+    @apply h-[1.125rem] w-[1.125rem];
   }
-  .btn > *:not(:first-child) {
-    @apply ml-2;
+  .btn > * {
+    /* Relative position or content will render below the ::before pseudo-element */
+    @apply relative;
   }
 
   .btn.btn-elevated {
@@ -79,20 +94,18 @@
   }
 
   .btn.btn-text {
-    @apply px-3 text-primary;
+    @apply text-primary;
   }
-  .btn.btn-text > svg,
-  .btn.btn-text > img {
-    @apply ml-0;
+  .btn.btn-text > :nth-child(1),
+  .btn.btn-text > svg:nth-child(1),
+  .btn.btn-text > img:nth-child(1) {
+    @apply ml-3;
   }
-  /*
-   * Add the 4 extra pixels required by spec.
-   * Does unfortunately require the icon sibling
-   * to be wrapped, e.g. in a <span>
-   */
-  .btn.btn-text > svg ~ *:last-of-type,
-  .btn.btn-text > img ~ *:last-of-type {
-    @apply mr-1;
+  .btn.btn-text > :last-child {
+    @apply mr-3;
+  }
+  .btn.btn-text > :nth-child(n + 2):last-child {
+    @apply mr-4;
   }
   .btn.btn-text:hover {
     @apply before:bg-primary/hover;
