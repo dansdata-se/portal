@@ -26,9 +26,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <I18nextProvider i18n={i18n}>
-      <div className="bg-background text-on-background">
-        <Story />
-      </div>
+      <Story />
     </I18nextProvider>
   ),
 ];
