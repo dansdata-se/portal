@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @each $token in primary, on-primary, primary-container, on-primary-container,
+    secondary, on-secondary, secondary-container, on-secondary-container,
+    tertiary, on-tertiary, tertiary-container, on-tertiary-container, error,
+    on-error, error-container, on-error-container, outline, background,
+    on-background, surface, on-surface, surface-variant, on-surface-variant,
+    inverse-surface, inverse-on-surface
+  {
+    .bg-md-sys-color-$(token),
+    .bg-$(token) {
+      @apply bg-md-sys-color-$(token)-light dark:bg-md-sys-color-$(token)-dark;
+    }
+    .bg-md-sys-color-$(token)\/hover,
+    .bg-$(token)\/hover {
+      @apply bg-md-sys-color-$(token)-light/hover dark:bg-md-sys-color-$(token)-dark/hover;
+    }
+    .bg-md-sys-color-$(token)\/focus,
+    .bg-$(token)\/focus {
+      @apply bg-md-sys-color-$(token)-light/focus dark:bg-md-sys-color-$(token)-dark/focus;
+    }
+    .bg-md-sys-color-$(token)\/pressed,
+    .bg-$(token)\/pressed {
+      @apply bg-md-sys-color-$(token)-light/pressed dark:bg-md-sys-color-$(token)-dark/pressed;
+    }
+    .bg-md-sys-color-$(token)\/disabled-bg,
+    .bg-$(token)\/disabled-bg {
+      @apply bg-md-sys-color-$(token)-light/disabled-bg dark:bg-md-sys-color-$(token)-dark/disabled-bg;
+    }
+
+    .text-md-sys-color-$(token),
+    .text-$(token) {
+      @apply text-md-sys-color-$(token)-light dark:text-md-sys-color-$(token)-dark;
+    }
+    .text-md-sys-color-$(token)\/disabled-text,
+    .text-$(token)\/disabled-text {
+      @apply text-md-sys-color-$(token)-light/disabled-text dark:text-md-sys-color-$(token)-dark/disabled-text;
+    }
+  }
+
+  .outline {
+    @apply outline-md-sys-color-outline-light dark:outline-md-sys-color-outline-dark;
+  }
+  .outline-primary {
+    @apply outline-md-sys-color-primary-light dark:outline-md-sys-color-primary-dark;
+  }
+  .outline-on-surface\/disabled-bg {
+    @apply outline-md-sys-color-on-surface-light/disabled-bg dark:outline-md-sys-color-on-surface-dark/disabled-bg;
+  }
+
+  hr {
+    @apply text-md-sys-color-outline-light dark:text-md-sys-color-outline-dark;
+  }
+}

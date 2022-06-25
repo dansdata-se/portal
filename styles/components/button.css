@@ -1,105 +1,109 @@
-@import "../typography.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.btn {
-  @apply relative flex items-center justify-center rounded-[1.25rem] min-h-[2.5rem] px-6 label-large overflow-hidden before:absolute before:top-0 before:left-0 before:h-full before:w-full;
-}
-.btn > svg,
-.btn > img {
-  @apply -ml-2 h-[1.125rem] w-[1.125rem];
-}
-.btn > *:not(:first-child) {
-  @apply ml-2;
-}
+@layer components {
+  .btn {
+    @apply relative flex items-center justify-center rounded-[1.25rem] min-h-[2.5rem] px-6 label-large overflow-hidden before:absolute before:top-0 before:left-0 before:h-full before:w-full;
+  }
+  .btn > svg,
+  .btn > img {
+    @apply -ml-2 h-[1.125rem] w-[1.125rem];
+  }
+  .btn > *:not(:first-child) {
+    @apply ml-2;
+  }
 
-.btn.btn-elevated {
-  @apply bg-surface shadow text-primary;
-}
-.btn.btn-elevated:hover {
-  @apply shadow-lg before:bg-primary/hover;
-}
-.btn.btn-elevated:focus-visible {
-  @apply shadow before:bg-primary/focus outline-none;
-}
-.btn.btn-elevated:active {
-  @apply shadow before:bg-primary/pressed;
-}
-.btn.btn-elevated:disabled {
-  @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
-}
+  .btn.btn-elevated {
+    @apply bg-surface shadow text-primary;
+  }
+  .btn.btn-elevated:hover {
+    @apply shadow-lg before:bg-primary/hover;
+  }
+  .btn.btn-elevated:focus-visible {
+    @apply shadow before:bg-primary/focus outline-none;
+  }
+  .btn.btn-elevated:active {
+    @apply shadow before:bg-primary/pressed;
+  }
+  .btn.btn-elevated:disabled {
+    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+  }
 
-.btn.btn-filled {
-  @apply bg-primary text-on-primary;
-}
-.btn.btn-filled:hover {
-  @apply shadow before:bg-on-primary/hover;
-}
-.btn.btn-filled:focus-visible {
-  @apply shadow-none before:bg-on-primary/focus outline-none;
-}
-.btn.btn-filled:active {
-  @apply shadow-none before:bg-on-primary/pressed;
-}
-.btn.btn-filled:disabled {
-  @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
-}
+  .btn.btn-filled {
+    @apply bg-primary text-on-primary;
+  }
+  .btn.btn-filled:hover {
+    @apply shadow before:bg-on-primary/hover;
+  }
+  .btn.btn-filled:focus-visible {
+    @apply shadow-none before:bg-on-primary/focus outline-none;
+  }
+  .btn.btn-filled:active {
+    @apply shadow-none before:bg-on-primary/pressed;
+  }
+  .btn.btn-filled:disabled {
+    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+  }
 
-.btn.btn-tonal {
-  @apply bg-secondary-container text-on-secondary-container;
-}
-.btn.btn-tonal:hover {
-  @apply shadow before:bg-on-secondary-container/hover;
-}
-.btn.btn-tonal:focus-visible {
-  @apply shadow-none before:bg-on-secondary-container/focus outline-none;
-}
-.btn.btn-tonal:active {
-  @apply shadow-none before:bg-on-secondary-container/pressed;
-}
-.btn.btn-tonal:disabled {
-  @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
-}
+  .btn.btn-tonal {
+    @apply bg-secondary-container text-on-secondary-container;
+  }
+  .btn.btn-tonal:hover {
+    @apply shadow before:bg-on-secondary-container/hover;
+  }
+  .btn.btn-tonal:focus-visible {
+    @apply shadow-none before:bg-on-secondary-container/focus outline-none;
+  }
+  .btn.btn-tonal:active {
+    @apply shadow-none before:bg-on-secondary-container/pressed;
+  }
+  .btn.btn-tonal:disabled {
+    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+  }
 
-.btn.btn-outlined {
-  @apply text-primary outline outline-1;
-}
-.btn.btn-outlined:hover {
-  @apply before:bg-primary/hover;
-}
-.btn.btn-outlined:focus-visible {
-  @apply before:bg-primary/focus outline-primary;
-}
-.btn.btn-outlined:active {
-  @apply before:bg-primary/pressed;
-}
-.btn.btn-outlined:disabled {
-  @apply before:hidden text-on-surface/disabled-text outline-on-surface/disabled-bg;
-}
+  .btn.btn-outlined {
+    @apply text-primary outline outline-1;
+  }
+  .btn.btn-outlined:hover {
+    @apply before:bg-primary/hover;
+  }
+  .btn.btn-outlined:focus-visible {
+    @apply before:bg-primary/focus outline-primary;
+  }
+  .btn.btn-outlined:active {
+    @apply before:bg-primary/pressed;
+  }
+  .btn.btn-outlined:disabled {
+    @apply before:hidden text-on-surface/disabled-text outline-on-surface/disabled-bg;
+  }
 
-.btn.btn-text {
-  @apply px-3 text-primary;
-}
-.btn.btn-text > svg,
-.btn.btn-text > img {
-  @apply ml-0;
-}
-/*
- * Add the 4 extra pixels required by spec.
- * Does unfortunately require the icon sibling
- * to be wrapped, e.g. in a <span>
- */
-.btn.btn-text > svg ~ *:last-of-type,
-.btn.btn-text > img ~ *:last-of-type {
-  @apply mr-1;
-}
-.btn.btn-text:hover {
-  @apply before:bg-primary/hover;
-}
-.btn.btn-text:focus-visible {
-  @apply before:bg-primary/focus outline-none;
-}
-.btn.btn-text:active {
-  @apply before:bg-primary/pressed;
-}
-.btn.btn-text:disabled {
-  @apply before:hidden text-on-surface/disabled-text;
+  .btn.btn-text {
+    @apply px-3 text-primary;
+  }
+  .btn.btn-text > svg,
+  .btn.btn-text > img {
+    @apply ml-0;
+  }
+  /*
+   * Add the 4 extra pixels required by spec.
+   * Does unfortunately require the icon sibling
+   * to be wrapped, e.g. in a <span>
+   */
+  .btn.btn-text > svg ~ *:last-of-type,
+  .btn.btn-text > img ~ *:last-of-type {
+    @apply mr-1;
+  }
+  .btn.btn-text:hover {
+    @apply before:bg-primary/hover;
+  }
+  .btn.btn-text:focus-visible {
+    @apply before:bg-primary/focus outline-none;
+  }
+  .btn.btn-text:active {
+    @apply before:bg-primary/pressed;
+  }
+  .btn.btn-text:disabled {
+    @apply before:hidden text-on-surface/disabled-text;
+  }
 }
