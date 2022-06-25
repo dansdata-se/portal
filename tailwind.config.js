@@ -174,6 +174,16 @@ module.exports = {
       "body-medium": "0.015625rem",
       "body-small": "0.025rem",
     },
+    opacity: {
+      0: "0",
+      hover: "0.08",
+      focus: "0.12",
+      pressed: "0.12",
+      dragged: "0.16",
+      "disabled-bg": "0.12",
+      "disabled-text": "0.38",
+      100: "1",
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
