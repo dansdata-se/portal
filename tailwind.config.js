@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const elevation = require("./styles/elevation/tailwind");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
@@ -10,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    boxShadow: {
+      ...elevation.theme.boxShadow,
+    },
     colors: {
       md: {
         sys: {

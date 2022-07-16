@@ -30,51 +30,51 @@
   }
 
   .btn.btn-elevated {
-    @apply bg-surface shadow text-primary;
+    @apply bg-surface shadow-level1 text-primary;
   }
   .btn.btn-elevated:hover {
-    @apply shadow-lg before:bg-primary/hover;
+    @apply shadow-level2 before:bg-primary/hover;
   }
   .btn.btn-elevated:focus-visible {
-    @apply shadow before:bg-primary/focus outline-none;
+    @apply shadow-level1 before:bg-primary/focus outline-none;
   }
   .btn.btn-elevated:active {
-    @apply shadow before:bg-primary/pressed;
+    @apply shadow-level1 before:bg-primary/pressed;
   }
   .btn.btn-elevated:disabled {
-    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+    @apply shadow-level0 before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
   }
 
   .btn.btn-filled {
-    @apply bg-primary text-on-primary;
+    @apply bg-primary shadow-level0 text-on-primary;
   }
   .btn.btn-filled:hover {
-    @apply shadow before:bg-on-primary/hover;
+    @apply shadow-level1 before:bg-on-primary/hover;
   }
   .btn.btn-filled:focus-visible {
-    @apply shadow-none before:bg-on-primary/focus outline-none;
+    @apply shadow-level0 before:bg-on-primary/focus outline-none;
   }
   .btn.btn-filled:active {
-    @apply shadow-none before:bg-on-primary/pressed;
+    @apply shadow-level0 before:bg-on-primary/pressed;
   }
   .btn.btn-filled:disabled {
-    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+    @apply shadow-level0 before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
   }
 
   .btn.btn-tonal {
-    @apply bg-secondary-container text-on-secondary-container;
+    @apply bg-secondary-container shadow-level0 text-on-secondary-container;
   }
   .btn.btn-tonal:hover {
-    @apply shadow before:bg-on-secondary-container/hover;
+    @apply shadow-level1 before:bg-on-secondary-container/hover;
   }
   .btn.btn-tonal:focus-visible {
-    @apply shadow-none before:bg-on-secondary-container/focus outline-none;
+    @apply shadow-level0 before:bg-on-secondary-container/focus outline-none;
   }
   .btn.btn-tonal:active {
-    @apply shadow-none before:bg-on-secondary-container/pressed;
+    @apply shadow-level0 before:bg-on-secondary-container/pressed;
   }
   .btn.btn-tonal:disabled {
-    @apply shadow-none before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
+    @apply shadow-level0 before:hidden bg-on-surface/disabled-bg text-on-surface/disabled-text;
   }
 
   .btn.btn-outlined {
