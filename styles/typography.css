@@ -105,7 +105,7 @@
   }
   .prose p,
   p.prose {
-    @apply md-sys-typescale-body-medium my-[1.15em];
+    @apply md-sys-typescale-body-medium my-[1.15em] max-w-[70ch];
   }
   .prose ul,
   ul.prose {
