@@ -51,6 +51,10 @@
     @apply outline-md-sys-color-on-surface-light/disabled-bg dark:outline-md-sys-color-on-surface-dark/disabled-bg;
   }
 
+  body {
+    @apply bg-background text-on-background;
+  }
+
   hr {
     @apply text-md-sys-color-outline-light dark:text-md-sys-color-outline-dark;
   }
