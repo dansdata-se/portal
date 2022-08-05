@@ -4,14 +4,15 @@ An administration interface for managing API keys and data presented via the dan
 
 ## Getting Started
 
+The project utilizes a [devcontainer](https://code.visualstudio.com/docs/remote/containers)
+with most dependencies, including `supabase-cli`, already included.
+
 The administration portal is based on [next.js](https://nextjs.org/) and uses [supabase](https://supabase.com/)
 as its backend.
 
 First, start your local supabase backend:
 
 ```bash
-# See https://supabase.com/docs/guides/local-development for instructions on
-# setting up the supabase CLI
 supabase start
 ```
 
@@ -35,8 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Supabase
 
 The portal uses supabase as its backend. For more details on local development using
-supabase during local development, please see the
-[official guide](https://supabase.com/docs/guides/local-development).
+supabase, please see the [official guide](https://supabase.com/docs/guides/local-development).
 
 ### Storybook
 
