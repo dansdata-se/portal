@@ -26,6 +26,10 @@
     .bg-$(token)\/pressed {
       @apply bg-md-sys-color-$(token)-light/pressed dark:bg-md-sys-color-$(token)-dark/pressed;
     }
+    .bg-md-sys-color-$(token)\/dragged,
+    .bg-$(token)\/dragged {
+      @apply bg-md-sys-color-$(token)-light/dragged dark:bg-md-sys-color-$(token)-dark/dragged;
+    }
     .bg-md-sys-color-$(token)\/disabled-bg,
     .bg-$(token)\/disabled-bg {
       @apply bg-md-sys-color-$(token)-light/disabled-bg dark:bg-md-sys-color-$(token)-dark/disabled-bg;

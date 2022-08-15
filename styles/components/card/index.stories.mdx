@@ -1,0 +1,353 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+import LinkTo from "@storybook/addon-links/react";
+import resolveConfig from "tailwindcss/resolveConfig";
+import { Plus } from "react-feather";
+import classNames from "classnames";
+import Button from "/components/Button";
+
+<Meta title="Styles/Components/Card" />
+
+# Card
+
+_Note: There exists a <LinkTo kind="components-card">helper component for cards</LinkTo>_
+
+There are three types of cards: elevated, filled, and outlined.
+These are based on the [guidelines from Material Design 3](https://m3.material.io/components/cards/overview).
+
+Grids of cards should use the `gap-card-grid` utility class to ensure correct spacing.
+
+<Canvas>
+  <Story name="Card">
+    {({}) => (
+      <div className="grid grid-cols-3 gap-card-grid w-full">
+        <article className="card card-elevated">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article className="card card-filled">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article className="card card-outlined">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="card-content prose">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Disabled Card
+
+To disable a card, add the `card-disabled` class.
+
+<Canvas>
+  <Story name="Disabled Card">
+    {({}) => (
+      <div className="grid grid-cols-3 gap-card-grid w-full">
+        <article className="card card-elevated card-disabled">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article className="card card-filled card-disabled">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article className="card card-outlined card-disabled">
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="card-content prose">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Clickable/Focusable Card
+
+To make a card clickable/focusable, add the `tabindex` attribute.
+
+Note that javascript is required to disable the focus effect when focusing child
+elements, such as buttons. This is included in
+the <LinkTo kind="components-card">`<Card>` helper component</LinkTo>
+
+<Canvas>
+  <Story name="Clickable/Focusable Card">
+    {({}) => (
+      <div className="grid grid-cols-3 gap-card-grid w-full">
+        <article
+          className="card card-elevated"
+          tabindex={0}
+        >
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article
+          className="card card-filled"
+          tabindex={0}
+        >
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="prose card-content">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+        <article
+          className="card card-outlined"
+          tabindex={0}
+        >
+          <img
+            className="w-full"
+            src="https://placekitten.com/600/200"
+          />
+          <div className="card-content prose">
+            <h5 className="mt-0">Headline</h5>
+            <h6 className="mt-0">Subhead</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque ut purus eget elit tincidunt vehicula nec vitae sem.
+            </p>
+          </div>
+          <hr className="my-4" />
+          <div className="flex gap-card-buttons card-content">
+            <Button
+              variant="outlined"
+              text="Click me"
+            />
+            <Button
+              variant="filled"
+              text="Click me"
+              icon={<Plus />}
+              className="flex-grow"
+            />
+          </div>
+        </article>
+      </div>
+    )}
+  </Story>
+</Canvas>

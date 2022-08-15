@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const card = require("./styles/components/card/tailwind");
 const elevation = require("./styles/elevation/tailwind");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,6 +12,17 @@ module.exports = {
     "./styles/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
+      borderRadius: {
+        ...card.theme.extends.borderRadius,
+      },
+      gap: {
+        ...card.theme.extends.gap,
+      },
+      spacing: {
+        ...card.theme.extends.spacing,
+      },
+    },
     container: {
       center: true,
       padding: {
@@ -196,6 +208,7 @@ module.exports = {
       dragged: "0.16",
       "disabled-bg": "0.12",
       "disabled-text": "0.38",
+      "disabled-container": "0.38",
       100: "1",
     },
   },
