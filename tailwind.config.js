@@ -3,6 +3,7 @@ const elevation = require("./styles/elevation/tailwind");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
+  important: true,
   content: [
     "./.storybook/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
