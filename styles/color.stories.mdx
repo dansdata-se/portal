@@ -6,39 +6,29 @@ import tailwindConfig from "../tailwind.config.js";
 
 # Colors
 
-Listing of the dansdata colors and their tailwindcss "tokens".
+Listing of the dansdata colors.
 
 The dansdata design system is based on [material design 3](https://m3.material.io/)
 and their system of
 [design tokens](https://m3.material.io/foundations/design-tokens/overview).
 
-All color tokens have a long form, e.g.: `md-sys-color-$(token)-light`.
-Most color tokens also have a short form, e.g.: `$(token)`. The short form
-without a `light`/`dark` suffix is preferred in-code. These are also designed
-to adapt to the current dark mode setting:
+All colors have an associated css variable in [./material.css](./material.css).
+Generally, the tokens provided by tailwindcss should be used over the raw css
+variables:
 
 ```css
-.bg-md-sys-color-$(token),
-.bg-$(token) {
-  @apply bg-md-sys-color-$(token)-light dark:bg-md-sys-color-$(token)-dark;
+/* Prefer */
+.my-custom-style {
+  @apply text-primary;
 }
-
-.text-md-sys-color-$(token),
-.text-$(token) {
-  @apply text-md-sys-color-$(token)-light dark:text-md-sys-color-$(token)-dark;
+/* Over */
+.my-custom-style {
+  @apply text-[var(--md-sys-color-primary)];
 }
 ```
 
-See also [./globals.css](./globals.css)
-
-## Quick Reference
-
-Some common background/foreground combinations.
-
-This list supports dark mode toggling.
-
 <Canvas>
-  <Story name="Quick Reference">
+  <Story name="Colors">
     <table className="border-separate border-spacing-4">
       <thead>
         <tr>
@@ -48,254 +38,30 @@ This list supports dark mode toggling.
         </tr>
       </thead>
       <tbody>
-        {
-          // Strange/repetetive setup to satisfy tailwindcss's need to read the class names in-code
-          [
-            [
-              "background",
-              "bg-background",
-              "on-background",
-              "text-on-background",
-            ],
-            ["primary", "bg-primary", "on-primary", "text-on-primary"],
-            [
-              "primary-container",
-              "bg-primary-container",
-              "on-primary-container",
-              "text-on-primary-container",
-            ],
-            ["secondary", "bg-secondary", "on-secondary", "text-on-secondary"],
-            [
-              "secondary-container",
-              "bg-secondary-container",
-              "on-secondary-container",
-              "text-on-secondary-container",
-            ],
-            ["tertiary", "bg-tertiary", "on-tertiary", "text-on-tertiary"],
-            [
-              "tertiary-container",
-              "bg-tertiary-container",
-              "on-tertiary-container",
-              "text-on-tertiary-container",
-            ],
-            ["error", "bg-error", "on-error", "text-on-error"],
-            [
-              "error-container",
-              "bg-error-container",
-              "on-error-container",
-              "text-on-error-container",
-            ],
-            ["surface", "bg-surface", "on-surface", "text-on-surface"],
-            [
-              "surface-variant",
-              "bg-surface-variant",
-              "on-surface-variant",
-              "text-on-surface-variant",
-            ],
-            [
-              "inverse-surface",
-              "bg-inverse-surface",
-              "inverse-on-surface",
-              "text-inverse-on-surface",
-            ],
-          ].map(([bgToken, bgClass, fgToken, fgClass]) => (
-            <tr>
-              <td className={`${bgClass} ${fgClass} p-4`}>
-                The quick brown fox
-                <br />
-                jumps over the lazy dog
-              </td>
-              <td>
-                {bgToken}
-                <br />
-                md-sys-color-{bgToken}
-              </td>
-              <td>
-                {fgToken}
-                <br />
-                md-sys-color-{fgToken}
-              </td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  </Story>
-</Canvas>
-
-## Full Color Scheme
-
-A listing of all basic color tokens.
-
-Note that this list does not include generated tokens (e.g. `md-sys-color-primary`)
-as these simply consist of a combination of tokens listed below.
-
-<Canvas>
-  <Story name="Full Color Scheme">
-    <table className="border-separate border-spacing-4">
-      <thead>
-        <tr>
-          <th>Color</th>
-          <th>Token</th>
-          <th>Hex</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          // Strange/repetetive setup to satisfy tailwindcss's need to read the class names in-code
-          [
-            [
-              "primary",
-              "bg-md-sys-color-primary-light",
-              "bg-md-sys-color-primary-dark",
-            ],
-            [
-              "on-primary",
-              "bg-md-sys-color-on-primary-light",
-              "bg-md-sys-color-on-primary-dark",
-            ],
-            [
-              "primary-container",
-              "bg-md-sys-color-primary-container-light",
-              "bg-md-sys-color-primary-container-dark",
-            ],
-            [
-              "on-primary-container",
-              "bg-md-sys-color-on-primary-container-light",
-              "bg-md-sys-color-on-primary-container-dark",
-            ],
-            [
-              "secondary",
-              "bg-md-sys-color-secondary-light",
-              "bg-md-sys-color-secondary-dark",
-            ],
-            [
-              "on-secondary",
-              "bg-md-sys-color-on-secondary-light",
-              "bg-md-sys-color-on-secondary-dark",
-            ],
-            [
-              "secondary-container",
-              "bg-md-sys-color-secondary-container-light",
-              "bg-md-sys-color-secondary-container-dark",
-            ],
-            [
-              "on-secondary-container",
-              "bg-md-sys-color-on-secondary-container-light",
-              "bg-md-sys-color-on-secondary-container-dark",
-            ],
-            [
-              "tertiary",
-              "bg-md-sys-color-tertiary-light",
-              "bg-md-sys-color-tertiary-dark",
-            ],
-            [
-              "on-tertiary",
-              "bg-md-sys-color-on-tertiary-light",
-              "bg-md-sys-color-on-tertiary-dark",
-            ],
-            [
-              "tertiary-container",
-              "bg-md-sys-color-tertiary-container-light",
-              "bg-md-sys-color-tertiary-container-dark",
-            ],
-            [
-              "on-tertiary-container",
-              "bg-md-sys-color-on-tertiary-container-light",
-              "bg-md-sys-color-on-tertiary-container-dark",
-            ],
-            [
-              "error",
-              "bg-md-sys-color-error-light",
-              "bg-md-sys-color-error-dark",
-            ],
-            [
-              "on-error",
-              "bg-md-sys-color-on-error-light",
-              "bg-md-sys-color-on-error-dark",
-            ],
-            [
-              "error-container",
-              "bg-md-sys-color-error-container-light",
-              "bg-md-sys-color-error-container-dark",
-            ],
-            [
-              "on-error-container",
-              "bg-md-sys-color-on-error-container-light",
-              "bg-md-sys-color-on-error-container-dark",
-            ],
-            [
-              "outline",
-              "bg-md-sys-color-outline-light",
-              "bg-md-sys-color-outline-dark",
-            ],
-            [
-              "background",
-              "bg-md-sys-color-background-light",
-              "bg-md-sys-color-background-dark",
-            ],
-            [
-              "on-background",
-              "bg-md-sys-color-on-background-light",
-              "bg-md-sys-color-on-background-dark",
-            ],
-            [
-              "surface",
-              "bg-md-sys-color-surface-light",
-              "bg-md-sys-color-surface-dark",
-            ],
-            [
-              "on-surface",
-              "bg-md-sys-color-on-surface-light",
-              "bg-md-sys-color-on-surface-dark",
-            ],
-            [
-              "surface-variant",
-              "bg-md-sys-color-surface-variant-light",
-              "bg-md-sys-color-surface-variant-dark",
-            ],
-            [
-              "on-surface-variant",
-              "bg-md-sys-color-on-surface-variant-light",
-              "bg-md-sys-color-on-surface-variant-dark",
-            ],
-            [
-              "inverse-surface",
-              "bg-md-sys-color-inverse-surface-light",
-              "bg-md-sys-color-inverse-surface-dark",
-            ],
-            [
-              "inverse-on-surface",
-              "bg-md-sys-color-inverse-on-surface-light",
-              "bg-md-sys-color-inverse-on-surface-dark",
-            ],
-          ].map(([colToken, colClassLight, colClassDark]) => (
-            <>
-              <tr>
-                <td className={`${colClassLight} p-4`}></td>
-                <td>md-sys-color-{colToken}-light</td>
-                <td>
-                  {
-                    resolveConfig(tailwindConfig).theme.colors.md.sys.color[
-                      colToken
-                    ].light
-                  }
-                </td>
-              </tr>
-              <tr>
-                <td className={`${colClassDark} p-4`}></td>
-                <td>md-sys-color-{colToken}-dark</td>
-                <td>
-                  {
-                    resolveConfig(tailwindConfig).theme.colors.md.sys.color[
-                      colToken
-                    ].dark
-                  }
-                </td>
-              </tr>
-            </>
-          ))
-        }
+        {[
+          ["bg-background", "text-on-background"],
+          ["bg-primary", "text-on-primary"],
+          ["bg-primary-container", "text-on-primary-container"],
+          ["bg-secondary", "text-on-secondary"],
+          ["bg-secondary-container", "text-on-secondary-container"],
+          ["bg-tertiary", "text-on-tertiary"],
+          ["bg-tertiary-container", "text-on-tertiary-container"],
+          ["bg-error", "text-on-error"],
+          ["bg-error-container", "text-on-error-container"],
+          ["bg-surface", "text-on-surface"],
+          ["bg-surface-variant", "text-on-surface-variant"],
+          ["bg-inverse-surface", "text-inverse-on-surface"],
+        ].map(([bgToken, fgToken]) => (
+          <tr>
+            <td className={`${bgToken} ${fgToken} p-4`}>
+              The quick brown fox
+              <br />
+              jumps over the lazy dog
+            </td>
+            <td>{bgToken}</td>
+            <td>{fgToken}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </Story>

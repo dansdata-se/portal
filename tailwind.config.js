@@ -1,6 +1,21 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const card = require("./styles/components/card/tailwind");
 const elevation = require("./styles/elevation/tailwind");
+
+// Based on
+// https://github.com/adamwathan/tailwind-css-variable-text-opacity-demo
+function cssRgbVar(cssVar) {
+  return ({ opacityVariable, opacityValue }) => {
+    if (opacityValue !== undefined) {
+      return `rgba(var(${cssVar}), ${opacityValue})`;
+    }
+    if (opacityVariable !== undefined) {
+      return `rgba(var(${cssVar}), var(${opacityVariable}, 1))`;
+    }
+    return `rgb(var(${cssVar}))`;
+  };
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
@@ -13,14 +28,22 @@ module.exports = {
   ],
   theme: {
     extend: {
-      borderRadius: {
-        ...card.theme.extends.borderRadius,
-      },
       gap: {
         ...card.theme.extends.gap,
       },
-      spacing: {
-        ...card.theme.extends.spacing,
+      borderWidth: {
+        1: "1px",
+      },
+      zIndex: {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+        7: 7,
+        8: 8,
+        9: 9,
       },
     },
     container: {
@@ -33,172 +56,240 @@ module.exports = {
         "2xl": "6rem",
       },
     },
-    boxShadow: {
-      ...elevation.theme.boxShadow,
-    },
+    boxShadow: elevation.theme.boxShadow,
     colors: {
-      md: {
-        sys: {
-          color: {
-            primary: {
-              light: "#006877",
-              dark: "#52d7f0",
-            },
-            "on-primary": {
-              light: "#ffffff",
-              dark: "#00363f",
-            },
-            "primary-container": {
-              light: "#a4eeff",
-              dark: "#004e5a",
-            },
-            "on-primary-container": {
-              light: "#001f25",
-              dark: "#a4eeff",
-            },
-            secondary: {
-              light: "#4b6268",
-              dark: "#b2cbd1",
-            },
-            "on-secondary": {
-              light: "#ffffff",
-              dark: "#1c3439",
-            },
-            "secondary-container": {
-              light: "#cde7ee",
-              dark: "#334a50",
-            },
-            "on-secondary-container": {
-              light: "#051f24",
-              dark: "#cde7ee",
-            },
-            tertiary: {
-              light: "#006b58",
-              dark: "#58dcbc",
-            },
-            "on-tertiary": {
-              light: "#ffffff",
-              dark: "#00382d",
-            },
-            "tertiary-container": {
-              light: "#77f8d7",
-              dark: "#005142",
-            },
-            "on-tertiary-container": {
-              light: "#002019",
-              dark: "#77f8d7",
-            },
-            error: {
-              light: "#ba1a1a",
-              dark: "#ffb4ab",
-            },
-            "on-error": {
-              light: "#ffffff",
-              dark: "#690005",
-            },
-            "error-container": {
-              light: "#ffdad6",
-              dark: "#93000a",
-            },
-            "on-error-container": {
-              light: "#410002",
-              dark: "#ffdad6",
-            },
-            outline: {
-              light: "#6f797b",
-              dark: "#899295",
-            },
-            background: {
-              light: "#fbfcfd",
-              dark: "#191c1d",
-            },
-            "on-background": {
-              light: "#191c1d",
-              dark: "#e1e3e4",
-            },
-            surface: {
-              light: "#fbfcfd",
-              dark: "#191c1d",
-            },
-            "on-surface": {
-              light: "#191c1d",
-              dark: "#e1e3e4",
-            },
-            "surface-variant": {
-              light: "#dbe4e7",
-              dark: "#3f484b",
-            },
-            "on-surface-variant": {
-              light: "#3f484b",
-              dark: "#bfc8cb",
-            },
-            "inverse-surface": {
-              light: "#2e3132",
-              dark: "#e1e3e4",
-            },
-            "inverse-on-surface": {
-              light: "#eff1f2",
-              dark: "#191c1d",
-            },
-          },
-        },
-      },
+      transparent: "transparent",
+      primary: cssRgbVar("--md-sys-color-primary"),
+      "primary-light": cssRgbVar("--md-sys-color-primary-light"),
+      "primary-dark": cssRgbVar("--md-sys-color-primary-dark"),
+      "on-primary": cssRgbVar("--md-sys-color-on-primary"),
+      "on-primary-light": cssRgbVar("--md-sys-color-on-primary-light"),
+      "on-primary-dark": cssRgbVar("--md-sys-color-on-primary-dark"),
+      "primary-container": cssRgbVar("--md-sys-color-primary-container"),
+      "primary-container-light": cssRgbVar(
+        "--md-sys-color-primary-container-light"
+      ),
+      "primary-container-dark": cssRgbVar(
+        "--md-sys-color-primary-container-dark"
+      ),
+      "on-primary-container": cssRgbVar("--md-sys-color-on-primary-container"),
+      "on-primary-container-light": cssRgbVar(
+        "--md-sys-color-on-primary-container-light"
+      ),
+      "on-primary-container-dark": cssRgbVar(
+        "--md-sys-color-on-primary-container-dark"
+      ),
+      secondary: cssRgbVar("--md-sys-color-secondary"),
+      "secondary-light": cssRgbVar("--md-sys-color-secondary-light"),
+      "secondary-dark": cssRgbVar("--md-sys-color-secondary-dark"),
+      "on-secondary": cssRgbVar("--md-sys-color-on-secondary"),
+      "on-secondary-light": cssRgbVar("--md-sys-color-on-secondary-light"),
+      "on-secondary-dark": cssRgbVar("--md-sys-color-on-secondary-dark"),
+      "secondary-container": cssRgbVar("--md-sys-color-secondary-container"),
+      "secondary-container-light": cssRgbVar(
+        "--md-sys-color-secondary-container-light"
+      ),
+      "secondary-container-dark": cssRgbVar(
+        "--md-sys-color-secondary-container-dark"
+      ),
+      "on-secondary-container": cssRgbVar(
+        "--md-sys-color-on-secondary-container"
+      ),
+      "on-secondary-container-light": cssRgbVar(
+        "--md-sys-color-on-secondary-container-light"
+      ),
+      "on-secondary-container-dark": cssRgbVar(
+        "--md-sys-color-on-secondary-container-dark"
+      ),
+      tertiary: cssRgbVar("--md-sys-color-tertiary"),
+      "tertiary-light": cssRgbVar("--md-sys-color-tertiary-light"),
+      "tertiary-dark": cssRgbVar("--md-sys-color-tertiary-dark"),
+      "on-tertiary": cssRgbVar("--md-sys-color-on-tertiary"),
+      "on-tertiary-light": cssRgbVar("--md-sys-color-on-tertiary-light"),
+      "on-tertiary-dark": cssRgbVar("--md-sys-color-on-tertiary-dark"),
+      "tertiary-container": cssRgbVar("--md-sys-color-tertiary-container"),
+      "tertiary-container-light": cssRgbVar(
+        "--md-sys-color-tertiary-container-light"
+      ),
+      "tertiary-container-dark": cssRgbVar(
+        "--md-sys-color-tertiary-container-dark"
+      ),
+      "on-tertiary-container": cssRgbVar(
+        "--md-sys-color-on-tertiary-container"
+      ),
+      "on-tertiary-container-light": cssRgbVar(
+        "--md-sys-color-on-tertiary-container-light"
+      ),
+      "on-tertiary-container-dark": cssRgbVar(
+        "--md-sys-color-on-tertiary-container-dark"
+      ),
+      error: cssRgbVar("--md-sys-color-error"),
+      "error-light": cssRgbVar("--md-sys-color-error-light"),
+      "error-dark": cssRgbVar("--md-sys-color-error-dark"),
+      "on-error": cssRgbVar("--md-sys-color-on-error"),
+      "on-error-light": cssRgbVar("--md-sys-color-on-error-light"),
+      "on-error-dark": cssRgbVar("--md-sys-color-on-error-dark"),
+      "error-container": cssRgbVar("--md-sys-color-error-container"),
+      "error-container-light": cssRgbVar(
+        "--md-sys-color-error-container-light"
+      ),
+      "error-container-dark": cssRgbVar("--md-sys-color-error-container-dark"),
+      "on-error-container": cssRgbVar("--md-sys-color-on-error-container"),
+      "on-error-container-light": cssRgbVar(
+        "--md-sys-color-on-error-container-light"
+      ),
+      "on-error-container-dark": cssRgbVar(
+        "--md-sys-color-on-error-container-dark"
+      ),
+      outline: cssRgbVar("--md-sys-color-outline"),
+      "outline-light": cssRgbVar("--md-sys-color-outline-light"),
+      "outline-dark": cssRgbVar("--md-sys-color-outline-dark"),
+      background: cssRgbVar("--md-sys-color-background"),
+      "background-light": cssRgbVar("--md-sys-color-background-light"),
+      "background-dark": cssRgbVar("--md-sys-color-background-dark"),
+      "on-background": cssRgbVar("--md-sys-color-on-background"),
+      "on-background-light": cssRgbVar("--md-sys-color-on-background-light"),
+      "on-background-dark": cssRgbVar("--md-sys-color-on-background-dark"),
+      surface: cssRgbVar("--md-sys-color-surface"),
+      "surface-light": cssRgbVar("--md-sys-color-surface-light"),
+      "surface-dark": cssRgbVar("--md-sys-color-surface-dark"),
+      "on-surface": cssRgbVar("--md-sys-color-on-surface"),
+      "on-surface-light": cssRgbVar("--md-sys-color-on-surface-light"),
+      "on-surface-dark": cssRgbVar("--md-sys-color-on-surface-dark"),
+      "surface-variant": cssRgbVar("--md-sys-color-surface-variant"),
+      "surface-variant-light": cssRgbVar(
+        "--md-sys-color-surface-variant-light"
+      ),
+      "surface-variant-dark": cssRgbVar("--md-sys-color-surface-variant-dark"),
+      "on-surface-variant": cssRgbVar("--md-sys-color-on-surface-variant"),
+      "on-surface-variant-light": cssRgbVar(
+        "--md-sys-color-on-surface-variant-light"
+      ),
+      "on-surface-variant-dark": cssRgbVar(
+        "--md-sys-color-on-surface-variant-dark"
+      ),
+      "inverse-surface": cssRgbVar("--md-sys-color-inverse-surface"),
+      "inverse-surface-light": cssRgbVar(
+        "--md-sys-color-inverse-surface-light"
+      ),
+      "inverse-surface-dark": cssRgbVar("--md-sys-color-inverse-surface-dark"),
+      "inverse-on-surface": cssRgbVar("--md-sys-color-inverse-on-surface"),
+      "inverse-on-surface-light": cssRgbVar(
+        "--md-sys-color-inverse-on-surface-light"
+      ),
+      "inverse-on-surface-dark": cssRgbVar(
+        "--md-sys-color-inverse-on-surface-dark"
+      ),
     },
     fontFamily: {
-      brand: ["Norican", "cursive"],
+      brand: ["Norican", ...defaultTheme.fontFamily.serif],
       plain: ["Roboto Flex", "Roboto", ...defaultTheme.fontFamily.sans],
     },
     // 1 rem = 16px
+    borderRadius: {
+      none: "var(--md-sys-shape-corner-none)",
+      xs: "var(--md-sys-shape-corner-extra-small)",
+      sm: "var(--md-sys-shape-corner-small)",
+      md: "var(--md-sys-shape-corner-medium)",
+      lg: "var(--md-sys-shape-corner-large)",
+      xl: "var(--md-sys-shape-corner-extra-large)",
+      full: "var(--md-sys-shape-corner-full)",
+    },
     fontSize: {
-      "display-large": ["3.5625rem", { lineHeight: "4rem" }],
-      "display-medium": ["2.8125rem", { lineHeight: "3.25rem" }],
-      "display-small": ["2.25rem", { lineHeight: "2.75rem" }],
-      "headline-large": ["2rem", { lineHeight: "2.5rem" }],
-      "headline-medium": ["1.75rem", { lineHeight: "2.25rem" }],
-      "headline-small": ["1.5rem", { lineHeight: "2rem" }],
-      "title-large": ["1.375rem", { lineHeight: "1.75rem" }],
-      "title-medium": ["1rem", { lineHeight: "1.5rem" }],
-      "title-small": ["0.875rem", { lineHeight: "1.25rem" }],
-      "label-large": ["0.875rem", { lineHeight: "1.25rem" }],
-      "label-medium": ["0.75rem", { lineHeight: "1rem" }],
-      "label-small": ["0.6875rem", { lineHeight: "1rem" }],
-      "body-large": ["1rem", { lineHeight: "1.5rem" }],
-      "body-medium": ["0.875rem", { lineHeight: "1.25rem" }],
-      "body-small": ["0.75rem", { lineHeight: "1rem" }],
+      "display-large": [
+        "var(--md-sys-typescale-display-large-size)",
+        { lineHeight: "var(--md-sys-typescale-display-large-line-height)" },
+      ],
+      "display-medium": [
+        "var(--md-sys-typescale-display-medium-size)",
+        { lineHeight: "var(--md-sys-typescale-display-medium-line-height)" },
+      ],
+      "display-small": [
+        "var(--md-sys-typescale-display-small-size)",
+        { lineHeight: "var(--md-sys-typescale-display-small-line-height)" },
+      ],
+      "headline-large": [
+        "var(--md-sys-typescale-headline-large-size)",
+        { lineHeight: "var(--md-sys-typescale-headline-large-line-height)" },
+      ],
+      "headline-medium": [
+        "var(--md-sys-typescale-headline-medium-size)",
+        { lineHeight: "var(--md-sys-typescale-headline-medium-line-height)" },
+      ],
+      "headline-small": [
+        "var(--md-sys-typescale-headline-small-size)",
+        { lineHeight: "var(--md-sys-typescale-headline-small-line-height)" },
+      ],
+      "title-large": [
+        "var(--md-sys-typescale-title-large-size)",
+        { lineHeight: "var(--md-sys-typescale-title-large-line-height)" },
+      ],
+      "title-medium": [
+        "var(--md-sys-typescale-title-medium-size)",
+        { lineHeight: "var(--md-sys-typescale-title-medium-line-height)" },
+      ],
+      "title-small": [
+        "var(--md-sys-typescale-title-small-size)",
+        { lineHeight: "var(--md-sys-typescale-title-small-line-height)" },
+      ],
+      "label-large": [
+        "var(--md-sys-typescale-label-large-size)",
+        { lineHeight: "var(--md-sys-typescale-label-large-line-height)" },
+      ],
+      "label-medium": [
+        "var(--md-sys-typescale-label-medium-size)",
+        { lineHeight: "var(--md-sys-typescale-label-medium-line-height)" },
+      ],
+      "label-small": [
+        "var(--md-sys-typescale-label-small-size)",
+        { lineHeight: "var(--md-sys-typescale-label-small-line-height)" },
+      ],
+      "body-large": [
+        "var(--md-sys-typescale-body-large-size)",
+        { lineHeight: "var(--md-sys-typescale-body-large-line-height)" },
+      ],
+      "body-medium": [
+        "var(--md-sys-typescale-body-medium-size)",
+        { lineHeight: "var(--md-sys-typescale-body-medium-line-height)" },
+      ],
+      "body-small": [
+        "var(--md-sys-typescale-body-small-size)",
+        { lineHeight: "var(--md-sys-typescale-body-small-line-height)" },
+      ],
     },
     lineHeight: {
-      "display-large": "4rem",
-      "display-medium": "3.25rem",
-      "display-small": "2.25rem",
-      "headline-large": "2rem",
-      "headline-medium": "1.75rem",
-      "headline-small": "1.5rem",
-      "title-large": "1.375rem",
-      "title-medium": "1rem",
-      "title-small": "0.875rem",
-      "label-large": "0.875rem",
-      "label-medium": "0.75rem",
-      "label-small": "0.6875rem",
-      "body-large": "1rem",
-      "body-medium": "0.875rem",
-      "body-small": "0.75rem",
+      "display-large": "var(--md-sys-typescale-display-large-line-height)",
+      "display-medium": "var(--md-sys-typescale-display-medium-line-height)",
+      "display-small": "var(--md-sys-typescale-display-small-line-height)",
+      "headline-large": "var(--md-sys-typescale-headline-large-line-height)",
+      "headline-medium": "var(--md-sys-typescale-headline-medium-line-height)",
+      "headline-small": "var(--md-sys-typescale-headline-small-line-height)",
+      "title-large": "var(--md-sys-typescale-title-large-line-height)",
+      "title-medium": "var(--md-sys-typescale-title-medium-line-height)",
+      "title-small": "var(--md-sys-typescale-title-small-line-height)",
+      "label-large": "var(--md-sys-typescale-label-large-line-height)",
+      "label-medium": "var(--md-sys-typescale-label-medium-line-height)",
+      "label-small": "var(--md-sys-typescale-label-small-line-height)",
+      "body-large": "var(--md-sys-typescale-body-large-line-height)",
+      "body-medium": "var(--md-sys-typescale-body-medium-line-height)",
+      "body-small": "var(--md-sys-typescale-body-small-line-height)",
     },
     letterSpacing: {
-      "display-large": "0rem",
-      "display-medium": "0rem",
-      "display-small": "0rem",
-      "headline-large": "0rem",
-      "headline-medium": "0rem",
-      "headline-small": "0rem",
-      "title-large": "0rem",
-      "title-medium": "0.009375rem",
-      "title-small": "0.00625rem",
-      "label-large": "0.00625rem",
-      "label-medium": "0.03125rem",
-      "label-small": "0.03125rem",
-      "body-large": "0.03125rem",
-      "body-medium": "0.015625rem",
-      "body-small": "0.025rem",
+      "display-large": "var(--md-sys-typescale-display-large-tracking)",
+      "display-medium": "var(--md-sys-typescale-display-medium-tracking)",
+      "display-small": "var(--md-sys-typescale-display-small-tracking)",
+      "headline-large": "var(--md-sys-typescale-headline-large-tracking)",
+      "headline-medium": "var(--md-sys-typescale-headline-medium-tracking)",
+      "headline-small": "var(--md-sys-typescale-headline-small-tracking)",
+      "title-large": "var(--md-sys-typescale-title-large-tracking)",
+      "title-medium": "var(--md-sys-typescale-title-medium-tracking)",
+      "title-small": "var(--md-sys-typescale-title-small-tracking)",
+      "label-large": "var(--md-sys-typescale-label-large-tracking)",
+      "label-medium": "var(--md-sys-typescale-label-medium-tracking)",
+      "label-small": "var(--md-sys-typescale-label-small-tracking)",
+      "body-large": "var(--md-sys-typescale-body-large-tracking)",
+      "body-medium": "var(--md-sys-typescale-body-medium-tracking)",
+      "body-small": "var(--md-sys-typescale-body-small-tracking)",
     },
     opacity: {
       0: "0",

@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --md-comp-card-radius: 0.75rem;
+  --md-comp-card-spacing-between: 0.5rem;
+  --md-comp-card-buttons-spacing-between: 0.5rem;
+  --md-comp-card-content-padding: 1rem;
+}
+
 @layer components {
   .card {
-    @apply relative inline-block rounded-md-comp-card-radius before:absolute before:top-0 before:left-0 before:right-0 before:bottom-0 before:rounded-md-comp-card-radius;
+    @apply relative inline-block before:absolute before:top-0 before:left-0 before:right-0 before:bottom-0;
+
+    &,
+    &::before {
+      border-radius: var(--md-comp-card-radius);
+    }
   }
   .card[tabindex] {
     @apply cursor-pointer;
@@ -18,17 +30,18 @@
     @apply relative;
   }
   .card img {
-    @apply rounded-md-comp-card-radius;
+    border-radius: var(--md-comp-card-radius);
   }
   .card > .card-content {
-    @apply px-md-comp-card-content-padding;
+    padding-left: var(--md-comp-card-content-padding);
+    padding-right: var(--md-comp-card-content-padding);
   }
   .card > .card-content:first-child,
   .card > img:first-child ~ .card-content:nth-of-type(1) {
-    @apply pt-md-comp-card-content-padding;
+    padding-top: var(--md-comp-card-content-padding);
   }
   .card > .card-content:last-child {
-    @apply pb-md-comp-card-content-padding;
+    padding-bottom: var(--md-comp-card-content-padding);
   }
 
   .card.card-elevated {

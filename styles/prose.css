@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .prose {
+    h1,
+    h1& {
+      @apply typography-display-small mb-[.8em];
+    }
+    h2,
+    h2& {
+      @apply typography-headline-large mt-[1.6em] mb-[.8em];
+    }
+    h3,
+    h3& {
+      @apply typography-headline-medium mt-[1.5em] mb-[.6em];
+    }
+    h4,
+    h4& {
+      @apply typography-headline-small mt-[1.4em] mb-[.45em];
+    }
+    h5,
+    h5& {
+      @apply typography-title-large mt-[1.25em] mb-[.45em];
+    }
+    h6,
+    h6& {
+      @apply typography-title-medium mt-[1.25em] mb-[.45em];
+    }
+    p,
+    p& {
+      @apply typography-body-medium my-[1.15em] max-w-[70ch];
+    }
+    ul,
+    ul& {
+      @apply list-inside list-disc;
+    }
+    ol,
+    ol& {
+      @apply list-inside list-decimal;
+    }
+  }
+}

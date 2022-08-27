@@ -4,15 +4,11 @@ import { Meta, Story, Canvas } from "@storybook/addon-docs";
 
 # Typography
 
-Listing of the dansdata text styles and their tailwindcss "tokens".
+Listing of the dansdata text styles and their css classes.
 
 The dansdata design system is based on [material design 3](https://m3.material.io/)
 and their system of
 [design tokens](https://m3.material.io/foundations/design-tokens/overview).
-
-All text tokens have a long form, e.g.: `md-sys-typescale-$(variant)-$(size)-$(property)`.
-Most text tokens also have a short form, e.g.: `$(variant)-$(size)`. The short form
-is preferred in-code.
 
 ## Quick Reference
 
@@ -22,38 +18,116 @@ is preferred in-code.
       <thead>
         <tr>
           <th>Example</th>
-          <th>Token</th>
+          <th>CSS class</th>
           <th>Prose</th>
         </tr>
       </thead>
       <tbody>
-        {["display", "headline", "title", "label", "body"].map((variant) =>
-          ["large", "medium", "small"].map((size) => (
-            <tr>
-              <td className={`${variant}-${size}`}>
-                The quick brown fox jumps over the lazy dog
-              </td>
-              <td>
-                {variant}-{size}
-                <br />
-                md-sys-typescale-{variant}-{size}
-              </td>
-              <td>
-                {
-                  {
-                    "display-small": "h1",
-                    "headline-large": "h2",
-                    "headline-medium": "h3",
-                    "headline-small": "h4",
-                    "title-large": "h5",
-                    "title-medium": "h6",
-                    "body-medium": "p",
-                  }[`${variant}-${size}`]
-                }
-              </td>
-            </tr>
-          ))
-        )}
+        <tr>
+          <td className="typography-display-large">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-display-large</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-display-medium">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-display-medium</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-display-small">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-display-small</td>
+          <td>h1</td>
+        </tr>
+        <tr>
+          <td className="typography-headline-large">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-headline-large</td>
+          <td>h2</td>
+        </tr>
+        <tr>
+          <td className="typography-headline-medium">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-headline-medium</td>
+          <td>h3</td>
+        </tr>
+        <tr>
+          <td className="typography-headline-small">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-headline-small</td>
+          <td>h4</td>
+        </tr>
+        <tr>
+          <td className="typography-title-large">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-title-large</td>
+          <td>h5</td>
+        </tr>
+        <tr>
+          <td className="typography-title-medium">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-title-medium</td>
+          <td>h6</td>
+        </tr>
+        <tr>
+          <td className="typography-title-small">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-title-small</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-label-large">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-label-large</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-label-medium">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-label-medium</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-label-small">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-label-small</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-body-large">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-body-large</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td className="typography-body-medium">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-body-medium</td>
+          <td>p</td>
+        </tr>
+        <tr>
+          <td className="typography-body-small">
+            The quick brown fox jumps over the lazy dog
+          </td>
+          <td>typography-body-small</td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </Story>
@@ -65,8 +139,7 @@ Inspired by [`@tailwindcss/typhography`](https://tailwindcss.com/docs/typography
 the `prose` class can be used to automatically make pieces of text beautiful without the need
 for additional styling classes.
 
-Using a surrounding tag with the `prose` class is preferred to setting margins manually per-page.
-The `prose` class can also be added directly to an element to use its `prose`-styling:
+The `prose` class can be added directly to an element to use its `prose`-styling:
 
 ```html
 <span class="prose">
