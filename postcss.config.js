@@ -9,6 +9,7 @@ module.exports = {
       },
     },
     "tailwindcss/nesting": {},
+    "postcss-calc": {},
     autoprefixer: {},
   },
 };
