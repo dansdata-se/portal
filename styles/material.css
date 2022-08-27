@@ -171,6 +171,27 @@
   }
 }
 
+/* 
+  Provide the current background color as a "context" value.
+  This can be used to mimic transparency, e.g. in outlined text fields where
+  the label is supposed to be placed on the parent's border, with the border
+  seemingly being "interrupted" by the label.
+  
+  See https://stackoverflow.com/a/73422236/1137077 for details on how this
+  context variable works.
+  */
+@each $token in primary, on-primary, primary-container, on-primary-container,
+  secondary, on-secondary, secondary-container, on-secondary-container, tertiary,
+  on-tertiary, tertiary-container, on-tertiary-container, error, on-error,
+  error-container, on-error-container, outline, background, on-background,
+  surface, on-surface, surface-variant, on-surface-variant, inverse-surface,
+  inverse-on-surface
+{
+  .bg-$(token) {
+    --md-ctx-background: var(--md-sys-color-$(token));
+  }
+}
+
 @layer base {
   body {
     @apply bg-background text-on-background;

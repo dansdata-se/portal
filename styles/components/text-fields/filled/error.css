@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-filled[data-error="true"]:not([data-disabled="true"]) {
+    &:hover {
+      @apply border-b-2;
+
+      &::after {
+        @apply bg-on-surface/hover;
+      }
+    }
+  }
+}

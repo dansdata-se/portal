@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-filled {
+    @apply text-on-surface-variant border-b-1 border-on-surface-variant rounded-t-xs;
+
+    &::before,
+    &::after {
+      content: "";
+      @apply block absolute top-0 left-0 right-0 bottom-0 bg-transparent rounded-t-xs;
+    }
+
+    /* Content */
+    & > * {
+      @apply z-2;
+    }
+
+    /* Container/Background */
+    &::before {
+      @apply z-0 bg-surface-variant;
+    }
+
+    /* State Layer */
+    &::after {
+      @apply z-1;
+    }
+
+    > .input-wrap {
+      > input,
+      > textarea {
+        @apply mt-[var(--md-sys-typescale-body-small-line-height)];
+      }
+    }
+  }
+}

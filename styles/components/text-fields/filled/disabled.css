@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-filled[data-disabled="true"] {
+    @apply border-on-surface/disabled-text;
+
+    &::before {
+      @apply bg-on-surface/[0.04];
+    }
+
+    > svg.leading,
+    > svg.trailing,
+    > .leading svg,
+    > .trailing svg {
+      /* Intended for feather icons specifically! */
+      @apply stroke-on-surface-variant/disabled-text;
+    }
+  }
+}

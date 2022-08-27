@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield {
+    @apply relative inline-flex items-center;
+
+    /* Content */
+    & > * {
+      @apply relative my-2;
+    }
+
+    > svg.leading,
+    > svg.trailing,
+    > .leading svg,
+    > .trailing svg {
+      /* Intended for feather icons specifically! */
+      @apply h-6 w-6 stroke-on-surface-variant;
+    }
+
+    > span.leading,
+    > span.trailing {
+      @apply self-end;
+    }
+
+    > .leading,
+    > .trailing {
+      @apply flex h-auto typography-body-large self-center items-end rounded-xs;
+
+      &:focus {
+        @apply outline-none;
+      }
+
+      &:focus-visible {
+        @apply outline-2 outline-primary;
+      }
+    }
+
+    > .leading {
+      @apply ml-3;
+    }
+
+    > .trailing {
+      @apply mr-3;
+    }
+
+    > .input-wrap {
+      @apply flex-grow mx-4;
+
+      > label {
+        @apply absolute left-0 top-1/2 -translate-y-1/2 z-1 transition-[top,transform,font,padding,margin] typography-body-large pointer-events-none;
+      }
+
+      > input,
+      > textarea {
+        @apply block w-full h-[var(--md-sys-typescale-body-large-line-height)] max-h-[calc(15*var(--md-sys-typescale-body-large-line-height))] m-0 p-0 typography-body-large text-on-surface bg-transparent border-none outline-none caret-primary resize-none focus:ring-0;
+      }
+    }
+
+    > .supporting-wrap {
+      @apply absolute bottom-0 left-0 right-0 translate-y-full text-on-surface-variant typography-body-small my-0 mx-4 pt-1 px-px flex gap-4 justify-between;
+    }
+  }
+}

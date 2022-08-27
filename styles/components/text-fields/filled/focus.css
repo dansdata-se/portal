@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-filled {
+    /* Fix for layout shift when border width is changed */
+    &:not([data-disabled="true"]) {
+      @apply pb-px;
+
+      &:hover:not(:disabled):not([disabled]),
+      &:focus-within {
+        @apply pb-0;
+        > .supporting-wrap > * {
+          @apply mt-px;
+        }
+      }
+    }
+
+    > .input-wrap {
+      &:focus-within > label,
+      > input:not([placeholder=" "]:placeholder-shown) ~ label,
+      > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
+        @apply top-0 translate-y-0 typography-body-small;
+      }
+
+      &:focus-within > label {
+        @apply text-primary;
+      }
+    }
+
+    &:focus-within {
+      @apply border-primary border-b-2;
+    }
+
+    &:hover:not([data-disabled="true"]):not([data-error="true"]) {
+      @apply border-primary border-b-2;
+
+      &::after {
+        @apply bg-on-surface/hover;
+      }
+    }
+  }
+}

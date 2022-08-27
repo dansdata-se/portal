@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-outlined[data-disabled="true"] {
+    @apply border-on-surface/disabled-bg;
+
+    > svg.leading,
+    > svg.trailing,
+    > .leading svg,
+    > .trailing svg {
+      /* Intended for feather icons specifically! */
+      @apply stroke-on-surface/disabled-text;
+    }
+  }
+}

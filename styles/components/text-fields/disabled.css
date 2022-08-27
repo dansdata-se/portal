@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield[data-disabled="true"] {
+    @apply text-on-surface/disabled-text;
+
+    > .input-wrap > input,
+    > .input-wrap > textarea {
+      @apply text-on-surface/disabled-text;
+    }
+
+    > .supporting-wrap {
+      @apply text-on-surface-variant/disabled-text;
+    }
+  }
+}

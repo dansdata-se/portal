@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .textfield.textfield-outlined {
+    /* Fix for layout shift when border width is changed */
+    &:not([data-disabled="true"]) {
+      @apply p-px;
+      &:focus-within {
+        @apply p-0;
+        > .supporting-wrap {
+          @apply px-0;
+          & > * {
+            @apply mt-px;
+          }
+        }
+      }
+    }
+
+    .leading + .input-wrap {
+      &:focus-within > label,
+      > input:not([placeholder=" "]:placeholder-shown) ~ label,
+      > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
+        @apply -mx-11;
+      }
+    }
+
+    > .input-wrap {
+      &:focus-within > label,
+      > input:not([placeholder=" "]:placeholder-shown) ~ label,
+      > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
+        /* 
+        Automatically adapt the label background to
+        the current background to mimic transparency.
+        */
+        background-color: rgb(var(--md-ctx-background));
+        @apply -mx-1 px-1 -top-2 -translate-y-1/2 typography-body-small;
+      }
+    }
+
+    &:focus-within {
+      @apply border-primary border-2;
+
+      &:not([data-error="true"]) > .input-wrap {
+        &:focus-within > label,
+        > input:not([placeholder=" "]:placeholder-shown) ~ label,
+        > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
+          @apply text-primary;
+        }
+      }
+    }
+
+    &:hover {
+      &:not(:focus-within) {
+        @apply border-on-surface;
+      }
+
+      &:not(:focus-within) > .input-wrap > label,
+      > .input-wrap:not(:focus-within)
+        > input[placeholder=" "]:placeholder-shown
+        ~ label,
+      > .input-wrap:not(:focus-within)
+        > textarea[placeholder=" "]:placeholder-shown
+        ~ label {
+        @apply text-on-surface;
+      }
+    }
+  }
+}
