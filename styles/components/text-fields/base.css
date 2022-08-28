@@ -54,7 +54,7 @@
 
       > input,
       > textarea {
-        @apply block w-full h-[var(--md-sys-typescale-body-large-line-height)] max-h-[calc(15*var(--md-sys-typescale-body-large-line-height))] m-0 p-0 typography-body-large text-on-surface bg-transparent border-none outline-none caret-primary resize-none focus:ring-0;
+        @apply block w-full h-[calc(var(--md-sys-typescale-body-large-line-height)+var(--md-sys-typescale-body-small-line-height))] max-h-[calc(15*var(--md-sys-typescale-body-large-line-height))] m-0 p-0 typography-body-large text-on-surface bg-transparent border-none outline-none caret-primary resize-none focus:ring-0;
       }
     }
 

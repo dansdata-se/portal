@@ -9,7 +9,7 @@
     > .input-wrap {
       > input,
       > textarea {
-        @apply my-[calc(0.5*var(--md-sys-typescale-body-small-line-height))];
+        @apply py-[calc(0.5*var(--md-sys-typescale-body-small-line-height))];
       }
     }
   }

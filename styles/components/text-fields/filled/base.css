@@ -30,7 +30,7 @@
     > .input-wrap {
       > input,
       > textarea {
-        @apply mt-[var(--md-sys-typescale-body-small-line-height)];
+        @apply pt-[var(--md-sys-typescale-body-small-line-height)];
       }
     }
   }
