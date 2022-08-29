@@ -1,10 +1,5 @@
-import {
-  cloneElement,
-  HTMLAttributes,
-  ReactElement,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { cloneElement, HTMLAttributes, ReactElement, useRef } from "react";
+import { useIsomorphicLayoutEffect } from "usehooks-ts";
 
 // Loosely inspired by `OutlinedTextField` from android Jetpack Compose
 // https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#OutlinedTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material.TextFieldColors)
@@ -93,7 +88,7 @@ function TextFieldInput({
 >) {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (textAreaRef.current === null) return;
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   }, [value, textAreaRef]);
