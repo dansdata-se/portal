@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const router = useRouter();
   const { t } = useTranslation("common");
   return (
-    <div className={styles.container}>
+    <div className={styles.container + " flex flex-col h-full"}>
       <Head>
         <title>Create Next App</title>
         <meta
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className={styles.main + " prose"}>
+      <main className={styles.main + " prose flex-grow"}>
         <h1 className="text-primary">{t("Hello World")}</h1>
         <Link
           href="/"
@@ -28,6 +28,21 @@ const Home: NextPage = () => {
           <button>{t("change-locale")}</button>
         </Link>
       </main>
+
+      <footer className={styles.footer + " text-center flex-grow-0"}>
+        <p>
+          Version:{" "}
+          <a
+            className="text-primary"
+            href={`https://github.com/dansdata-se/portal/tree/${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF}:
+            {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.substring(0, 7)}
+          </a>
+        </p>
+      </footer>
     </div>
   );
 };
