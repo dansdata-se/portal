@@ -1,0 +1,14 @@
+/*
+Workaround to allow proper bottom positioning for fixed
+elements in mobile browsers with collapsing url bars:
+https://stackoverflow.com/a/17555766/1137077
+*/
+html {
+  @apply h-full;
+}
+body {
+  @apply min-h-full h-full;
+}
+#__next {
+  @apply h-full;
+}
