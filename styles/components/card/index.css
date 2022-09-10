@@ -11,6 +11,7 @@
 
 @layer components {
   .card {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     @apply relative inline-block before:absolute before:top-0 before:left-0 before:right-0 before:bottom-0;
 
     &,
