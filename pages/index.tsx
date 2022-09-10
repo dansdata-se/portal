@@ -1,3 +1,4 @@
+import LanguageButton from "components/Button/Language";
 import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -21,12 +22,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main + " prose flex-grow"}>
         <h1 className="text-primary">{t("Hello World")}</h1>
-        <Link
-          href="/"
-          locale={router.locale === "en" ? "sv" : "en"}
-        >
-          <button>{t("change-locale")}</button>
-        </Link>
+        <LanguageButton variant="text" />
       </main>
 
       <footer className={styles.footer + " text-center flex-grow-0"}>

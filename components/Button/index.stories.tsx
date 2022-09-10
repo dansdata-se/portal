@@ -1,38 +1,31 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Plus } from "react-feather";
-import ButtonComponent, { ButtonAttributes } from ".";
-
-type TemplateButtonAttributes = { icon: boolean } & Omit<
-  ButtonAttributes,
-  "icon"
->;
-
-function TemplateButton(args: TemplateButtonAttributes) {
-  const buttonAttrs: ButtonAttributes = {
-    ...args,
-    icon: args.icon ? <Plus /> : undefined,
-  };
-  return <ButtonComponent {...buttonAttrs} />;
-}
+import ButtonComponent from ".";
 
 export default {
   title: "Components/Button",
   component: ButtonComponent,
+  args: {
+    variant: "elevated",
+    text: "Click me!",
+    disabled: false,
+  },
   argTypes: {
     icon: {
       type: "boolean",
+      defaultValue: false,
     },
   },
 } as ComponentMeta<typeof ButtonComponent>;
 
-const Template: ComponentStory<typeof TemplateButton> = (
-  args: TemplateButtonAttributes
-) => <TemplateButton {...args} />;
-
-export const Button = Template.bind({});
-Button.args = {
-  variant: "elevated",
-  text: "Click me!",
-  disabled: false,
-  icon: true,
+export const Button: ComponentStory<typeof ButtonComponent> = ({
+  icon,
+  ...props
+}) => {
+  return (
+    <ButtonComponent
+      {...props}
+      icon={icon ? <Plus /> : undefined}
+    />
+  );
 };

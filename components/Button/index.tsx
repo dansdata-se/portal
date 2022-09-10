@@ -1,5 +1,10 @@
 import classNames from "classnames";
-import { ButtonHTMLAttributes, ReactElement } from "react";
+import {
+  ButtonHTMLAttributes,
+  ForwardedRef,
+  forwardRef,
+  ReactElement,
+} from "react";
 import { Icon } from "react-feather";
 
 export type ButtonAttributes = {
@@ -16,18 +21,26 @@ export type ButtonAttributes = {
  *
  * Pure icon buttons should not use this component.
  */
-function Button({ variant, text, icon, ...props }: ButtonAttributes) {
-  return (
-    <button
-      {...props}
-      className={classNames("btn", `btn-${variant}`, props?.className)}
-    >
-      <>
-        {icon}
-        {text.length && <span>{text}</span>}
-      </>
-    </button>
-  );
-}
+
+const Button = forwardRef<HTMLButtonElement, ButtonAttributes>(
+  (
+    { variant, text, icon, ...attrs }: ButtonAttributes,
+    ref: ForwardedRef<HTMLButtonElement> | undefined
+  ) => {
+    return (
+      <button
+        {...attrs}
+        ref={ref}
+        className={classNames("btn", `btn-${variant}`, attrs?.className)}
+      >
+        <>
+          {icon}
+          {text.length && <span>{text}</span>}
+        </>
+      </button>
+    );
+  }
+);
+Button.displayName = "Button";
 
 export default Button;
