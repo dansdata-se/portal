@@ -30,6 +30,12 @@
     "git": "latest",
     "node": "18"
   },
+
+  "settings": {
+    // Container is set up to use host networking
+    "remote.autoForwardPorts": false
+  },
+
   "customizations": {
     "vscode": {
       "extensions": [
