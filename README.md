@@ -7,6 +7,11 @@ An administration interface for managing API keys and data presented via the dan
 The project utilizes a [devcontainer](https://code.visualstudio.com/docs/remote/containers)
 with most dependencies, including `supabase-cli`, already included.
 
+Note that VSCode likes to perform automatic port forwarding when opening links, which can sometimes
+cause issues when viewing storybook. If storybook opens with some content not loading properly,
+try checking if VSCode opened storybook on port e.g. `6007` despite running on `6006` as a first
+measure.
+
 The administration portal is based on [next.js](https://nextjs.org/) and uses [supabase](https://supabase.com/)
 as its backend.
 
