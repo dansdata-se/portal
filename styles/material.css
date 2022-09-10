@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --md-sys-shape-corner-none: 0rem;
   --md-sys-shape-corner-extra-small: 0.25rem;
