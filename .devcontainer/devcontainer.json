@@ -37,7 +37,8 @@
         "ms-ossdata.vscode-postgresql",
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss",
-        "bungcip.better-toml"
+        "bungcip.better-toml",
+        "csstools.postcss"
       ]
     }
   }
