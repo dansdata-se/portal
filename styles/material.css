@@ -239,6 +239,13 @@
     line-height: var(--md-sys-typescale-headline-large-line-height);
     letter-spacing: var(--md-sys-typescale-headline-large-tracking);
   }
+  .typography-label-small {
+    font-family: var(--md-sys-typescale-label-small-font);
+    font-weight: var(--md-sys-typescale-label-small-weight);
+    font-size: var(--md-sys-typescale-label-small-size);
+    line-height: var(--md-sys-typescale-label-small-line-height);
+    letter-spacing: var(--md-sys-typescale-label-small-tracking);
+  }
   .typography-label-medium {
     font-family: var(--md-sys-typescale-label-medium-font);
     font-weight: var(--md-sys-typescale-label-medium-weight);
