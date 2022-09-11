@@ -24,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "sharp": "^0.31.0",
     "usehooks-ts": "^2.6.0"
   },
   "devDependencies": {
