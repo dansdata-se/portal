@@ -1,0 +1,11 @@
+@import "./selector.css";
+
+$component-selector {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  @apply relative w-[3.25rem] h-8;
+
+  &:focus,
+  &:focus-visible {
+    @apply border-none outline-none ring-0;
+  }
+}

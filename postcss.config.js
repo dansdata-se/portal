@@ -8,6 +8,7 @@ module.exports = {
         beforeEach: [require("tailwindcss")],
       },
     },
+    "postcss-simple-vars": {},
     "tailwindcss/nesting": {},
     "postcss-calc": {},
     autoprefixer: {},

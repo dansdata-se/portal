@@ -1,0 +1,17 @@
+@import "./selector.css";
+
+/* Don't show hover effect on mobile browsers */
+@media (hover: hover) {
+  $component-selector {
+    --md-comp-switch-thumb-bg-unselected: var(
+      --md-sys-color-on-surface-variant
+    );
+    --md-comp-switch-thumb-fg-unselected: var(--md-sys-color-surface-variant);
+    --md-comp-switch-thumb-halo-color-unselected: var(
+      --md-sys-color-on-surface
+    );
+    --md-comp-switch-thumb-halo-opacity: var(
+      --md-sys-state-hover-state-layer-opacity
+    );
+  }
+}

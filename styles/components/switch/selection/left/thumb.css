@@ -1,0 +1,7 @@
+@import "./selector.css";
+
+$component-selector {
+  > .switch-thumb {
+    @apply left-1;
+  }
+}

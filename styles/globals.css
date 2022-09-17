@@ -7,5 +7,6 @@
 @import "./components/button";
 @import "./components/card";
 @import "./components/text-fields";
+@import "./components/switch";
 
 @import "tailwindcss/utilities";

@@ -1,0 +1,12 @@
+@import "./selector.css";
+
+/* Don't show active effect on mobile browsers */
+@media (hover: hover) {
+  $component-selector {
+    --md-comp-switch-thumb-bg-selected: var(--md-sys-color-primary-container);
+    --md-comp-switch-thumb-fg-selected: var(
+      --md-sys-color-on-primary-container
+    );
+    --md-comp-switch-thumb-halo-color-selected: var(--md-sys-color-primary);
+  }
+}

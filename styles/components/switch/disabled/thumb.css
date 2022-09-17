@@ -1,0 +1,15 @@
+@import "./selector.css";
+
+$component-selector {
+  --md-comp-switch-thumb-bg-unselected: var(--md-sys-color-on-surface);
+  --md-comp-switch-thumb-bg-opacity-unselected: 0.38;
+  --md-comp-switch-thumb-fg-unselected: var(--md-sys-color-surface-variant);
+  --md-comp-switch-thumb-fg-opacity-unselected: 1;
+
+  --md-comp-switch-thumb-bg-selected: var(--md-sys-color-surface);
+  --md-comp-switch-thumb-bg-opacity-selected: 1;
+  --md-comp-switch-thumb-fg-selected: var(--md-sys-color-on-surface);
+  --md-comp-switch-thumb-fg-opacity-selected: 0.38;
+
+  --md-comp-switch-thumb-halo-opacity: 0;
+}

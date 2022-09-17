@@ -7,6 +7,11 @@
   --md-sys-shape-corner-extra-large: 1.75rem;
   --md-sys-shape-corner-full: 100%;
 
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-focus-state-layer-opacity: 0.12;
+  --md-sys-state-pressed-state-layer-opacity: 0.12;
+  --md-sys-state-dragged-state-layer-opacity: 0.16;
+
   --md-ref-typeface-brand: "Norican", ui-serif, Georgia, Cambria,
     "Times New Roman", Times, serif;
   --md-ref-typeface-plain: "Roboto Flex", "Roboto", ui-sans-serif, system-ui,

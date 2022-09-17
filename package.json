@@ -52,6 +52,7 @@
     "postcss": "^8.4.16",
     "postcss-each": "^1.1.0",
     "postcss-import": "^15.0.0",
+    "postcss-simple-vars": "^7.0.0",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "react-i18next": "^11.18.6",
