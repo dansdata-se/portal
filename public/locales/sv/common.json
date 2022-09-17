@@ -1,4 +1,7 @@
 {
   "Hello World": "Hej världen",
-  "change-locale": "In English"
+  "change-locale": "In English",
+  "sr-darkmode-on": "Tema: mörkt",
+  "sr-darkmode-off": "Tema: ljust",
+  "sr-darkmode-follow-system": "Tema: följ systemets inställning"
 }
