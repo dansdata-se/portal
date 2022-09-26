@@ -5,7 +5,7 @@ ARG VARIANT="buster"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 ARG VARIANT
 ARG POSTGRES_VERSION="14"
-ARG SUPABASE_CLI_VERSION="0.34.0"
+ARG SUPABASE_CLI_VERSION="1.4.10"
 
 # Generic requirements
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
