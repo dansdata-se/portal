@@ -28,7 +28,8 @@
   "features": {
     "docker-from-docker": "20.10",
     "git": "latest",
-    "node": "18"
+    "node": "18",
+    "golang": "latest"
   },
 
   "settings": {
@@ -44,7 +45,8 @@
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss",
         "bungcip.better-toml",
-        "csstools.postcss"
+        "csstools.postcss",
+        "golang.go"
       ]
     }
   }
