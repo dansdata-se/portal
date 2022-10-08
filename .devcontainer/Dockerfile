@@ -6,6 +6,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 ARG VARIANT
 ARG POSTGRES_VERSION="14"
 ARG SUPABASE_CLI_VERSION="1.4.10"
+ARG TBLS_VERSION="1.56.2"
 
 # Generic requirements
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
@@ -42,3 +43,7 @@ RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | su
     && apt-get -y install --no-install-recommends\
     postgresql-client-${POSTGRES_VERSION}\
     pgformatter
+
+# Install [tbls](https://github.com/k1LoW/tbls) for graph visualization
+ADD https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb /tmp/tbls.deb
+RUN dpkg -i /tmp/tbls.deb

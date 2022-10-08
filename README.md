@@ -29,6 +29,12 @@ npm run dev
 yarn dev
 ```
 
+To generate database documentation (requires supabase to be running)
+
+```bash
+npm run docs
+```
+
 ### Supabase
 
 The portal uses supabase as its backend. For more details on local development using

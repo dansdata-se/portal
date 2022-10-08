@@ -7,12 +7,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint && tbls lint",
     "format": "prettier --write . && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
     "format-check": "prettier --check .",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "docs": "tbls doc --rm-dist"
   },
   "dependencies": {
     "classnames": "^2.3.1",
