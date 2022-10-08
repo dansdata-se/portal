@@ -27,7 +27,7 @@
   "remoteUser": "vscode",
   "features": {
     "docker-from-docker": "20.10",
-    "git": "latest",
+    "git": "os-provided",
     "node": "18",
     "golang": "latest"
   },
