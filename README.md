@@ -25,8 +25,6 @@ To run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 To generate database documentation (requires supabase to be running)
