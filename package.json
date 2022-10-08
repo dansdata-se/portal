@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write . && pg_format -i supabase/**/*.sql",
+    "format": "prettier --write . && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
     "format-check": "prettier --check .",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
