@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "docs": "tbls doc --rm-dist"
+    "docs": "supabase gen types typescript --local > types/supabase/index.ts && tbls doc --rm-dist"
   },
   "dependencies": {
     "classnames": "^2.3.1",
