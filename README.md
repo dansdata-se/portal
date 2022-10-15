@@ -27,7 +27,7 @@ To run the development server:
 npm run dev
 ```
 
-To generate database documentation (requires supabase to be running)
+To generate database documentation and TS types (requires supabase to be running)
 
 ```bash
 npm run docs

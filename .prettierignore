@@ -34,3 +34,4 @@ yarn-error.log*
 
 # auto generated database documentation
 /docs/database
+/types/supabase
