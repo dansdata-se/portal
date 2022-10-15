@@ -416,7 +416,7 @@ BEGIN
   IF COALESCE(current_setting('config.environment', TRUE), 'local') <> 'local' THEN
     CREATE EXTENSION IF NOT EXISTS pg_cron WITH SCHEMA extensions;
     COMMENT ON EXTENSION pg_cron IS 'Job scheduler for PostgreSQL';
-    SELECT
+    PERFORM
       cron.schedule ('nightly-api-auth-log-clean', '0 1 * * *', $$
         PERFORM
           api_auth.clean_log () $$);
