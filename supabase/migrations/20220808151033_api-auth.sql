@@ -487,11 +487,9 @@ DECLARE
   response_content text;
   -- TODO: Change these to match your environment!
   supabase_url text := CASE WHEN current_setting('config.environment', TRUE) = 'production' THEN
-    '<production-url>'
+    'https://rpmwqxukdehqmnvknrqz.supabase.co'
   WHEN current_setting('config.environment', TRUE) = 'stage' THEN
-    '<stage-url>'
-  WHEN current_setting('config.environment', TRUE) = 'development' THEN
-    '<development-url>'
+    'https://zbczgvcssyjqfzombcom.supabase.co'
     -- Else: Default for Supabase CLI local development.
     -- Note that Supabase CLI runs supabase locally in a docker environment.
   ELSE
@@ -500,11 +498,9 @@ DECLARE
   -- NOTE: The anon key is meant to be usable in untrusted contexts.
   -- DO NOT use any other key than your anon key here!
   supabase_anon_key text := CASE WHEN current_setting('config.environment', TRUE) = 'production' THEN
-    '<production-anon-key>'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwbXdxeHVrZGVocW1udmtucnF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQyMDc4MDgsImV4cCI6MTk3OTc4MzgwOH0.rkBPMXB4ZG4cculI1paQ9k9sJaRQxWZWwpV1zz3hgjc'
   WHEN current_setting('config.environment', TRUE) = 'stage' THEN
-    '<stage-anon-key>'
-  WHEN current_setting('config.environment', TRUE) = 'development' THEN
-    '<development-anon-key>'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiY3pndmNzc3lqcWZ6b21iY29tIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQyMDc3MDIsImV4cCI6MTk3OTc4MzcwMn0.OkjZ9uUAiV8Jd4UX4YIywVK8pWzIGMFT0KDWeQ--BRg'
     -- Else: Default for Supabase CLI local development
   ELSE
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24ifQ.625_WdcF3KHqz5amU0x2X5WWHP-OEs_4qj0ssLNHzTs'
