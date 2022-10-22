@@ -34,6 +34,32 @@ module.exports = {
         path: false,
       };
     }
+
+    // Disable whatever is already set to load SVGs
+    config.module.rules
+      .filter((rule) => rule.test.test(".svg"))
+      .forEach((rule) => (rule.exclude = /\.svg$/i));
+
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  name: "removeViewBox",
+                  active: false,
+                },
+              ],
+            },
+          },
+        },
+      ],
+    });
+
     return config;
   },
 };
