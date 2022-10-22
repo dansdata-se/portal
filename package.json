@@ -50,6 +50,7 @@
     "husky": "^8.0.1",
     "i18next": "^21.9.1",
     "i18next-http-backend": "^1.4.1",
+    "js-yaml": "^4.1.0",
     "postcss": "^8.4.16",
     "postcss-each": "^1.1.0",
     "postcss-import": "^15.0.0",
