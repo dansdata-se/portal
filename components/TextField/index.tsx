@@ -51,14 +51,16 @@ export type TextFieldAttributes = {
 
 function normalizeLeadingTrailing(
   node: ReactElement | string | null,
-  leadingOrTrailing: "leading" | "trailing"
+  leadingOrTrailing: "leading" | "trailing",
+  disabled: boolean
 ): ReactElement | null {
   if (typeof node === "string") {
     return <span className={leadingOrTrailing}>{node}</span>;
   }
   if (node !== null) {
-    return cloneElement<HTMLElement>(node, {
+    return cloneElement<HTMLButtonElement>(node, {
       className: `${node.props.className ?? ""} ${leadingOrTrailing}`,
+      disabled,
     });
   }
   return null;
@@ -146,8 +148,8 @@ function TextField({
     // A placeholder is required for proper positioning of the label.
     placeholder = " ";
   }
-  leading = normalizeLeadingTrailing(leading, "leading");
-  trailing = normalizeLeadingTrailing(trailing, "trailing");
+  leading = normalizeLeadingTrailing(leading, "leading", disabled);
+  trailing = normalizeLeadingTrailing(trailing, "trailing", disabled);
 
   return (
     <div

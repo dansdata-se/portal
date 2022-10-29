@@ -51,7 +51,7 @@
       }
     }
 
-    &:hover {
+    &:hover:not([data-disabled="true"]) {
       &:not(:focus-within) {
         @apply border-on-surface;
       }
