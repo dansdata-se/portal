@@ -56,7 +56,14 @@ enable_confirmations = false
 
 # Use an external OAuth provider. The full list of providers are: `apple`, `azure`, `bitbucket`,
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `twitch`, `twitter`, `slack`, `spotify`.
-[auth.external.apple]
-enabled = false
-client_id = ""
-secret = ""
+[auth.external.facebook]
+client_id = "env(SSO_FACEBOOK_CLIENT_ID)"
+secret = "env(SSO_FACEBOOK_SECRET)"
+
+[auth.external.github]
+client_id = "env(SSO_GITHUB_CLIENT_ID)"
+secret = "env(SSO_GITHUB_SECRET)"
+
+[auth.external.google]
+client_id = "env(SSO_GOOGLE_CLIENT_ID)"
+secret = "env(SSO_GOOGLE_SECRET)"

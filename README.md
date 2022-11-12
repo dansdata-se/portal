@@ -7,10 +7,11 @@ An administration interface for managing API keys and data presented via the dan
 The project utilizes a [devcontainer](https://code.visualstudio.com/docs/remote/containers)
 with most dependencies, including `supabase-cli`, already included.
 
-Note that VSCode likes to perform automatic port forwarding when opening links, which can sometimes
-cause issues when viewing storybook. If storybook opens with some content not loading properly,
-try checking if VSCode opened storybook on port e.g. `6007` despite running on `6006` as a first
-measure.
+Before you can start this devcontainer however, you need to create a local `.env.local` file:
+
+```bash
+touch .env.local
+```
 
 The administration portal is based on [next.js](https://nextjs.org/) and uses [supabase](https://supabase.com/)
 as its backend.
@@ -38,6 +39,14 @@ npm run docs
 The portal uses supabase as its backend. For more details on local development using
 supabase, please see the [official guide](https://supabase.com/docs/guides/local-development).
 
+#### SSO
+
+To enable SSO for your local environment, override the `SSO_<PROVIDER>_CLIENT_ID` and `SSO_<PROVIDER>_SECRET`
+in your local `.env.local` file (see [`.env.development`](./.env.development) for instructions) and rebuild
+the devcontainer. By default, SSO is disabled for local development builds.
+
+Note that you will need to generate your own `CLIENT_ID` and `SECRET` for local testing.
+
 ### Storybook
 
 Components are documented using [Storybook](https://storybook.js.org/).
@@ -49,6 +58,11 @@ npm run storybook
 ```
 
 Stories should be located next to their respective components in a `[component].stories.(mdx|tsx)` file.
+
+Note that VSCode likes to perform automatic port forwarding when opening links, which can sometimes
+cause issues when viewing storybook. If storybook opens with some content not loading properly,
+try checking if VSCode opened storybook on port e.g. `6007` despite running on `6006` as a first
+measure.
 
 ## About Dansdata.se
 
