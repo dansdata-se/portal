@@ -14,10 +14,9 @@ import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "react-feather";
 import { useMediaQuery } from "usehooks-ts";
 
-const SignIn: NextPage = () => {
+const LogIn: NextPage = () => {
   const router = useRouter();
-  const { t: tCommon } = useTranslation("common");
-  const { t: tPage } = useTranslation("page-sign-in");
+  const { t: tPage } = useTranslation("page-log-in");
 
   // Force small footer when image squishes the left-hand bar too much.
   const forceSmallFooter = useMediaQuery(
@@ -71,7 +70,7 @@ const SignIn: NextPage = () => {
           </header>
           <div className="h-8 grow"></div>
           <main className="prose grow mx-auto px-4 w-full max-w-sm">
-            <h1>{tCommon("Sign In")}</h1>
+            <h1>{tPage("title-log-in")}</h1>
             <div className="flex flex-col gap-4 w-full max-w-sm">
               <TextField
                 id="signin-email"
@@ -101,7 +100,7 @@ const SignIn: NextPage = () => {
               <Button
                 className="w-full"
                 variant="filled"
-                text={tPage("action-sign-in")}
+                text={tPage("action-log-in")}
                 onClick={() => {
                   setEmailError(email.length === 0);
                   setPasswordError(password.length === 0);
@@ -149,10 +148,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       ...(await serverSideTranslations(context.locale as string, [
         "common",
-        "page-sign-in",
+        "page-log-in",
       ])),
     },
   };
 };
 
-export default SignIn;
+export default LogIn;
