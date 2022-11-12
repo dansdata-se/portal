@@ -1,6 +1,9 @@
 breadcrumb-root: Portal
 breadcrumb-log-in: Log in
 breadcrumb-secure-home: Home
+breadcrumb-legal-root: Legal
+breadcrumb-legal-terms-of-service: Terms of Service
+breadcrumb-legal-privacy-policy: Privacy Policy
 change-locale: På Svenska
 sr-darkmode-on: "Theme: Dark"
 sr-darkmode-off: "Theme: Light"

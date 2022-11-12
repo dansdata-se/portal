@@ -1,4 +1,5 @@
 import { TFunction } from "next-i18next";
+import legal from "./legal";
 import secure from "./secure";
 
 export type Destination = {
@@ -19,6 +20,7 @@ function Nav() {
     parentDestinations: [Index],
   };
   return {
+    legal: legal([Index]),
     secure: secure([Index]),
     Index,
     Login,

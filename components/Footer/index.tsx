@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import LanguageButton from "components/Button/Language";
 import Image from "next/future/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { HTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
@@ -14,6 +16,7 @@ function Footer({
   forceSmall = false,
   ...props
 }: { forceSmall?: boolean } & HTMLAttributes<HTMLElement>) {
+  const router = useRouter();
   const { t: tCommon } = useTranslation("common");
 
   return (
@@ -73,6 +76,24 @@ function Footer({
           </span>
           <hr className="col-span-2" />
           <div className="flex flex-row flex-wrap gap-2 items-center justify-between col-span-2">
+            <div className="flex flex-row gap-2">
+              <Link
+                href={"/legal/terms-of-service"}
+                locale={router.locale}
+              >
+                <span className="typography-body-small underline cursor-pointer">
+                  {tCommon("breadcrumb-legal-terms-of-service")}
+                </span>
+              </Link>
+              <Link
+                href={"/legal/privacy"}
+                locale={router.locale}
+              >
+                <span className="typography-body-small underline cursor-pointer">
+                  {tCommon("breadcrumb-legal-privacy-policy")}
+                </span>
+              </Link>
+            </div>
             <a
               className="typography-label-small underline"
               href={`https://github.com/dansdata-se/portal/tree/${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}`}
