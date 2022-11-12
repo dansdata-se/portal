@@ -1,3 +1,4 @@
+import { getUser } from "@supabase/auth-helpers-nextjs";
 import Button from "components/Button";
 import LanguageButton from "components/Button/Language";
 import DarkModeSwitch from "components/Switch/DarkMode";
@@ -133,6 +134,24 @@ const SignIn: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { user } = await getUser(context);
+  if (user !== null) {
+    let redirectTo = "/secure/";
+    let { redirectedFrom } = context.query;
+    if (Array.isArray(redirectedFrom)) {
+      redirectTo = redirectedFrom[0];
+    } else if (redirectedFrom) {
+      redirectTo = redirectedFrom;
+    }
+
+    return {
+      redirect: {
+        destination: redirectTo,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string, [
