@@ -13,7 +13,7 @@ A profile may be owned by multiple users but does not directly represent individ
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | created_at | timestamp with time zone | (now() AT TIME ZONE 'utc'::text) | false |  |  |  |
-| id | uuid | gen_random_uuid() | false | [internal.event_organizers](internal.event_organizers.md) [internal.profile_owners](internal.profile_owners.md) [internal.profile_translations](internal.profile_translations.md) |  |  |
+| id | uuid | gen_random_uuid() | false | [internal.event_organizers](internal.event_organizers.md) [internal.event_slot_profile_associations](internal.event_slot_profile_associations.md) [internal.profile_owners](internal.profile_owners.md) [internal.profile_translations](internal.profile_translations.md) |  |  |
 | updated_at | timestamp with time zone | (now() AT TIME ZONE 'utc'::text) | false |  |  |  |
 
 ## Constraints

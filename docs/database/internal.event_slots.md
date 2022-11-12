@@ -19,7 +19,7 @@ e.g. dance or course session.
 | created_at | timestamp with time zone | (now() AT TIME ZONE 'utc'::text) | false |  |  |  |
 | end | timestamp with time zone |  | false |  |  |  |
 | group_id | uuid |  | false |  | [internal.event_groups](internal.event_groups.md) | Id of the event group this slot is a member of. |
-| id | uuid | gen_random_uuid() | false | [internal.event_slot_translations](internal.event_slot_translations.md) |  |  |
+| id | uuid | gen_random_uuid() | false | [internal.event_slot_profile_associations](internal.event_slot_profile_associations.md) [internal.event_slot_translations](internal.event_slot_translations.md) |  |  |
 | start | timestamp with time zone |  | false |  |  |  |
 | updated_at | timestamp with time zone | (now() AT TIME ZONE 'utc'::text) | false |  |  |  |
 
