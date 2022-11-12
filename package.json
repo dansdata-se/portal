@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint && tbls lint",
-    "format": "prettier --write . && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
+    "format": "prettier --write . && find ./supabase/ -type f -name '*.sql' ! -name '20220923174143_sweden.sql' ! -name '20220926120345_norway.sql' -exec pg_format -c ./.pg_format -i {} \\;",
     "format-check": "prettier --check .",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",

@@ -8,7 +8,7 @@ List of supported languages
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| code | text |  | false | [internal.association_translations](internal.association_translations.md) [internal.event_group_translations](internal.event_group_translations.md) [internal.event_slot_translations](internal.event_slot_translations.md) [internal.event_translations](internal.event_translations.md) [internal.language_translations](internal.language_translations.md) [internal.profile_translations](internal.profile_translations.md) |  | ISO 639-1 language code (with `xx` reserved for "untranslatable" and/or fallback translations) |
+| code | text |  | false | [internal.association_translations](internal.association_translations.md) [internal.country_translations](internal.country_translations.md) [internal.event_group_translations](internal.event_group_translations.md) [internal.event_slot_translations](internal.event_slot_translations.md) [internal.event_translations](internal.event_translations.md) [internal.language_translations](internal.language_translations.md) [internal.profile_translations](internal.profile_translations.md) |  | ISO 639-1 language code (with `xx` reserved for "untranslatable" and/or fallback translations) |
 
 ## Constraints
 
