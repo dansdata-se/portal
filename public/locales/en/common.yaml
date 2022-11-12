@@ -3,3 +3,11 @@ change-locale: På Svenska
 sr-darkmode-on: "Theme: Dark"
 sr-darkmode-off: "Theme: Light"
 sr-darkmode-follow-system: "Theme: Follow system setting"
+tagline: In the swing with Swedish dance!
+footer-text-md: |-
+  Dansdata is an
+  <a className="underline" href="https://en.wikipedia.org/wiki/Open_source" target="_blank" rel="noreferrer">open source</a>
+  project, made by dancers, for dancers.
+
+  Help us digitalize the world of dance -
+  <a className="underline" href="https://github.com/dansdata-se" target="_blank" rel="noreferrer">check out Dansdata on GitHub!</a>

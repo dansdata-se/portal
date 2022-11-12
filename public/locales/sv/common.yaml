@@ -3,3 +3,11 @@ change-locale: In English
 sr-darkmode-on: "Tema: mörkt"
 sr-darkmode-off: "Tema: ljust"
 sr-darkmode-follow-system: "Tema: följ systemets inställning"
+tagline: Vi vet när Sverige dansar!
+footer-text-md: |-
+  Dansdata är ett projekt med
+  <a className="underline" href="https://sv.wikipedia.org/wiki/%C3%96ppen_k%C3%A4llkod" target="_blank" rel="noreferrer">öppen källkod</a>,
+  skapat av dansare, för dansare.
+
+  Hjälp oss digitalisera dansvärlden -
+  <a className="underline" href="https://github.com/dansdata-se" target="_blank" rel="noreferrer">Dansdata finns på GitHub!</a>

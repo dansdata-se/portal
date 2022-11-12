@@ -1,6 +1,6 @@
 import { getUser } from "@supabase/auth-helpers-nextjs";
 import Button from "components/Button";
-import LanguageButton from "components/Button/Language";
+import Footer from "components/Footer";
 import DarkModeSwitch from "components/Switch/DarkMode";
 import TextField from "components/TextField";
 import type { GetServerSideProps, NextPage } from "next";
@@ -12,11 +12,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "react-feather";
+import { useMediaQuery } from "usehooks-ts";
 
 const SignIn: NextPage = () => {
   const router = useRouter();
   const { t: tCommon } = useTranslation("common");
   const { t: tPage } = useTranslation("page-sign-in");
+
+  // Force small footer when image squishes the left-hand bar too much.
+  const forceSmallFooter = useMediaQuery(
+    "((min-width: 768px) and (max-width: 1150px)) or ((min-width: 1280px) and (max-width: 1700px))"
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +44,7 @@ const SignIn: NextPage = () => {
       </Head>
 
       <div className="flex min-h-full flex-row items-stretch">
-        <div className="relative w-full md:w-1/2 xl:w-1/3">
+        <div className="relative flex min-h-full flex-col w-full md:w-1/2 xl:w-1/3">
           <header className="flex flex-row items-center justify-between w-full py-2 px-4">
             <div className="flex flex-row gap-3">
               <div className="relative overflow-hidden h-[var(--md-sys-typescale-headline-small-line-height)] aspect-square rounded-xs">
@@ -63,7 +69,8 @@ const SignIn: NextPage = () => {
             </div>
             <DarkModeSwitch />
           </header>
-          <main className="prose my-40 container">
+          <div className="h-8 grow"></div>
+          <main className="prose grow mx-auto px-4 w-full max-w-sm">
             <h1>{tCommon("Sign In")}</h1>
             <div className="flex flex-col gap-4 w-full max-w-sm">
               <TextField
@@ -102,22 +109,8 @@ const SignIn: NextPage = () => {
               />
             </div>
           </main>
-          <footer className="absolute bottom-0 flex flex-row items-center justify-between w-full py-2 px-4">
-            <LanguageButton variant="text" />
-            <a
-              href={`https://github.com/dansdata-se/portal/tree/${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="block typography-label-small -mb-2">
-                Version
-              </span>
-              <span className="typography-label-small text-primary">
-                {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF}:
-                {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.substring(0, 7)}
-              </span>
-            </a>
-          </footer>
+          <div className="h-8 grow"></div>
+          <Footer forceSmall={forceSmallFooter} />
         </div>
         <div className="relative overflow-hidden flex-grow hidden md:block">
           <Image
