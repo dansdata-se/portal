@@ -11,6 +11,8 @@
 | [api_auth.usage](api_auth.usage.md) | 6 |  | VIEW |
 | [api_auth.user_config](api_auth.user_config.md) | 9 | API Key restrictions and other API related configuration | BASE TABLE |
 | [auth.users](auth.users.md) | 32 | Auth: Stores user login data within a secure schema. | BASE TABLE |
+| [internal.language_translations](internal.language_translations.md) | 4 | Language codes and their names in different languages | BASE TABLE |
+| [internal.languages](internal.languages.md) | 1 | List of supported languages | BASE TABLE |
 
 ## Stored procedures and functions
 
@@ -133,6 +135,8 @@
 | pgsodium.crypto_aead_det_decrypt | bytea | message bytea, additional bytea, key_uuid uuid, nonce bytea | FUNCTION |
 | pgsodium.encrypted_columns | text | relid oid | FUNCTION |
 | pgsodium.decrypted_columns | text | relid oid | FUNCTION |
+| extensions.gin_extract_value_date | internal | date, internal | FUNCTION |
+| extensions.gin_compare_prefix_date | int4 | date, date, smallint, internal | FUNCTION |
 | extensions.pgp_sym_encrypt | bytea | text, text | FUNCTION |
 | extensions.grant_pg_graphql_access | event_trigger |  | FUNCTION |
 | extensions.pgrst_ddl_watch | event_trigger |  | FUNCTION |
@@ -212,6 +216,39 @@
 | storage.filename | text | name text | FUNCTION |
 | storage.foldername | _text | name text | FUNCTION |
 | graphql.rebuild_types | void |  | FUNCTION |
+| extensions.gin_extract_query_date | internal | date, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_interval | internal | interval, internal | FUNCTION |
+| extensions.gin_compare_prefix_interval | int4 | interval, interval, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_interval | internal | interval, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_macaddr | internal | macaddr, internal | FUNCTION |
+| extensions.gin_compare_prefix_macaddr | int4 | macaddr, macaddr, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_macaddr | internal | macaddr, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_inet | internal | inet, internal | FUNCTION |
+| extensions.gin_compare_prefix_inet | int4 | inet, inet, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_inet | internal | inet, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_cidr | internal | cidr, internal | FUNCTION |
+| extensions.gin_compare_prefix_cidr | int4 | cidr, cidr, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_cidr | internal | cidr, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_text | internal | text, internal | FUNCTION |
+| extensions.gin_compare_prefix_text | int4 | text, text, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_text | internal | text, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_char | internal | "char", internal | FUNCTION |
+| extensions.gin_compare_prefix_char | int4 | "char", "char", smallint, internal | FUNCTION |
+| extensions.gin_extract_query_char | internal | "char", internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_bytea | internal | bytea, internal | FUNCTION |
+| extensions.gin_compare_prefix_bytea | int4 | bytea, bytea, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_bytea | internal | bytea, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_bit | internal | bit, internal | FUNCTION |
+| extensions.gin_compare_prefix_bit | int4 | bit, bit, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_bit | internal | bit, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_varbit | internal | bit varying, internal | FUNCTION |
+| extensions.gin_compare_prefix_varbit | int4 | bit varying, bit varying, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_varbit | internal | bit varying, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_numeric | internal | numeric, internal | FUNCTION |
+| extensions.gin_compare_prefix_numeric | int4 | numeric, numeric, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_numeric | internal | numeric, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_numeric_cmp | int4 | numeric, numeric | FUNCTION |
+| extensions.gin_extract_value_macaddr8 | internal | macaddr8, internal | FUNCTION |
 | graphql.is_variable | bool | field jsonb | FUNCTION |
 | graphql.name_literal | text | ast jsonb | FUNCTION |
 | graphql_public.graphql | jsonb | "operationName" text DEFAULT NULL::text, query text DEFAULT NULL::text, variables jsonb DEFAULT NULL::jsonb, extensions jsonb DEFAULT NULL::jsonb | FUNCTION |
@@ -294,12 +331,15 @@
 | graphql.build_connection_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, parent_type text DEFAULT NULL::text, parent_block_name text DEFAULT NULL::text | FUNCTION |
 | graphql.build_delete | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
 | graphql.build_heartbeat_query | text | ast jsonb | FUNCTION |
+| extensions.gtrgm_same | internal | gtrgm, gtrgm, internal | FUNCTION |
 | graphql.argument_value_by_name | text | name text, ast jsonb | FUNCTION |
 | graphql.build_node_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, parent_type text DEFAULT NULL::text, parent_block_name text DEFAULT NULL::text | FUNCTION |
 | graphql.build_update | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
 | graphql.build_enum_values_query | text | ast jsonb, type_block_name text | FUNCTION |
 | graphql.build_field_on_type_query | text | ast jsonb, type_block_name text, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, is_input_fields boolean DEFAULT false | FUNCTION |
 | graphql.build_args_on_field_query | text | ast jsonb, field_block_name text, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
+| extensions.gin_extract_value_trgm | internal | text, internal | FUNCTION |
+| extensions.gin_extract_query_trgm | internal | text, internal, smallint, internal, internal, internal, internal | FUNCTION |
 | graphql.resolve | jsonb | query text DEFAULT NULL::text, variables jsonb DEFAULT '{}'::jsonb, "operationName" text DEFAULT NULL::text, extensions jsonb DEFAULT NULL::jsonb | FUNCTION |
 | graphql.build_schema_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
 | graphql.build_type_query_core_selects | text | ast jsonb, block_name text | FUNCTION |
@@ -307,6 +347,8 @@
 | graphql.build_type_query_in_field_context | text | ast jsonb, field_block_name text | FUNCTION |
 | graphql.cache_key | text | role regrole, schemas text[], schema_version integer, ast jsonb, variables jsonb, variable_definitions jsonb | FUNCTION |
 | graphql.cache_key_variable_component | text | variables jsonb DEFAULT '{}'::jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb | FUNCTION |
+| extensions.gin_trgm_consistent | bool | internal, smallint, text, integer, internal, internal, internal, internal | FUNCTION |
+| extensions.gin_trgm_triconsistent | char | internal, smallint, text, integer, internal, internal, internal | FUNCTION |
 | graphql.prepared_statement_create_clause | text | statement_name text, variable_definitions jsonb, query_ text | FUNCTION |
 | graphql.prepared_statement_execute_clause | text | statement_name text, variable_definitions jsonb, variables jsonb | FUNCTION |
 | graphql.variable_definitions_sort | jsonb | variable_definitions jsonb | FUNCTION |
@@ -315,6 +357,8 @@
 | graphql.rebuild_on_ddl | event_trigger |  | FUNCTION |
 | graphql.rebuild_on_drop | event_trigger |  | FUNCTION |
 | storage.search | record | prefix text, bucketname text, limits integer DEFAULT 100, levels integer DEFAULT 1, offsets integer DEFAULT 0, search text DEFAULT ''::text, sortcolumn text DEFAULT 'name'::text, sortorder text DEFAULT 'asc'::text | FUNCTION |
+| extensions.strict_word_similarity | float4 | text, text | FUNCTION |
+| extensions.strict_word_similarity_op | bool | text, text | FUNCTION |
 | api_auth.new_api_token | text | user_id uuid, title text | FUNCTION |
 | api_auth.tid | uuid |  | FUNCTION |
 | api_auth.check_token_revocation | void |  | FUNCTION |
@@ -330,14 +374,90 @@
 | extensions.http_delete | http_response | uri character varying | FUNCTION |
 | extensions.http_head | http_response | uri character varying | FUNCTION |
 | extensions.urlencode | text | string character varying | FUNCTION |
+| extensions.strict_word_similarity_commutator_op | bool | text, text | FUNCTION |
+| extensions.strict_word_similarity_dist_op | float4 | text, text | FUNCTION |
 | public.api_auth_log_request | void | method text, path text, user_agent text, origin text, ip text | FUNCTION |
+| extensions.strict_word_similarity_dist_commutator_op | float4 | text, text | FUNCTION |
+| extensions.gtrgm_options | void | internal | FUNCTION |
+| extensions.gin_btree_consistent | bool | internal, smallint, anyelement, integer, internal, internal | FUNCTION |
+| extensions.gin_extract_value_int2 | internal | smallint, internal | FUNCTION |
+| extensions.gin_compare_prefix_int2 | int4 | smallint, smallint, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_int2 | internal | smallint, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_int4 | internal | integer, internal | FUNCTION |
+| extensions.gin_compare_prefix_int4 | int4 | integer, integer, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_int4 | internal | integer, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_int8 | internal | bigint, internal | FUNCTION |
+| extensions.gin_compare_prefix_int8 | int4 | bigint, bigint, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_int8 | internal | bigint, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_float4 | internal | real, internal | FUNCTION |
+| extensions.gin_compare_prefix_float4 | int4 | real, real, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_float4 | internal | real, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_float8 | internal | double precision, internal | FUNCTION |
 | api_auth.send_log_api_request | void |  | FUNCTION |
 | api_auth.handle_new_user | trigger |  | FUNCTION |
 | extensions.moddatetime | trigger |  | FUNCTION |
 | api_auth.check_usage_limit_rules | void |  | FUNCTION |
+| extensions.gin_compare_prefix_float8 | int4 | double precision, double precision, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_float8 | internal | double precision, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_money | internal | money, internal | FUNCTION |
+| extensions.gin_compare_prefix_money | int4 | money, money, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_money | internal | money, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_oid | internal | oid, internal | FUNCTION |
+| extensions.gin_compare_prefix_oid | int4 | oid, oid, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_oid | internal | oid, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_timestamp | internal | timestamp without time zone, internal | FUNCTION |
+| extensions.gin_compare_prefix_timestamp | int4 | timestamp without time zone, timestamp without time zone, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_timestamp | internal | timestamp without time zone, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_timestamptz | internal | timestamp with time zone, internal | FUNCTION |
+| extensions.gin_compare_prefix_timestamptz | int4 | timestamp with time zone, timestamp with time zone, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_timestamptz | internal | timestamp with time zone, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_time | internal | time without time zone, internal | FUNCTION |
+| extensions.gin_compare_prefix_time | int4 | time without time zone, time without time zone, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_time | internal | time without time zone, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_timetz | internal | time with time zone, internal | FUNCTION |
+| extensions.gin_compare_prefix_timetz | int4 | time with time zone, time with time zone, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_timetz | internal | time with time zone, internal, smallint, internal, internal | FUNCTION |
 | api_auth.check_ip_rules | void |  | FUNCTION |
 | api_auth.check_origin_rules | void |  | FUNCTION |
 | api_auth.validate_token | void |  | FUNCTION |
+| extensions.set_limit | float4 | real | FUNCTION |
+| extensions.show_limit | float4 |  | FUNCTION |
+| extensions.show_trgm | _text | text | FUNCTION |
+| extensions.similarity | float4 | text, text | FUNCTION |
+| extensions.similarity_op | bool | text, text | FUNCTION |
+| extensions.word_similarity | float4 | text, text | FUNCTION |
+| extensions.word_similarity_op | bool | text, text | FUNCTION |
+| extensions.word_similarity_commutator_op | bool | text, text | FUNCTION |
+| extensions.similarity_dist | float4 | text, text | FUNCTION |
+| extensions.word_similarity_dist_op | float4 | text, text | FUNCTION |
+| extensions.word_similarity_dist_commutator_op | float4 | text, text | FUNCTION |
+| extensions.gtrgm_in | gtrgm | cstring | FUNCTION |
+| extensions.gtrgm_out | cstring | gtrgm | FUNCTION |
+| extensions.gtrgm_consistent | bool | internal, text, smallint, oid, internal | FUNCTION |
+| extensions.gtrgm_distance | float8 | internal, text, smallint, oid, internal | FUNCTION |
+| extensions.gtrgm_compress | internal | internal | FUNCTION |
+| extensions.gtrgm_decompress | internal | internal | FUNCTION |
+| extensions.gtrgm_penalty | internal | internal, internal, internal | FUNCTION |
+| extensions.gtrgm_picksplit | internal | internal, internal | FUNCTION |
+| extensions.gtrgm_union | gtrgm | internal, internal | FUNCTION |
+| extensions.gin_compare_prefix_macaddr8 | int4 | macaddr8, macaddr8, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_macaddr8 | internal | macaddr8, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_anyenum | internal | anyenum, internal | FUNCTION |
+| extensions.gin_compare_prefix_anyenum | int4 | anyenum, anyenum, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_anyenum | internal | anyenum, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_enum_cmp | int4 | anyenum, anyenum | FUNCTION |
+| extensions.gin_extract_value_uuid | internal | uuid, internal | FUNCTION |
+| extensions.gin_compare_prefix_uuid | int4 | uuid, uuid, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_uuid | internal | uuid, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_name | internal | name, internal | FUNCTION |
+| extensions.gin_compare_prefix_name | int4 | name, name, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_name | internal | name, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_bool | internal | boolean, internal | FUNCTION |
+| extensions.gin_compare_prefix_bool | int4 | boolean, boolean, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_bool | internal | boolean, internal, smallint, internal, internal | FUNCTION |
+| extensions.gin_extract_value_bpchar | internal | character, internal | FUNCTION |
+| extensions.gin_compare_prefix_bpchar | int4 | character, character, smallint, internal | FUNCTION |
+| extensions.gin_extract_query_bpchar | internal | character, internal, smallint, internal, internal | FUNCTION |
 
 ## Relations
 
