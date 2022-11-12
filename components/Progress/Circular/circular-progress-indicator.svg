@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <circle cx="24" cy="24" r="20" stroke="currentColor" fill="#0000" stroke-width="4"
+    stroke-dasharray="var(--md-comp-progress-indicator-stroke-dasharray)" stroke-dashoffset="31.41592653589793">
+  </circle>
+</svg>

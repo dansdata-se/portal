@@ -3,17 +3,13 @@ import {
   ButtonHTMLAttributes,
   ForwardedRef,
   forwardRef,
-  ReactElement,
+  ReactNode,
 } from "react";
-import { Icon } from "react-feather";
 
 export type ButtonAttributes = {
   variant: "elevated" | "filled" | "tonal" | "outlined" | "text";
   text: string;
-  icon?:
-    | ReactElement<Icon>
-    | ReactElement<HTMLImageElement>
-    | ReactElement<SVGElement>;
+  icon?: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 /**

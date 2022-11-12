@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <circle cx="24" cy="24" r="20" stroke="currentColor" fill="#0000" stroke-width="4"
+    stroke-dasharray="31.41592653589793 94.24777960769379" stroke-dashoffset="31.41592653589793">
+    <animate attributeName="stroke-dasharray" calcMode="linear" keySplines="
+    .25,.1,.25,1;
+    .25,.1,.25,1;
+    .25,.1,.25,1;
+    .25,.1,.25,1;
+    .25,.1,.25,1;
+    .25,.1,.25,1
+    " values="
+      10.471975511965978, 115.19173063162575;
+      120.42771838760873, 5.23598775598299;
+      10.471975511965978, 115.19173063162575;
+      10.471975511965978, 115.19173063162575;
+      120.42771838760873, 5.23598775598299;
+      10.471975511965978, 115.19173063162575;
+      10.471975511965978, 115.19173063162575;
+      " keyTimes="0; .2; .4; .5; .7; .9; 1" dur="4.1s" repeatCount="indefinite" />
+    <animateTransform attributeName="transform" type="rotate" values="
+    0 24 24;
+    216 24 24;
+    792 24 24;
+    900 24 24;
+    1116 24 24;
+    1692 24 24;
+    1800 24 24
+    " keyTimes="0; .2; .4; .5; .7; .9; 1" dur="4.1s" repeatCount="indefinite" />
+  </circle>
+</svg>
