@@ -13,6 +13,9 @@
 | [auth.users](auth.users.md) | 32 | Auth: Stores user login data within a secure schema. | BASE TABLE |
 | [internal.language_translations](internal.language_translations.md) | 4 | Language codes and their names in different languages | BASE TABLE |
 | [internal.languages](internal.languages.md) | 1 | List of supported languages | BASE TABLE |
+| [internal.profile_owners](internal.profile_owners.md) | 5 | Determines which users may edit and control what profiles | BASE TABLE |
+| [internal.profile_translations](internal.profile_translations.md) | 6 | Translated texts relating to a given profile | BASE TABLE |
+| [internal.profiles](internal.profiles.md) | 3 | The basic unit of "person, organization, or object" data.<br><br>Profiles are related to events, e.g. as organizers, venues, performers, etc. but are not events themselves.<br><br>A profile may be owned by multiple users but does not directly represent individual users. | BASE TABLE |
 
 ## Stored procedures and functions
 

@@ -8,7 +8,7 @@ List of supported languages
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| code | text |  | false | [internal.language_translations](internal.language_translations.md) |  | ISO 639-1 language code (with `xx` reserved for "untranslatable" and/or fallback translations) |
+| code | text |  | false | [internal.language_translations](internal.language_translations.md) [internal.profile_translations](internal.profile_translations.md) |  | ISO 639-1 language code (with `xx` reserved for "untranslatable" and/or fallback translations) |
 
 ## Constraints
 
