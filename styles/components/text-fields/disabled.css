@@ -6,8 +6,8 @@
   .textfield[data-disabled="true"] {
     @apply text-on-surface/disabled-text;
 
-    > .input-wrap > input,
-    > .input-wrap > textarea {
+    > .content-wrap > .input-wrap > input,
+    > .content-wrap > .input-wrap > textarea {
       @apply text-on-surface/disabled-text;
     }
 

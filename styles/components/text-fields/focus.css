@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .textfield > .input-wrap {
+  .textfield > .content-wrap > .input-wrap {
     /* Hide buttons on number input */
 
     /* Chrome, Safari, Edge, Opera */

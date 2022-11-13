@@ -1,29 +1,23 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useState } from "react";
+import Button from "components/Button";
+import { useRef, useState } from "react";
 import { AlertOctagon, Search } from "react-feather";
-import TextFieldComponent, { TextFieldAttributes } from ".";
+import TextFieldComponent from ".";
 
 export default {
   title: "Components/TextField",
   component: TextFieldComponent,
   args: {
     variant: "filled",
-    type: "multilineText",
+    type: "text",
     label: "Label",
     placeholder: "",
     supportingText: "Supporting text",
-    error: false,
     disabled: false,
-    required: false,
-    withLeading: true,
-    withTrailing: false,
   },
   argTypes: {
-    withLeading: {
-      type: "boolean",
-    },
-    withTrailing: {
-      type: "boolean",
+    maxLength: {
+      type: "number",
     },
     leading: {
       table: {
@@ -35,95 +29,92 @@ export default {
         disable: true,
       },
     },
-    value: {
-      table: {
-        disable: true,
-      },
-    },
-    onValueChange: {
-      table: {
-        disable: true,
-      },
-    },
-    pattern: {
-      table: {
-        disable: true,
-      },
-    },
-    required: {
-      table: {
-        disable: true,
-      },
-    },
   },
 } as ComponentMeta<typeof TextFieldComponent>;
 
-export const TextField: ComponentStory<typeof TextFieldComponent> = (
-  args: TextFieldAttributes
-) => {
-  const [value, setValue] = useState("");
+export const TextField: ComponentStory<typeof TextFieldComponent> = (args) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const [isValid, setValid] = useState(true);
   return (
-    <TextFieldComponent
-      {...args}
-      value={value}
-      onValueChange={setValue}
-    />
+    <>
+      <TextFieldComponent
+        ref={ref}
+        {...args}
+      />
+      <br />
+      <br />
+      <Button
+        variant="filled"
+        onClick={() => setValid(ref.current?.reportValidity() ?? true)}
+        text="Check validity"
+      />
+      <br />
+      <span>Last check: {isValid ? "valid" : "invalid"}</span>
+    </>
   );
 };
+TextField.args = {
+  required: false,
+};
 
-export const TextFieldWithIcons = (
-  args: TextFieldAttributes & { withLeading: boolean; withTrailing: boolean }
-) => {
-  const [value, setValue] = useState("");
+export const TextFieldWithIcons = (args: any) => {
   return (
     <TextFieldComponent
       {...args}
       leading={args.withLeading ? args.leading : null}
       trailing={args.withTrailing ? args.trailing : null}
-      value={value}
-      onValueChange={setValue}
     />
   );
 };
 TextFieldWithIcons.args = {
+  withLeading: true,
+  withTrailing: false,
   leading: <Search />,
   trailing: <AlertOctagon key="alert" />,
 };
 
-export const TextFieldWithText = (
-  args: TextFieldAttributes & { withLeading: boolean; withTrailing: boolean }
-) => {
-  const [value, setValue] = useState("");
+export const TextFieldWithText = (args: any) => {
   return (
     <TextFieldComponent
       {...args}
       leading={args.withLeading ? args.leading : null}
       trailing={args.withTrailing ? args.trailing : null}
-      value={value}
-      onValueChange={setValue}
     />
   );
 };
 TextFieldWithText.args = {
+  withLeading: true,
   leading: "$",
+  withTrailing: false,
   trailing: "lbs",
 };
+TextFieldWithText.argTypes = {
+  leading: {
+    type: "string",
+    table: {
+      disable: false,
+    },
+  },
+  trailing: {
+    type: "string",
+    table: {
+      disable: false,
+    },
+  },
+};
 
-export const TextFieldWithIconButtons = (
-  args: TextFieldAttributes & { withLeading: boolean; withTrailing: boolean }
-) => {
-  const [value, setValue] = useState("");
+export const TextFieldWithIconButtons = (args: any) => {
   return (
     <TextFieldComponent
       {...args}
       leading={args.withLeading ? args.leading : null}
       trailing={args.withTrailing ? args.trailing : null}
-      value={value}
-      onValueChange={setValue}
     />
   );
 };
 TextFieldWithIconButtons.args = {
+  withLeading: true,
+  withTrailing: false,
   leading: (
     <button>
       <Search />

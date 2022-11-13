@@ -6,14 +6,12 @@
   .textfield.textfield-outlined {
     /* Fix for layout shift when border width is changed */
     &:not([data-disabled="true"]) {
-      @apply p-px;
+      > .content-wrap {
+        @apply p-px;
+      }
       &:focus-within {
-        @apply p-0;
-        > .supporting-wrap {
-          @apply px-0;
-          & > * {
-            @apply mt-px;
-          }
+        > .content-wrap {
+          @apply p-0;
         }
       }
     }
@@ -26,7 +24,7 @@
       }
     }
 
-    > .input-wrap {
+    .content-wrap > .input-wrap {
       &:focus-within > label,
       > input:not([placeholder=" "]:placeholder-shown) ~ label,
       > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
@@ -40,9 +38,11 @@
     }
 
     &:focus-within {
-      @apply border-primary border-2;
+      > .content-wrap {
+        @apply border-primary border-2;
+      }
 
-      &:not([data-error="true"]) > .input-wrap {
+      &:not([data-error="true"]) > .content-wrap > .input-wrap {
         &:focus-within > label,
         > input:not([placeholder=" "]:placeholder-shown) ~ label,
         > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
@@ -52,15 +52,17 @@
     }
 
     &:hover:not([data-disabled="true"]) {
-      &:not(:focus-within) {
+      &:not(:focus-within) > .content-wrap {
         @apply border-on-surface;
       }
 
-      &:not(:focus-within) > .input-wrap > label,
-      > .input-wrap:not(:focus-within)
+      &:not(:focus-within) > .content-wrap > .input-wrap > label,
+      > .content-wrap:not(:focus-within)
+        > .input-wrap
         > input[placeholder=" "]:placeholder-shown
         ~ label,
-      > .input-wrap:not(:focus-within)
+      > .content-wrap:not(:focus-within)
+        > .input-wrap
         > textarea[placeholder=" "]:placeholder-shown
         ~ label {
         @apply text-on-surface;

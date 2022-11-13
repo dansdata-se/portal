@@ -4,33 +4,37 @@
 
 @layer components {
   .textfield.textfield-filled {
-    @apply text-on-surface-variant border-b-1 border-on-surface-variant rounded-t-xs;
+    @apply text-on-surface-variant;
 
-    &::before,
-    &::after {
-      content: "";
-      @apply block absolute top-0 left-0 right-0 bottom-0 bg-transparent rounded-t-xs;
-    }
+    > .content-wrap {
+      @apply border-b-1 border-on-surface-variant rounded-t-xs;
 
-    /* Content */
-    & > * {
-      @apply z-2;
-    }
+      &::before,
+      &::after {
+        content: "";
+        @apply block absolute top-0 left-0 right-0 bottom-0 bg-transparent rounded-t-xs;
+      }
 
-    /* Container/Background */
-    &::before {
-      @apply z-0 bg-surface-variant;
-    }
+      /* Content */
+      & > * {
+        @apply z-2;
+      }
 
-    /* State Layer */
-    &::after {
-      @apply z-1;
-    }
+      /* Container/Background */
+      &::before {
+        @apply z-0 bg-surface-variant;
+      }
 
-    > .input-wrap {
-      > input,
-      > textarea {
-        @apply pt-[var(--md-sys-typescale-body-small-line-height)];
+      /* State Layer */
+      &::after {
+        @apply z-1;
+      }
+
+      > .input-wrap {
+        > input,
+        > textarea {
+          @apply pt-[var(--md-sys-typescale-body-small-line-height)];
+        }
       }
     }
   }

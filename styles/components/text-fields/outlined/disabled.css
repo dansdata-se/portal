@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .textfield.textfield-outlined[data-disabled="true"] {
+  .textfield.textfield-outlined[data-disabled="true"] > .content-wrap {
     @apply border-on-surface/disabled-bg;
 
     > svg.leading,

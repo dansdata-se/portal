@@ -4,12 +4,16 @@
 
 @layer components {
   .textfield.textfield-outlined {
-    @apply text-on-surface-variant border-1 border-outline rounded-xs;
+    @apply text-on-surface-variant;
 
-    > .input-wrap {
-      > input,
-      > textarea {
-        @apply py-[calc(0.5*var(--md-sys-typescale-body-small-line-height))];
+    > .content-wrap {
+      @apply border-1 border-outline rounded-xs;
+
+      > .input-wrap {
+        > input,
+        > textarea {
+          @apply py-[calc(0.5*var(--md-sys-typescale-body-small-line-height))];
+        }
       }
     }
   }

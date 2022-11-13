@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/future/image";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { Eye, EyeOff } from "react-feather";
 import { useMediaQuery } from "usehooks-ts";
 
@@ -20,18 +20,9 @@ const LogIn: NextPage = () => {
     "((min-width: 768px) and (max-width: 1150px)) or ((min-width: 1280px) and (max-width: 1700px))"
   );
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-
-  useEffect(() => {
-    setEmailError(false);
-  }, [email]);
-  useEffect(() => {
-    setPasswordError(false);
-  }, [password]);
 
   return (
     <>
@@ -45,22 +36,29 @@ const LogIn: NextPage = () => {
           <div className="h-8 grow"></div>
           <main className="prose grow mx-auto px-4 w-full max-w-sm">
             <h1>{tPage("title-log-in")}</h1>
-            <div className="flex flex-col gap-4 w-full max-w-sm">
+            <form
+              className="flex flex-col gap-4 w-full max-w-sm"
+              noValidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                emailRef.current?.checkValidity();
+                passwordRef.current?.checkValidity();
+              }}
+            >
               <TextField
+                ref={emailRef}
                 id="signin-email"
                 className="w-full"
                 variant="outlined"
-                error={emailError}
                 label={tPage("label-email")}
                 type="email"
-                value={email}
-                onValueChange={setEmail}
+                required
               />
               <TextField
+                ref={passwordRef}
                 id="signin-password"
                 className="w-full"
                 variant="outlined"
-                error={passwordError}
                 label={tPage("label-password")}
                 type={passwordVisible ? "singlelineText" : "password"}
                 trailing={
@@ -68,19 +66,15 @@ const LogIn: NextPage = () => {
                     {passwordVisible ? <EyeOff /> : <Eye />}
                   </button>
                 }
-                value={password}
-                onValueChange={setPassword}
+                required
               />
               <Button
                 className="w-full"
                 variant="filled"
                 text={tPage("action-log-in")}
-                onClick={() => {
-                  setEmailError(email.length === 0);
-                  setPasswordError(password.length === 0);
-                }}
+                type="submit"
               />
-            </div>
+            </form>
           </main>
           <div className="h-8 grow"></div>
           <Footer forceSmall={forceSmallFooter} />

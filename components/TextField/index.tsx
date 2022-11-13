@@ -1,15 +1,19 @@
-import { cloneElement, HTMLAttributes, ReactElement, useRef } from "react";
-import { useIsomorphicLayoutEffect } from "usehooks-ts";
+import classNames from "classnames";
+import {
+  cloneElement,
+  DetailedHTMLProps,
+  ForwardedRef,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactElement,
+  useRef,
+  useState,
+} from "react";
+import { mergeRefs } from "react-merge-refs";
 
-// Loosely inspired by `OutlinedTextField` from android Jetpack Compose
-// https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#OutlinedTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material.TextFieldColors)
 export type TextFieldAttributes = {
   variant: "filled" | "outlined";
-  type: "multilineText" | "singlelineText" | "email" | "password" | "number";
   label: string;
-  placeholder?: string;
-  value: string;
-  onValueChange: (newValue: string) => void;
   /**
    * A leading icon or text.
    *
@@ -25,13 +29,10 @@ export type TextFieldAttributes = {
   /**
    * Supporting text shown beneath the text field.
    *
-   * This text does not alter the height of the text field.
+   * Supporting text is temporarily replaced by an error message
+   * if the text field fails validation.
    */
   supportingText?: string;
-  /**
-   * Indicate an error state (e.g. invalid contents).
-   */
-  error?: boolean;
   /**
    * Whether the text field is enabled or disabled.
    *
@@ -39,15 +40,7 @@ export type TextFieldAttributes = {
    * that can be disabled, you must make sure these follow this `disabled` state!
    */
   disabled?: boolean;
-  maxLength?: number;
-  /**
-   * See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern
-   *
-   * Only used when {@link type} is NOT "multilineText"
-   */
-  pattern?: string | undefined;
-  required?: boolean;
-} & Omit<HTMLAttributes<HTMLDivElement>, "children">;
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 function normalizeLeadingTrailing(
   node: ReactElement | string | null,
@@ -59,130 +52,108 @@ function normalizeLeadingTrailing(
   }
   if (node !== null) {
     return cloneElement<HTMLButtonElement>(node, {
-      className: `${node.props.className ?? ""} ${leadingOrTrailing}`,
+      className: classNames(node.props.className, leadingOrTrailing),
       disabled,
     });
   }
   return null;
 }
 
-function TextFieldInput({
-  id,
-  type,
-  placeholder,
-  value,
-  onValueChange,
-  disabled,
-  maxLength,
-  pattern,
-  required,
-}: Pick<
-  TextFieldAttributes,
-  | "id"
-  | "type"
-  | "placeholder"
-  | "value"
-  | "onValueChange"
-  | "disabled"
-  | "maxLength"
-  | "pattern"
-  | "required"
->) {
-  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+/**
+ * A simple `<input>` element with surrounding markup to produce a material 3 style text field.
+ */
+const TextField = forwardRef(
+  (
+    {
+      variant,
+      label,
+      placeholder = " ",
+      leading = null,
+      trailing = null,
+      supportingText = "",
+      id = `id-${Math.random().toString(16).substring(2)}`,
+      ...attrs
+    }: TextFieldAttributes,
+    forwardedRef: ForwardedRef<HTMLInputElement>
+  ) => {
+    const ref = useRef<HTMLInputElement>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const hasErrorMessage = errorMessage !== null;
+    const [textLength, setTextLength] = useState(0);
 
-  useIsomorphicLayoutEffect(() => {
-    if (textAreaRef.current === null) return;
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
-  }, [value, textAreaRef]);
+    if (placeholder.length === 0) {
+      // A placeholder is required for proper positioning of the label.
+      placeholder = " ";
+    }
+    leading = normalizeLeadingTrailing(
+      leading,
+      "leading",
+      attrs.disabled ?? false
+    );
+    trailing = normalizeLeadingTrailing(
+      trailing,
+      "trailing",
+      attrs.disabled ?? false
+    );
 
-  switch (type) {
-    case "multilineText":
-      return (
-        <textarea
-          id={id}
-          ref={textAreaRef}
-          placeholder={placeholder}
-          value={value}
-          onInput={(e) => onValueChange(e.currentTarget.value)}
-          disabled={disabled}
-          maxLength={maxLength}
-          required={required}
-        />
-      );
-    default:
-      return (
-        <input
-          id={id}
-          type={type === "singlelineText" ? "text" : type}
-          placeholder={placeholder}
-          value={value}
-          onInput={(e) => onValueChange(e.currentTarget.value)}
-          disabled={disabled}
-          maxLength={maxLength}
-          required={required}
-          pattern={pattern}
-        />
-      );
-  }
-}
+    if (hasErrorMessage && ref.current?.validity.valid) {
+      setErrorMessage(null);
+    }
 
-function TextField({
-  variant,
-  type,
-  label,
-  placeholder = " ",
-  value,
-  onValueChange,
-  leading = null,
-  trailing = null,
-  supportingText = "",
-  error = false,
-  disabled = false,
-  maxLength = -1,
-  required = false,
-  pattern,
-  id = `id-${Math.random().toString(16).substring(2)}`,
-  ...props
-}: TextFieldAttributes) {
-  if (placeholder.length === 0) {
-    // A placeholder is required for proper positioning of the label.
-    placeholder = " ";
-  }
-  leading = normalizeLeadingTrailing(leading, "leading", disabled);
-  trailing = normalizeLeadingTrailing(trailing, "trailing", disabled);
+    return (
+      <div
+        className={classNames(
+          "textfield",
+          `textfield-${variant}`,
+          attrs.className
+        )}
+        data-error={hasErrorMessage ?? false}
+        data-disabled={attrs.disabled ?? false}
+      >
+        <div className="content-wrap">
+          {leading}
+          <div className="input-wrap">
+            <input
+              ref={mergeRefs([ref, forwardedRef])}
+              id={id}
+              placeholder={placeholder}
+              {...attrs}
+              onInvalid={(e) => {
+                attrs.onInvalid?.(e);
+                if (e.defaultPrevented) return;
 
-  return (
-    <div
-      {...props}
-      className={`textfield textfield-${variant} ${props.className ?? ""}`}
-      data-error={error}
-      data-disabled={disabled}
-    >
-      {leading}
-      <div className="input-wrap">
-        <TextFieldInput
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onValueChange={onValueChange}
-          disabled={disabled}
-          maxLength={maxLength}
-          pattern={pattern}
-          required={required}
-        />
-        <label htmlFor={id}>{label}</label>
-      </div>
-      {trailing}
-      <div className="supporting-wrap">
-        <span>{supportingText}</span>
-        {maxLength >= 0 && (
-          <span>
-            {value.length}/{maxLength}
-          </span>
+                e.preventDefault();
+                setErrorMessage(ref.current?.validationMessage ?? "");
+              }}
+              onInput={(e) => {
+                attrs.onInput?.(e);
+                if (e.defaultPrevented) return;
+
+                e.preventDefault();
+                setTextLength(ref.current?.value.length ?? 0);
+                setErrorMessage(null);
+                ref.current?.setCustomValidity("");
+              }}
+            />
+            <label htmlFor={id}>{label}</label>
+          </div>
+          {trailing}
+        </div>
+        {(supportingText || hasErrorMessage || attrs.maxLength) && (
+          <div className="supporting-wrap">
+            {/* This span also helps position the text length meter. */}
+            <span>{errorMessage ?? supportingText}</span>
+            {ref.current && (attrs.maxLength ?? -1) >= 0 && (
+              <span>
+                {textLength}/{attrs.maxLength}
+              </span>
+            )}
+          </div>
         )}
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+TextField.displayName = "TextField";
+
 export default TextField;

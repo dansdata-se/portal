@@ -6,18 +6,19 @@
   .textfield.textfield-filled {
     /* Fix for layout shift when border width is changed */
     &:not([data-disabled="true"]) {
-      @apply pb-px;
+      > .content-wrap {
+        @apply pb-px;
+      }
 
       &:hover:not(:disabled):not([disabled]),
       &:focus-within {
-        @apply pb-0;
-        > .supporting-wrap > * {
-          @apply mt-px;
+        > .content-wrap {
+          @apply pb-0;
         }
       }
     }
 
-    > .input-wrap {
+    > .content-wrap > .input-wrap {
       &:focus-within > label,
       > input:not([placeholder=" "]:placeholder-shown) ~ label,
       > textarea:not([placeholder=" "]:placeholder-shown) ~ label {
@@ -29,11 +30,12 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within > .content-wrap {
       @apply border-primary border-b-2;
     }
 
-    &:hover:not([data-disabled="true"]):not([data-error="true"]) {
+    &:hover:not([data-disabled="true"]):not([data-error="true"])
+      > .content-wrap {
       @apply border-primary border-b-2;
 
       &::after {

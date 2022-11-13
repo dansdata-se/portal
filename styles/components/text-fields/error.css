@@ -4,47 +4,49 @@
 
 @layer components {
   .textfield[data-error="true"]:not([data-disabled="true"]) {
-    @apply text-error border-error;
-
-    > svg.trailing,
-    > .trailing svg {
-      @apply stroke-error;
-    }
-
-    > .input-wrap {
-      > input,
-      > textarea {
-        @apply caret-error;
-      }
-
-      &:focus-within > label {
-        @apply text-error;
-      }
-    }
-
-    > .supporting-wrap {
-      @apply text-error;
-    }
-
-    &:hover {
-      @apply text-on-error-container border-on-error-container;
+    > .content-wrap {
+      @apply text-error border-error;
 
       > svg.trailing,
       > .trailing svg {
-        /* Intended for feather icons specifically! */
-        @apply stroke-on-error-container;
+        @apply stroke-error;
       }
 
       > .input-wrap {
         > input,
         > textarea {
-          @apply caret-on-error-container;
+          @apply caret-error;
         }
 
         &:focus-within > label {
-          @apply text-on-error-container;
+          @apply text-error;
         }
       }
+
+      &:hover {
+        @apply text-on-error-container border-on-error-container;
+
+        > svg.trailing,
+        > .trailing svg {
+          /* Intended for feather icons specifically! */
+          @apply stroke-on-error-container;
+        }
+
+        > .input-wrap {
+          > input,
+          > textarea {
+            @apply caret-on-error-container;
+          }
+
+          &:focus-within > label {
+            @apply text-on-error-container;
+          }
+        }
+      }
+    }
+
+    > .supporting-wrap {
+      @apply text-error;
     }
   }
 }

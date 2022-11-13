@@ -4,7 +4,7 @@
 
 @layer components {
   .textfield.textfield-filled[data-error="true"]:not([data-disabled="true"]) {
-    &:hover {
+    &:hover > .content-wrap {
       @apply border-b-2;
 
       &::after {

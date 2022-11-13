@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .textfield.textfield-filled[data-disabled="true"] {
+  .textfield.textfield-filled[data-disabled="true"] > .content-wrap {
     @apply border-on-surface/disabled-text;
 
     &::before {
