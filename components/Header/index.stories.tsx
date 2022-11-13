@@ -5,7 +5,7 @@ import HeaderComponent from ".";
 export default {
   title: "Components/Header",
   args: {
-    currentDestination: Nav().secure.Home,
+    currentDestination: Nav().secure.Index,
   },
   component: HeaderComponent,
 } as ComponentMeta<typeof HeaderComponent>;

@@ -16,9 +16,9 @@
     "docs": "supabase gen types typescript --local > types/supabase/index.ts && tbls doc --rm-dist"
   },
   "dependencies": {
-    "@supabase/auth-helpers-nextjs": "^0.2.8",
-    "@supabase/auth-helpers-react": "^0.2.4",
-    "@supabase/supabase-js": "^1.35.7",
+    "@supabase/auth-helpers-nextjs": "^0.5.1",
+    "@supabase/auth-helpers-react": "^0.3.1",
+    "@supabase/supabase-js": "^2.1.0",
     "classnames": "^2.3.1",
     "country-flag-icons": "^1.5.5",
     "feather-icons": "^4.29.0",

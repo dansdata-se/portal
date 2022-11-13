@@ -1,4 +1,3 @@
-import { getUser } from "@supabase/auth-helpers-nextjs";
 import Button from "components/Button";
 import Footer from "components/Footer";
 import Header from "components/Header";
@@ -101,24 +100,6 @@ const LogIn: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { user } = await getUser(context);
-  if (user !== null) {
-    let redirectTo = "/secure/";
-    let { redirectedFrom } = context.query;
-    if (Array.isArray(redirectedFrom)) {
-      redirectTo = redirectedFrom[0];
-    } else if (redirectedFrom) {
-      redirectTo = redirectedFrom;
-    }
-
-    return {
-      redirect: {
-        destination: redirectTo,
-        permanent: false,
-      },
-    };
-  }
-
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string, [

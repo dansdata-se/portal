@@ -5,7 +5,7 @@ import HeaderBreadcrumbsComponent from ".";
 export default {
   title: "Components/Header/Breadcrumbs",
   args: {
-    currentDestination: Nav().secure.Home,
+    currentDestination: Nav().secure.Index,
   },
   component: HeaderBreadcrumbsComponent,
 } as ComponentMeta<typeof HeaderBreadcrumbsComponent>;
