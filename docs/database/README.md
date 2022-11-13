@@ -338,6 +338,7 @@
 | api_auth.check_ip_rules | void |  | FUNCTION |
 | api_auth.check_origin_rules | void |  | FUNCTION |
 | api_auth.validate_token | void |  | FUNCTION |
+| public.delete_account | void |  | FUNCTION |
 
 ## Relations
 
