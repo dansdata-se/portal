@@ -1,0 +1,10 @@
+branches:
+  - main
+  - name: staging
+    prerelease: true
+debug: true
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - path: "@semantic-release/release-notes-generator"
+    preset: "conventionalcommits"
+  - "@semantic-release/github"
