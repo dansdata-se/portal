@@ -23,33 +23,25 @@ Every commit should strive to do _one thing and one thing only_, whether that be
 code, remove unused imports or implementing new functionality. Please keep your commits as
 small as possible and separate unrelated changes from each other.
 
-Commits _should_ follow the following template:
+Commit messages _must_ follow the [conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
+config and will be validated using [`commitlint`](https://commitlint.js.org/). See also
+https://www.conventionalcommits.org/ .
 
-```
-gh-{issue-id}: Subject line
-
-Why is this change needed?
-
-How does this commit address the issue?
-
-Additional information
-```
-
-The `gh-{issue-id}` prefix may be skipped if there is no associated issue id.
-
-The subject line _should_ be shorter than 50 characters and _must_ be shorter than
-80 characters.
-
-The body lines _must_ be shorter than 80 characters. URLs/similar are exempt from this
-rule, though such lines should be shortened as much as possible.
+When working on a specific github issue, the issue id should be used as the scope, e.g.
+`fix(123): something related to issue 123`.
 
 There are times when a single-line commit is warranted but it is preferred to err on the
-side of verbosity.
+side of verbosity. Please try to include the following information in your commits:
+
+- Why this change was necessary
+- What the change does
+- Known issues with the solution
+- Other relevant information
 
 ## Pull Requests
 
-To make review work easier, pull requests are requested to use [`fixup` commits](https://fle.github.io/git-tip-keep-your-branch-clean-with-fixup-and-autosquash.html) to
-address comments.
+To make review work easier, pull requests are requested to use [`fixup` commits](https://fle.github.io/git-tip-keep-your-branch-clean-with-fixup-and-autosquash.html)
+to address comments.
 
 If you need to update your commit messages, `squash` commits can be a good way to make such
 intentions clear in a similar way to `fixup` commits.
@@ -59,8 +51,8 @@ intentions clear in a similar way to `fixup` commits.
 #### 1. You push some work to a PR
 
 ```
-abcd123 Feature A is done
-1234abc Feature B is done
+abcd123 feature(123): feature A is done
+1234abc feature(123): feature B is done
 ```
 
 #### 2. You receive some comments
@@ -82,11 +74,11 @@ git commit --fixup abcd123
 
 # Change message from
 # ```
-# fixup! Feature A is done
+# fixup! feature(123): feature A is done
 # ```
 # to
 # ```
-# fixup! Feature A is done
+# fixup! feature(123): feature A is done
 #
 # Change langage -> language
 # ```
@@ -98,11 +90,11 @@ git commit --amend
 #### 4. You push your fixup
 
 ```
-abcd123 Feature A is done
-1234abc Feature B is done
-efgh123 fixup! Feature A is done
-qwer123 fixup! Feature B is done
-zxcv123 fixup! Feature A is done
+abcd123 feature(123): feature A is done
+1234abc feature(123): feature B is done
+efgh123 fixup! feature(123): feature A is done
+qwer123 fixup! feature(123): feature B is done
+zxcv123 fixup! feature(123): feature A is done
 ```
 
 #### The review continues...
@@ -125,17 +117,17 @@ commit.
 i.e. do this:
 
 ```
-abcd123 Feature A is done
-efgh123 fixup! Feature A is done
-ijkl123 fixup! Feature A is done
+abcd123 feature(123): feature A is done
+efgh123 fixup! feature(123): feature A is done
+ijkl123 fixup! feature(123): feature A is done
 ```
 
 _not_ this:
 
 ```
-abcd123 Feature A is done
-efgh123 fixup! Feature A is done
-ijkl123 fixup! fixup! Feature A is done
+abcd123 feature(123): feature A is done
+efgh123 fixup! feature(123): feature A is done
+ijkl123 fixup! fixup! feature(123): feature A is done
 ```
 
 ## Database Changes
