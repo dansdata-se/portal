@@ -1,5 +1,7 @@
 breadcrumb-root: Portal
 breadcrumb-log-in: Log in
+breadcrumb-password-reset: Reset Password
+breadcrumb-create-account: Create Account
 breadcrumb-secure-home: Home
 breadcrumb-legal-root: Legal
 breadcrumb-legal-terms-of-service: Terms of Service

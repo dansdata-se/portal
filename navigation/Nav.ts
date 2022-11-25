@@ -19,11 +19,23 @@ function Nav() {
     breadcrumbText: (tCommon) => tCommon("breadcrumb-log-in"),
     parentDestinations: [Index],
   };
+  const CreateAccount: Destination = {
+    href: "/create-account",
+    breadcrumbText: (tCommon) => tCommon("breadcrumb-create-account"),
+    parentDestinations: [Index],
+  };
+  const PasswordReset: Destination = {
+    href: "/password-reset",
+    breadcrumbText: (tCommon) => tCommon("breadcrumb-password-reset"),
+    parentDestinations: [Index],
+  };
   return {
     legal: legal([Index]),
     secure: secure([Index]),
     Index,
     Login,
+    CreateAccount,
+    PasswordReset,
   };
 }
 

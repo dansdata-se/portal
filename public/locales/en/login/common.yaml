@@ -1,3 +1,7 @@
 button-log-in: Log in
+button-reset-password: Reset password
+button-create-account: Create account
 label-email: Email
 label-password: Password
+label-password-confirm: Confirm password
+error-passwords-do-not-match: The passwords do not match.

@@ -10,7 +10,7 @@ import { TFunction, useTranslation } from "react-i18next";
 import { Database } from "types/supabase";
 import { useEventListener } from "usehooks-ts";
 
-function LoginContentLayout({ tPage }: { tPage: TFunction }) {
+function CreateAccountContentLayout({ tPage }: { tPage: TFunction }) {
   const { t: tCommon } = useTranslation("common");
   const { t: tLoginCommon } = useTranslation("login/common");
 
@@ -19,6 +19,8 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
   useEventListener("beforeunload", () => {
@@ -27,12 +29,21 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
     }
   });
 
-  function login() {
+  function createAccount() {
     if (isLoading) return;
 
     let isValid = true;
     isValid = (emailRef.current?.reportValidity() ?? false) && isValid;
     isValid = (passwordRef.current?.reportValidity() ?? false) && isValid;
+    isValid =
+      (passwordConfirmRef.current?.reportValidity() ?? false) && isValid;
+    if (passwordRef.current?.value !== passwordConfirmRef.current?.value) {
+      isValid = false;
+      passwordConfirmRef.current?.setCustomValidity(
+        tLoginCommon("error-passwords-do-not-match")
+      );
+      passwordConfirmRef.current?.reportValidity();
+    }
     if (!isValid) return;
 
     const email = (emailRef.current as HTMLInputElement).value;
@@ -40,22 +51,22 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
 
     setLoading(true);
     supabaseClient.auth
-      .signInWithPassword({
+      .signUp({
         email,
         password,
       })
       .then((response) => {
         if (!response.error) return;
 
-        // Continue loading indication if login was successful
+        // Continue loading indication if account creation was successful
         setLoading(false);
 
-        if (/e.?mail/i.test(response.error.message)) {
-          emailRef.current?.setCustomValidity(response.error.message);
-          emailRef.current?.reportValidity();
-        } else {
+        if (/password/i.test(response.error.message)) {
           passwordRef.current?.setCustomValidity(response.error.message);
           passwordRef.current?.reportValidity();
+        } else {
+          emailRef.current?.setCustomValidity(response.error.message);
+          emailRef.current?.reportValidity();
         }
       });
   }
@@ -68,7 +79,7 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
         noValidate
         onSubmit={(e) => {
           e.preventDefault();
-          login();
+          createAccount();
         }}
       >
         <TextField
@@ -95,11 +106,27 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
           }
           required
         />
+        <TextField
+          ref={passwordConfirmRef}
+          className="w-full"
+          variant="outlined"
+          label={tLoginCommon("label-password-confirm")}
+          type={passwordConfirmVisible ? "singlelineText" : "password"}
+          trailing={
+            <button
+              type="button"
+              onClick={() => setPasswordConfirmVisible((visible) => !visible)}
+            >
+              {passwordConfirmVisible ? <EyeOff /> : <Eye />}
+            </button>
+          }
+          required
+        />
         <CircularProgressButton
           className="w-full"
           variant="filled"
           type="submit"
-          text={tLoginCommon("button-log-in")}
+          text={tLoginCommon("button-create-account")}
           disabled={isLoading}
           loading={isLoading}
         />
@@ -112,11 +139,11 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
             text={tLoginCommon("button-reset-password")}
           />
         </NavLink>
-        <NavLink destination={Nav().CreateAccount}>
+        <NavLink destination={Nav().Login}>
           <Button
             className="w-full"
             variant="text"
-            text={tLoginCommon("button-create-account")}
+            text={tLoginCommon("button-log-in")}
           />
         </NavLink>
       </div>
@@ -124,4 +151,4 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
   );
 }
 
-export default LoginContentLayout;
+export default CreateAccountContentLayout;

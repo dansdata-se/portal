@@ -1,3 +1,7 @@
 button-log-in: Logga in
+button-reset-password: Glömt lösenord?
+button-create-account: Skapa konto
 label-email: E-post
 label-password: Lösenord
+label-password-confirm: Bekräfta password
+error-passwords-do-not-match: Lösenorden matchar inte.
