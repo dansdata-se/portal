@@ -54,6 +54,7 @@ function PasswordResetContentLayout({ tPage }: { tPage: TFunction }) {
           }}
         >
           <TextField
+            id="email"
             ref={emailRef}
             className="w-full"
             variant="outlined"

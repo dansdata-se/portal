@@ -40,7 +40,16 @@ export type TextFieldAttributes = {
    * that can be disabled, you must make sure these follow this `disabled` state!
    */
   disabled?: boolean;
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &
+  Required<
+    Pick<
+      DetailedHTMLProps<
+        InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+      >,
+      "id"
+    >
+  >;
 
 function normalizeLeadingTrailing(
   node: ReactElement | string | null,
@@ -65,13 +74,13 @@ function normalizeLeadingTrailing(
 const TextField = forwardRef(
   (
     {
+      id,
       variant,
       label,
       placeholder = " ",
       leading = null,
       trailing = null,
       supportingText = "",
-      id = `id-${Math.random().toString(16).substring(2)}`,
       ...attrs
     }: TextFieldAttributes,
     forwardedRef: ForwardedRef<HTMLInputElement>

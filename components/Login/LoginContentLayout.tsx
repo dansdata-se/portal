@@ -72,6 +72,7 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
         }}
       >
         <TextField
+          id="email"
           ref={emailRef}
           className="w-full"
           variant="outlined"
@@ -80,6 +81,7 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
           required
         />
         <TextField
+          id="password"
           ref={passwordRef}
           className="w-full"
           variant="outlined"

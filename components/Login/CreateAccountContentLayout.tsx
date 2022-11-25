@@ -83,6 +83,7 @@ function CreateAccountContentLayout({ tPage }: { tPage: TFunction }) {
         }}
       >
         <TextField
+          id="email"
           ref={emailRef}
           className="w-full"
           variant="outlined"
@@ -91,6 +92,7 @@ function CreateAccountContentLayout({ tPage }: { tPage: TFunction }) {
           required
         />
         <TextField
+          id="password"
           ref={passwordRef}
           className="w-full"
           variant="outlined"
@@ -107,6 +109,7 @@ function CreateAccountContentLayout({ tPage }: { tPage: TFunction }) {
           required
         />
         <TextField
+          id="password-confirm"
           ref={passwordConfirmRef}
           className="w-full"
           variant="outlined"
