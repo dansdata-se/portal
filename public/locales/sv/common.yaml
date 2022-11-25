@@ -4,6 +4,7 @@ breadcrumb-secure-home: Hem
 breadcrumb-legal-root: Juridiskt
 breadcrumb-legal-terms-of-service: Användarvillkor
 breadcrumb-legal-privacy-policy: Integritetspolicy
+onbeforeunload-generic-message: Du kan förlora osparade ändringar om du lämnar sidan nu!
 change-locale: In English
 sr-darkmode-on: "Tema: mörkt"
 sr-darkmode-off: "Tema: ljust"

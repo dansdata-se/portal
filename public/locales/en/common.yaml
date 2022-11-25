@@ -4,6 +4,7 @@ breadcrumb-secure-home: Home
 breadcrumb-legal-root: Legal
 breadcrumb-legal-terms-of-service: Terms of Service
 breadcrumb-legal-privacy-policy: Privacy Policy
+onbeforeunload-generic-message: You may loose unsaved changes if you leave now!
 change-locale: På Svenska
 sr-darkmode-on: "Theme: Dark"
 sr-darkmode-off: "Theme: Light"
