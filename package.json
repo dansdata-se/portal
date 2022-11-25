@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && tbls lint",
+    "lint": "tsc && next lint && tbls lint",
     "format": "prettier --write . && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
     "format-check": "prettier --check .",
     "prepare": "husky install",
