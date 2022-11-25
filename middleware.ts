@@ -39,7 +39,9 @@ export async function middleware(req: NextRequest) {
         if (!redirectTo.startsWith("/secure/")) {
           redirectTo = Nav().secure.Index.href;
         }
-        return redirect(redirectTo);
+        const redirectUrl = req.nextUrl.clone();
+        redirectUrl.pathname = redirectTo;
+        return redirect(redirectUrl);
     }
   } else if (!hasSession && req.nextUrl.pathname.startsWith("/secure/")) {
     const redirectUrl = req.nextUrl.clone();
@@ -51,14 +53,7 @@ export async function middleware(req: NextRequest) {
   devLog("Middleware took no action");
 }
 
-function redirect(
-  url: string | NextURL | URL,
-  init?: number | ResponseInit
-): NextResponse {
-  if (typeof url === "string") {
-    devLog("Middleware redirect to", url);
-  } else {
-    devLog("Middleware redirect to", url.href);
-  }
+function redirect(url: NextURL, init?: number | ResponseInit): NextResponse {
+  devLog("Middleware redirect to", url.href);
   return NextResponse.redirect(url, init);
 }
