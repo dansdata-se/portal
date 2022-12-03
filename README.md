@@ -47,6 +47,15 @@ the devcontainer. By default, SSO is disabled for local development builds.
 
 Note that you will need to generate your own `CLIENT_ID` and `SECRET` for local testing.
 
+You also need to enable the SSO provider(s) of your choice in [`config.toml`](./supabase/config.toml) like this:
+
+```toml
+[auth.external.<provider>]
+enabled = true  # Add this line
+client_id = "env(SSO_<PROVIDER>_CLIENT_ID)"
+secret = "env(SSO_<PROVIDER>_SECRET)"
+```
+
 ### Storybook
 
 Components are documented using [Storybook](https://storybook.js.org/).

@@ -19,3 +19,5 @@ footer-text-md: |-
 
   Help us digitalize the world of dance -
   <a className="underline" href="https://github.com/dansdata-se" target="_blank" rel="noreferrer">check out Dansdata on GitHub!</a>
+or: or
+and: and

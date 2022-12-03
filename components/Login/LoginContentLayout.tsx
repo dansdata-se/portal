@@ -2,8 +2,11 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Button from "components/Button";
 import CircularProgressButton from "components/Button/Progress/Circular";
 import TextField from "components/TextField";
+import { useHydrationSafeDarkMode } from "hooks/useHydrationSafeDarkMode";
 import Nav from "navigation/Nav";
 import NavLink from "navigation/NavLink";
+import Image from "next/future/image";
+import Google from "public/images/sso/google.svg";
 import { useRef, useState } from "react";
 import { Eye, EyeOff } from "react-feather";
 import { TFunction, useTranslation } from "react-i18next";
@@ -15,6 +18,8 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
   const { t: tLoginCommon } = useTranslation("login/common");
 
   const supabaseClient = useSupabaseClient<Database>();
+
+  const { isDarkMode } = useHydrationSafeDarkMode();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -71,6 +76,67 @@ function LoginContentLayout({ tPage }: { tPage: TFunction }) {
           login();
         }}
       >
+        <div className="grid grid-cols-1 gap-4 w-full">
+          <Button
+            className="w-full"
+            variant="outlined"
+            text="Facebook"
+            type="button"
+            icon={
+              <Image
+                priority={true}
+                src={"/images/sso/facebook.png"}
+                alt=""
+                width={50}
+                height={50}
+              />
+            }
+            onClick={() => {
+              supabaseClient.auth.signInWithOAuth({
+                provider: "facebook",
+              });
+            }}
+          />
+          <Button
+            className="w-full"
+            variant="outlined"
+            text="GitHub"
+            type="button"
+            icon={
+              <Image
+                priority={true}
+                src={
+                  isDarkMode
+                    ? "/images/sso/github-light.png"
+                    : "/images/sso/github.png"
+                }
+                alt=""
+                width={50}
+                height={50}
+              />
+            }
+            onClick={() => {
+              supabaseClient.auth.signInWithOAuth({
+                provider: "github",
+              });
+            }}
+          />
+          <Button
+            className="w-full"
+            variant="outlined"
+            text="Google"
+            type="button"
+            icon={<Google />}
+            onClick={() => {
+              supabaseClient.auth.signInWithOAuth({
+                provider: "google",
+              });
+            }}
+          />
+        </div>
+        <div className="flex flex-row text-outline items-center gap-2 before:shrink before:w-full before:bg-outline before:h-px after:shrink after:w-full after:bg-outline after:h-px my-4">
+          {tCommon("or")}
+        </div>
         <TextField
           id="email"
           ref={emailRef}
