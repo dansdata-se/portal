@@ -23,11 +23,11 @@ function LoginLayout({
     <div className="flex min-h-full flex-row items-stretch">
       <div className="relative flex min-h-full flex-col w-full md:w-1/2 xl:w-1/3">
         <Header currentDestination={currentDestination} />
-        <div className="h-8 grow"></div>
+        <div className="h-12 grow"></div>
         <main className="prose grow mx-auto px-4 w-full max-w-sm">
           {children}
         </main>
-        <div className="h-8 grow"></div>
+        <div className="h-12 grow"></div>
         <Footer forceSmall={!isFirst && forceSmallFooter} />
       </div>
       <div className="relative overflow-hidden flex-grow hidden md:block">
