@@ -3,6 +3,10 @@ label-log-in: Log in
 label-password-reset: Reset Password
 label-create-account: Create Account
 label-secure-home: Home
+label-secure-api: API
+label-secure-account: Account
+label-secure-events: Events
+label-secure-profiles: Profiles
 label-legal-root: Legal
 label-legal-terms-of-service: Terms of Service
 label-legal-privacy-policy: Privacy Policy

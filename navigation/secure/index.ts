@@ -1,4 +1,8 @@
 import { Destination } from "navigation/Nav";
+import account from "./account";
+import api from "./api";
+import events from "./events";
+import profiles from "./profiles";
 
 function secure(parents: Destination[]) {
   const Index: Destination = {
@@ -8,6 +12,10 @@ function secure(parents: Destination[]) {
   };
   return {
     Index,
+    account: account([...parents, Index]),
+    api: api([...parents, Index]),
+    events: events([...parents, Index]),
+    profiles: profiles([...parents, Index]),
   };
 }
 

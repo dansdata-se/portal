@@ -3,6 +3,10 @@ label-log-in: Logga in
 label-password-reset: Glömt lösenord
 label-create-account: Skapa konto
 label-secure-home: Hem
+label-secure-api: API
+label-secure-account: Konto
+label-secure-events: "Evene\u00ADmang"
+label-secure-profiles: Profiler
 label-legal-root: Juridiskt
 label-legal-terms-of-service: Användarvillkor
 label-legal-privacy-policy: Integritetspolicy

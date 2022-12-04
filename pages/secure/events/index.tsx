@@ -2,11 +2,11 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 
-export default function Home() {
-  const { t: tPage } = useTranslation("secure/page");
+export default function Events() {
+  const { t: tPage } = useTranslation("secure/events/page");
 
   return (
-    <div>
+    <main>
       <Head>
         <title>{tPage("head-title")}</title>
       </Head>
@@ -16,12 +16,15 @@ export default function Home() {
       </main>
     </div>
   );
-};
+}
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "secure/page"])),
+      ...(await serverSideTranslations(locale, [
+        "common",
+        "secure/events/page",
+      ])),
     },
   };
 }
