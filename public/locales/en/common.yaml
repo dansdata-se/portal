@@ -1,11 +1,11 @@
-breadcrumb-root: Portal
-breadcrumb-log-in: Log in
-breadcrumb-password-reset: Reset Password
-breadcrumb-create-account: Create Account
-breadcrumb-secure-home: Home
-breadcrumb-legal-root: Legal
-breadcrumb-legal-terms-of-service: Terms of Service
-breadcrumb-legal-privacy-policy: Privacy Policy
+label-root: Portal
+label-log-in: Log in
+label-password-reset: Reset Password
+label-create-account: Create Account
+label-secure-home: Home
+label-legal-root: Legal
+label-legal-terms-of-service: Terms of Service
+label-legal-privacy-policy: Privacy Policy
 onbeforeunload-generic-message: You may loose unsaved changes if you leave now!
 change-locale: På Svenska
 sr-darkmode-on: "Theme: Dark"

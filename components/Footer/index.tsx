@@ -82,7 +82,7 @@ function Footer({
                 locale={router.locale}
               >
                 <span className="typography-body-small underline cursor-pointer">
-                  {tCommon("breadcrumb-legal-terms-of-service")}
+                  {tCommon("label-legal-terms-of-service")}
                 </span>
               </Link>
               <Link
@@ -90,7 +90,7 @@ function Footer({
                 locale={router.locale}
               >
                 <span className="typography-body-small underline cursor-pointer">
-                  {tCommon("breadcrumb-legal-privacy-policy")}
+                  {tCommon("label-legal-privacy-policy")}
                 </span>
               </Link>
             </div>

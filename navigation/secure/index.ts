@@ -3,7 +3,7 @@ import { Destination } from "navigation/Nav";
 function secure(parents: Destination[]) {
   const Index: Destination = {
     href: "/secure/",
-    breadcrumbText: (tCommon) => tCommon("breadcrumb-secure-home"),
+    label: (tCommon) => tCommon("label-secure-home"),
     parentDestinations: parents,
   };
   return {

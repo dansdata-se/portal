@@ -45,13 +45,13 @@ function HeaderBreadcrumbs({
               locale={router.locale}
             >
               <span className="text-primary cursor-pointer">
-                {p.breadcrumbText(tCommon)}
+                {p.label(tCommon)}
               </span>
             </Link>{" "}
             <span className="text-outline">/</span>{" "}
           </Fragment>
         ))}
-        <span>{currentDestination.breadcrumbText(tCommon)}</span>
+        <span>{currentDestination.label(tCommon)}</span>
       </div>
     </div>
   );
