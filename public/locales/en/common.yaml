@@ -25,3 +25,4 @@ footer-text-md: |-
   <a className="underline" href="https://github.com/dansdata-se" target="_blank" rel="noreferrer">check out Dansdata on GitHub!</a>
 or: or
 and: and
+log-out: Log out
