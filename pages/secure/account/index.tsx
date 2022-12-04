@@ -1,11 +1,15 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Button from "components/Button";
+import Footer from "components/Footer";
+import { getDefaultNavigationEntries } from "components/Navigation";
+import NavigationLayout from "components/Navigation/NavigationLayout";
 import Cookies from "js-cookie";
 import Nav from "navigation/Nav";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
 import { Database } from "types/supabase";
 
 export default function Account() {
@@ -13,14 +17,20 @@ export default function Account() {
 
   const router = useRouter();
   const supabaseClient = useSupabaseClient<Database>();
+  const navigationEntries = useMemo(
+    () => getDefaultNavigationEntries(Nav().secure.account.Index),
+    []
+  );
 
   return (
-    <div>
+    <NavigationLayout
+      className="flex flex-col"
+      entries={navigationEntries}
+    >
       <Head>
         <title>{tPage("head-title")}</title>
       </Head>
-
-      <main>
+      <main className="grow">
         <h1 className="typography-display-large">{tPage("page-title")}</h1>
         <Button
           variant="outlined"
@@ -43,7 +53,8 @@ export default function Account() {
           }}
         />
       </main>
-    </div>
+      <Footer />
+    </NavigationLayout>
   );
 }
 
