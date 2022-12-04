@@ -32,7 +32,7 @@ const Legal: NextPage = () => {
               <Button
                 className="w-full md:w-auto"
                 variant="filled"
-                text={tCommon("breadcrumb-legal-terms-of-service")}
+                text={tCommon("label-legal-terms-of-service")}
               />
             </Link>
             <Link
@@ -42,7 +42,7 @@ const Legal: NextPage = () => {
               <Button
                 className="w-full md:w-auto"
                 variant="filled"
-                text={tCommon("breadcrumb-legal-privacy-policy")}
+                text={tCommon("label-legal-privacy-policy")}
               />
             </Link>
           </div>
