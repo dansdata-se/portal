@@ -5,7 +5,7 @@ ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 ARG VARIANT
 ARG POSTGRES_VERSION="14"
-ARG SUPABASE_CLI_VERSION="1.8.4"
+ARG SUPABASE_CLI_VERSION="1.22.1"
 ARG TBLS_VERSION="1.56.9"
 
 # Generic requirements

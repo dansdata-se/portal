@@ -4,12 +4,23 @@
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
+| [_realtime.extensions](_realtime.extensions.md) | 6 |  | BASE TABLE |
+| [_realtime.schema_migrations](_realtime.schema_migrations.md) | 2 |  | BASE TABLE |
+| [_realtime.tenants](_realtime.tenants.md) | 9 |  | BASE TABLE |
 | [api_auth.log](api_auth.log.md) | 9 | Log for API token usage | BASE TABLE |
 | [api_auth.token_ip_rules](api_auth.token_ip_rules.md) | 3 | Whitelist for IP addresses from which an API key may be used. No entries means allowed from all. | BASE TABLE |
 | [api_auth.token_origin_rules](api_auth.token_origin_rules.md) | 3 | Whitelist for origins from which an API key may be used. No entries means allowed from all. | BASE TABLE |
 | [api_auth.tokens](api_auth.tokens.md) | 5 | Listing of known API tokens | BASE TABLE |
 | [api_auth.usage](api_auth.usage.md) | 6 |  | VIEW |
 | [api_auth.user_config](api_auth.user_config.md) | 9 | API Key restrictions and other API related configuration | BASE TABLE |
+| [auth.mfa_amr_claims](auth.mfa_amr_claims.md) | 5 | auth: stores authenticator method reference claims for multi factor authentication | BASE TABLE |
+| [auth.mfa_challenges](auth.mfa_challenges.md) | 5 | auth: stores metadata about challenge requests made | BASE TABLE |
+| [auth.mfa_factors](auth.mfa_factors.md) | 8 | auth: stores metadata about factors | BASE TABLE |
+| [auth.saml_providers](auth.saml_providers.md) | 8 | Auth: Manages SAML Identity Provider connections. | BASE TABLE |
+| [auth.saml_relay_states](auth.saml_relay_states.md) | 8 | Auth: Contains SAML Relay State information for each Service Provider initiated login. | BASE TABLE |
+| [auth.sso_domains](auth.sso_domains.md) | 5 | Auth: Manages SSO email address domain mapping to an SSO Identity Provider. | BASE TABLE |
+| [auth.sso_providers](auth.sso_providers.md) | 4 | Auth: Manages SSO identity provider information; see saml_providers for SAML. | BASE TABLE |
+| [auth.sso_sessions](auth.sso_sessions.md) | 8 | Auth: A session initiated by an SSO Identity Provider | BASE TABLE |
 | [auth.users](auth.users.md) | 32 | Auth: Stores user login data within a secure schema. | BASE TABLE |
 
 ## Stored procedures and functions
@@ -124,7 +135,6 @@
 | pgsodium.crypto_aead_ietf_decrypt | bytea | message bytea, additional bytea, nonce bytea, key_uuid uuid | FUNCTION |
 | pgsodium.has_mask | bool | role regrole, source_name text | FUNCTION |
 | pgsodium.mask_columns | record | source_relid oid | FUNCTION |
-| extensions.armor | text | bytea | FUNCTION |
 | pgsodium.create_mask_view | void | relid oid, debug boolean DEFAULT false | FUNCTION |
 | pgsodium.trg_mask_update | event_trigger |  | FUNCTION |
 | pgsodium.mask_role | void | masked_role regrole, source_name text, view_name text | FUNCTION |
@@ -133,24 +143,23 @@
 | pgsodium.crypto_aead_det_decrypt | bytea | message bytea, additional bytea, key_uuid uuid, nonce bytea | FUNCTION |
 | pgsodium.encrypted_columns | text | relid oid | FUNCTION |
 | pgsodium.decrypted_columns | text | relid oid | FUNCTION |
-| extensions.pgp_sym_encrypt | bytea | text, text | FUNCTION |
+| auth.email | text |  | FUNCTION |
+| extensions.pgp_pub_encrypt | bytea | text, bytea, text | FUNCTION |
 | extensions.grant_pg_graphql_access | event_trigger |  | FUNCTION |
 | extensions.pgrst_ddl_watch | event_trigger |  | FUNCTION |
 | extensions.pgrst_drop_watch | event_trigger |  | FUNCTION |
-| extensions.pgp_pub_encrypt | bytea | text, bytea, text | FUNCTION |
 | extensions.pgp_pub_encrypt_bytea | bytea | bytea, bytea | FUNCTION |
 | extensions.set_graphql_placeholder | event_trigger |  | FUNCTION |
+| storage.get_size_by_bucket | record |  | FUNCTION |
 | extensions.pgp_pub_encrypt_bytea | bytea | bytea, bytea, text | FUNCTION |
 | extensions.pgp_sym_decrypt | text | bytea, text | FUNCTION |
-| storage.get_size_by_bucket | record |  | FUNCTION |
 | extensions.pgp_sym_decrypt | text | bytea, text, text | FUNCTION |
 | extensions.pgp_sym_decrypt_bytea | bytea | bytea, text | FUNCTION |
-| extensions.pgp_sym_decrypt_bytea | bytea | bytea, text, text | FUNCTION |
-| auth.email | text |  | FUNCTION |
 | auth.jwt | jsonb |  | FUNCTION |
 | auth.role | text |  | FUNCTION |
 | auth.uid | uuid |  | FUNCTION |
 | extensions.algorithm_sign | text | signables text, secret text, algorithm text | FUNCTION |
+| extensions.armor | text | bytea | FUNCTION |
 | extensions.armor | text | bytea, text[], text[] | FUNCTION |
 | extensions.crypt | text | text, text | FUNCTION |
 | extensions.dearmor | bytea | text | FUNCTION |
@@ -181,6 +190,8 @@
 | extensions.pgp_pub_decrypt_bytea | bytea | bytea, bytea, text | FUNCTION |
 | extensions.pgp_pub_decrypt_bytea | bytea | bytea, bytea, text, text | FUNCTION |
 | extensions.pgp_pub_encrypt | bytea | text, bytea | FUNCTION |
+| extensions.pgp_sym_decrypt_bytea | bytea | bytea, text, text | FUNCTION |
+| extensions.pgp_sym_encrypt | bytea | text, text | FUNCTION |
 | extensions.pgp_sym_encrypt | bytea | text, text, text | FUNCTION |
 | extensions.pgp_sym_encrypt_bytea | bytea | bytea, text | FUNCTION |
 | extensions.pgp_sym_encrypt_bytea | bytea | bytea, text, text | FUNCTION |
@@ -199,122 +210,20 @@
 | extensions.uuid_ns_url | uuid |  | FUNCTION |
 | extensions.uuid_ns_x500 | uuid |  | FUNCTION |
 | extensions.verify | record | token text, secret text, algorithm text DEFAULT 'HS256'::text | FUNCTION |
-| pgbouncer.get_auth | record | p_usename text | FUNCTION |
-| realtime.apply_rls | wal_rls | wal jsonb, max_record_bytes integer DEFAULT (1024 * 1024) | FUNCTION |
-| realtime.build_prepared_statement_sql | text | prepared_statement_name text, entity regclass, columns realtime.wal_column[] | FUNCTION |
-| realtime.cast | jsonb | val text, type_ regtype | FUNCTION |
-| realtime.check_equality_op | bool | op realtime.equality_op, type_ regtype, val_1 text, val_2 text | FUNCTION |
-| realtime.is_visible_through_filters | bool | columns realtime.wal_column[], filters realtime.user_defined_filter[] | FUNCTION |
-| realtime.quote_wal2json | text | entity regclass | FUNCTION |
-| realtime.subscription_check_filters | trigger |  | FUNCTION |
-| realtime.to_regrole | regrole | role_name text | FUNCTION |
 | storage.extension | text | name text | FUNCTION |
+| pgbouncer.get_auth | record | p_usename text | FUNCTION |
 | storage.filename | text | name text | FUNCTION |
 | storage.foldername | _text | name text | FUNCTION |
-| graphql.rebuild_types | void |  | FUNCTION |
-| graphql.is_variable | bool | field jsonb | FUNCTION |
-| graphql.name_literal | text | ast jsonb | FUNCTION |
 | graphql_public.graphql | jsonb | "operationName" text DEFAULT NULL::text, query text DEFAULT NULL::text, variables jsonb DEFAULT NULL::jsonb, extensions jsonb DEFAULT NULL::jsonb | FUNCTION |
-| graphql.comment | text | regclass | FUNCTION |
-| graphql.comment | text | regtype | FUNCTION |
-| graphql.comment | text | regproc | FUNCTION |
-| graphql.comment | text | regnamespace | FUNCTION |
-| graphql.jsonb_coalesce | jsonb | val jsonb, default_ jsonb | FUNCTION |
-| graphql.arg_coerce_list | jsonb | arg jsonb | FUNCTION |
-| graphql.comment | text | regclass, column_name text | FUNCTION |
-| graphql.comment_directive_inflect_names | bool | regnamespace | FUNCTION |
-| graphql.jsonb_unnest_recursive_with_jsonpath | record | obj jsonb | FUNCTION |
-| graphql.slug | text |  | FUNCTION |
-| graphql._first_agg | anyelement | anyelement, anyelement | FUNCTION |
-| graphql.first | anyelement | anyelement | a |
-| graphql.is_array | bool | regtype | FUNCTION |
-| graphql.is_composite | bool | regtype | FUNCTION |
-| graphql.is_literal | bool | field jsonb | FUNCTION |
-| graphql.primary_key_columns | _text | entity regclass | FUNCTION |
-| graphql.primary_key_types | _regtype | entity regclass | FUNCTION |
-| graphql.column_set_is_unique | bool | regclass, columns text[] | FUNCTION |
-| graphql.to_type_name | text | regtype | FUNCTION |
-| graphql.to_function_name | text | regproc | FUNCTION |
-| graphql.to_regclass | regclass | schema_ text, name_ text | FUNCTION |
-| graphql.to_table_name | text | regclass | FUNCTION |
-| graphql.to_camel_case | text | text | FUNCTION |
-| graphql.alias_or_name_literal | text | field jsonb | FUNCTION |
-| graphql.arg_to_jsonb | jsonb | arg jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
+| graphql.resolve | jsonb | query text, variables jsonb DEFAULT '{}'::jsonb, "operationName" text DEFAULT NULL::text, extensions jsonb DEFAULT NULL::jsonb | FUNCTION |
 | graphql.comment_directive | jsonb | comment_ text | FUNCTION |
-| graphql.ast_pass_fragments | jsonb | ast jsonb, fragment_defs jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.ast_pass_strip_loc | jsonb | body jsonb | FUNCTION |
-| graphql.parse | parse_result | text | FUNCTION |
-| graphql.value_literal | text | ast jsonb | FUNCTION |
-| graphql.value_literal_is_null | bool | ast jsonb | FUNCTION |
 | graphql.exception | text | message text | FUNCTION |
-| graphql.exception_required_argument | text | arg_name text | FUNCTION |
-| graphql.exception_unknown_field | text | field_name text, type_name text | FUNCTION |
-| graphql.exception_unknown_field | text | field_name text | FUNCTION |
-| graphql.reverse | _column_order_w_type | column_orders graphql.column_order_w_type[] | FUNCTION |
-| graphql.to_cursor_clause | text | alias_name text, column_orders graphql.column_order_w_type[] | FUNCTION |
-| graphql.encode | text | jsonb | FUNCTION |
-| graphql.decode | jsonb | text | FUNCTION |
-| graphql.cursor_where_clause | text | block_name text, column_orders graphql.column_order_w_type[], cursor_ text, cursor_var_ix integer, depth_ integer DEFAULT 1 | FUNCTION |
-| graphql.comment_directive_name | text | regclass | FUNCTION |
-| graphql.comment_directive_totalcount_enabled | bool | regclass | FUNCTION |
-| graphql.comment_directive_name | text | regclass, column_name text | FUNCTION |
-| graphql.comment_directive_name | text | regtype | FUNCTION |
-| graphql.comment_directive_name | text | regproc | FUNCTION |
-| graphql.inflect_type_default | text | text | FUNCTION |
-| graphql.type_name | text | rec graphql._type | FUNCTION |
-| graphql.type_name | text | type_id integer | FUNCTION |
-| graphql.type_name | text | regclass, graphql.meta_kind | FUNCTION |
-| graphql.set_type_name | trigger |  | FUNCTION |
-| graphql.sql_type_to_graphql_type | text | regtype | FUNCTION |
-| graphql.type_id | int4 | regtype | FUNCTION |
-| graphql.field_name_for_column | text | entity regclass, column_name text | FUNCTION |
-| graphql.lowercase_first_letter | text | text | FUNCTION |
-| graphql.field_name_for_to_many | text | foreign_entity regclass, foreign_name_override text | FUNCTION |
-| graphql.field_name_for_query_collection | text | entity regclass | FUNCTION |
-| graphql.prepared_statement_exists | bool | statement_name text | FUNCTION |
-| graphql.build_insert | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.field_name_for_to_one | text | foreign_entity regclass, foreign_name_override text, foreign_columns text[] | FUNCTION |
-| graphql.field_name_for_function | text | func regproc | FUNCTION |
-| graphql.field_name | text | rec graphql._field | FUNCTION |
-| graphql.set_field_name | trigger |  | FUNCTION |
-| graphql.type_id | int4 | type_name text | FUNCTION |
-| graphql.type_id | int4 | graphql.meta_kind | FUNCTION |
-| graphql.rebuild_fields | void |  | FUNCTION |
-| graphql.arg_index | int4 | arg_name text, variable_definitions jsonb | FUNCTION |
-| graphql.get_arg_by_name | jsonb | name text, arguments jsonb | FUNCTION |
-| graphql.arg_clause | text | name text, arguments jsonb, variable_definitions jsonb, entity regclass, default_value text DEFAULT NULL::text | FUNCTION |
-| api_auth.handle_deleted_user | trigger |  | FUNCTION |
-| graphql.join_clause | text | local_columns text[], local_alias_name text, parent_columns text[], parent_alias_name text | FUNCTION |
-| graphql.primary_key_clause | text | entity regclass, alias_name text | FUNCTION |
-| graphql.order_by_clause | text | alias_name text, column_orders graphql.column_order_w_type[] | FUNCTION |
-| graphql.order_by_enum_to_clause | text | order_by_enum_val text | FUNCTION |
-| graphql.to_column_orders | _column_order_w_type | order_by_arg jsonb, entity regclass, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.text_to_comparison_op | comparison_op | text | FUNCTION |
-| graphql.where_clause | text | filter_arg jsonb, entity regclass, alias_name text, variables jsonb DEFAULT '{}'::jsonb, variable_definitions jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.build_connection_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, parent_type text DEFAULT NULL::text, parent_block_name text DEFAULT NULL::text | FUNCTION |
-| graphql.build_delete | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.build_heartbeat_query | text | ast jsonb | FUNCTION |
-| graphql.argument_value_by_name | text | name text, ast jsonb | FUNCTION |
-| graphql.build_node_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, parent_type text DEFAULT NULL::text, parent_block_name text DEFAULT NULL::text | FUNCTION |
-| graphql.build_update | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.build_enum_values_query | text | ast jsonb, type_block_name text | FUNCTION |
-| graphql.build_field_on_type_query | text | ast jsonb, type_block_name text, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb, is_input_fields boolean DEFAULT false | FUNCTION |
-| graphql.build_args_on_field_query | text | ast jsonb, field_block_name text, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.resolve | jsonb | query text DEFAULT NULL::text, variables jsonb DEFAULT '{}'::jsonb, "operationName" text DEFAULT NULL::text, extensions jsonb DEFAULT NULL::jsonb | FUNCTION |
-| graphql.build_schema_query | text | ast jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb, variables jsonb DEFAULT '{}'::jsonb | FUNCTION |
-| graphql.build_type_query_core_selects | text | ast jsonb, block_name text | FUNCTION |
-| graphql.build_type_query_wrapper_selects | text | ast jsonb, kind text, of_type_selects text | FUNCTION |
-| graphql.build_type_query_in_field_context | text | ast jsonb, field_block_name text | FUNCTION |
-| graphql.cache_key | text | role regrole, schemas text[], schema_version integer, ast jsonb, variables jsonb, variable_definitions jsonb | FUNCTION |
-| graphql.cache_key_variable_component | text | variables jsonb DEFAULT '{}'::jsonb, variable_definitions jsonb DEFAULT '[]'::jsonb | FUNCTION |
-| graphql.prepared_statement_create_clause | text | statement_name text, variable_definitions jsonb, query_ text | FUNCTION |
-| graphql.prepared_statement_execute_clause | text | statement_name text, variable_definitions jsonb, variables jsonb | FUNCTION |
-| graphql.variable_definitions_sort | jsonb | variable_definitions jsonb | FUNCTION |
-| graphql.get_built_schema_version | int4 |  | FUNCTION |
-| graphql.rebuild_schema | void |  | FUNCTION |
-| graphql.rebuild_on_ddl | event_trigger |  | FUNCTION |
-| graphql.rebuild_on_drop | event_trigger |  | FUNCTION |
+| public.api_auth_log_request | void | method text, path text, user_agent text, origin text, ip text | FUNCTION |
+| graphql.sequential_executor | jsonb | prepared_statement_names text[] | FUNCTION |
+| graphql.increment_schema_version | event_trigger |  | FUNCTION |
+| graphql.get_schema_version | int4 |  | FUNCTION |
 | storage.search | record | prefix text, bucketname text, limits integer DEFAULT 100, levels integer DEFAULT 1, offsets integer DEFAULT 0, search text DEFAULT ''::text, sortcolumn text DEFAULT 'name'::text, sortorder text DEFAULT 'asc'::text | FUNCTION |
+| api_auth.handle_deleted_user | trigger |  | FUNCTION |
 | api_auth.new_api_token | text | user_id uuid, title text | FUNCTION |
 | api_auth.tid | uuid |  | FUNCTION |
 | api_auth.check_token_revocation | void |  | FUNCTION |
@@ -330,7 +239,6 @@
 | extensions.http_delete | http_response | uri character varying | FUNCTION |
 | extensions.http_head | http_response | uri character varying | FUNCTION |
 | extensions.urlencode | text | string character varying | FUNCTION |
-| public.api_auth_log_request | void | method text, path text, user_agent text, origin text, ip text | FUNCTION |
 | api_auth.send_log_api_request | void |  | FUNCTION |
 | api_auth.handle_new_user | trigger |  | FUNCTION |
 | extensions.moddatetime | trigger |  | FUNCTION |

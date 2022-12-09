@@ -22,7 +22,7 @@ Auth: Stores user login data within a secure schema.
 | email_change_token_new | varchar(255) |  | true |  |  |  |  |
 | email_confirmed_at | timestamp with time zone |  | true |  |  |  |  |
 | encrypted_password | varchar(255) |  | true |  |  |  |  |
-| id | uuid |  | false |  | [api_auth.user_config](api_auth.user_config.md) |  |  |
+| id | uuid |  | false |  | [api_auth.user_config](api_auth.user_config.md) [auth.mfa_factors](auth.mfa_factors.md) |  |  |
 | instance_id | uuid |  | true |  |  |  |  |
 | invited_at | timestamp with time zone |  | true |  |  |  |  |
 | is_super_admin | boolean |  | true |  |  |  |  |
