@@ -12,7 +12,7 @@ jobs:
       DEBIAN_FRONTEND: noninteractive
       POSTGRES_VERSION: 14
       SUPABASE_CLI_VERSION: 1.8.4
-      TBLS_VERSION: 1.56.2
+      TBLS_VERSION: 1.56.9
 
     steps:
       - uses: actions/checkout@v3
