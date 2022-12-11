@@ -7,13 +7,20 @@ ARG VARIANT
 ARG POSTGRES_VERSION="14"
 ARG SUPABASE_CLI_VERSION="1.22.1"
 ARG TBLS_VERSION="1.56.9"
+# https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
+ARG FLUTTER_VERSION="3.3.9"
 
 # Generic requirements
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
     && apt-get -y install --no-install-recommends\
     libcurl4-openssl-dev\
     ca-certificates\
-    gnupg
+    gnupg\
+    curl\
+    zip\
+    unzip\
+    xz-utils\
+    libglu1-mesa
 
 # Install supabase CLI
 COPY supabase_${SUPABASE_CLI_VERSION}_checksums.txt .
@@ -47,3 +54,16 @@ RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | su
 # Install [tbls](https://github.com/k1LoW/tbls) for graph visualization
 ADD https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb /tmp/tbls.deb
 RUN dpkg -i /tmp/tbls.deb
+
+# Create a non-root user - see https://aka.ms/vscode-remote/containers/non-root-user.
+USER vscode
+
+# Install [Flutter SDK](https://flutter.dev/)
+WORKDIR /home/vscode
+ENV PATH=${PATH}:/home/vscode/flutter/bin
+ADD --chown=vscode:vscode https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz ./flutter.tar.xz
+RUN tar xf ./flutter.tar.xz\
+    && rm ./flutter.tar.xz\
+    && flutter config --no-analytics \
+    && flutter doctor \
+    && dart --disable-analytics

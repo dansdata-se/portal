@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.0.1",
+  "configurations": [
+      {
+          "name": "Flutter Web",
+          "type": "dart",
+          "request": "launch",
+          "program": "lib/main.dart",
+          "deviceId": "web-server",
+          "preLaunchTask": "Code generator",
+          "internalConsoleOptions": "openOnSessionStart",
+          "args": [
+              // Use fixed web server port
+              "--web-port",
+              "3000",
+              // Allow access from other devices
+              // "--web-hostname",
+              // "0.0.0.0"
+          ],
+      }
+  ]
+}
