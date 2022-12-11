@@ -1,0 +1,43 @@
+name: Configure CI Environment
+description: Configure the CI environment for the Dansdata Portal
+runs:
+  using: "composite"
+  steps:
+    - name: Install NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        channel: "stable"
+
+    - name: Install Flutter SDK
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 3.3.9
+
+    - name: Install Supabase CLI
+      uses: supabase/setup-cli@v1
+      with:
+        version: 1.22.1
+
+    - name: Install pgformatter
+      env:
+        POSTGRES_VERSION: 14
+      shell: bash
+      run: |
+        sudo cp ./.devcontainer/pgdg.pref /etc/apt/preferences.d/pgdg.pref
+        echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main ${POSTGRES_VERSION}" | sudo tee -a /etc/apt/sources.list.d/pgdg.list >/dev/null
+        curl -sL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
+        sudo apt-get update
+        sudo apt-get -y install --no-install-recommends pgformatter
+
+    - name: Install [tbls](https://github.com/k1LoW/tbls)
+      env:
+        TBLS_VERSION: 1.56.9
+      shell: bash
+      run: |
+        curl -sL https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb --output /tmp/tbls.deb
+        sudo dpkg -i /tmp/tbls.deb
+
+    - name: Run `npm ci`
+      shell: bash
+      run: npm ci

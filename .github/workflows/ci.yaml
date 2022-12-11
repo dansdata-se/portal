@@ -4,48 +4,29 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBIAN_FRONTEND: noninteractive
+
 jobs:
-  test:
-    runs-on: ubuntu-22.04
-
-    env:
-      DEBIAN_FRONTEND: noninteractive
-      POSTGRES_VERSION: 14
-      SUPABASE_CLI_VERSION: 1.22.1
-      TBLS_VERSION: 1.56.9
-
+  verify:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run `npm ci`
-        run: npm ci
+      - name: Configure CI Environment
+        uses: ./.github/actions/configure_environment
 
-      - name: Install pgformatter
-        run: |
-          sudo cp ./.devcontainer/pgdg.pref /etc/apt/preferences.d/pgdg.pref
-          echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main ${POSTGRES_VERSION}" | sudo tee -a /etc/apt/sources.list.d/pgdg.list >/dev/null
-          curl -sL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
-          sudo apt-get update
-          sudo apt-get -y install --no-install-recommends pgformatter
-
-      - name: Verify formatting
+      - name: Ensure `format` and `fix` commands do not apply code changes
         run: |
           npm run format
+          npm run fix
           if [ "$(git diff --ignore-space-at-eol | wc -l)" -gt "0" ]; then
             echo "Detected code style issues. See status below:"
             git diff
             exit 1
           fi
 
-      - name: Install [tbls](https://github.com/k1LoW/tbls)
-        run: |
-          curl -sL https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb --output /tmp/tbls.deb
-          sudo dpkg -i /tmp/tbls.deb
-
-      - uses: supabase/setup-cli@v1
-        with:
-          version: ${{ env.SUPABASE_CLI_VERSION }}
-
+      # Make sure supabase can start
       - name: Start Supabase local development setup
         run: supabase start
 
@@ -53,6 +34,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # Note that supabase must be running for `tbls` to generate documenation!
       - name: Verify generated types are up-to-date
         run: |
           npm run docs
@@ -61,3 +43,14 @@ jobs:
             git diff
             exit 1
           fi
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure CI Environment
+        uses: ./.github/actions/configure_environment
+
+      - name: Run tests
+        run: npm test

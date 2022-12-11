@@ -7,14 +7,12 @@ An administration interface for managing API keys and data presented via the dan
 The project utilizes a [devcontainer](https://code.visualstudio.com/docs/remote/containers)
 with most dependencies, including `supabase-cli`, already included.
 
-Before you can start this devcontainer however, you need to create a local `.env.local` file:
+`npm` is used to assist with some scripts and tools. See the `scripts` section of
+[`package.json`](./package.json) for information. Make sure to run `npm i` on first setup to install
+required packages and shared git hooks.
 
-```bash
-touch .env.local
-```
-
-The administration portal is based on [next.js](https://nextjs.org/) and uses [supabase](https://supabase.com/)
-as its backend.
+The administration portal is based on [Flutter](https://flutter.dev/) and uses
+[supabase](https://supabase.com/) as its backend.
 
 To start your local supabase backend:
 
@@ -22,16 +20,23 @@ To start your local supabase backend:
 supabase start
 ```
 
-To run the development server:
+To run the development server, use the "Run and Debug" menu in VSCode (recommended), or
 
 ```bash
-npm run dev
+npm start
 ```
 
-To generate database documentation and TS types (requires supabase to be running)
+To generate database documentation (requires supabase to be running)
 
 ```bash
 npm run docs
+```
+
+To run code generation, use the "Code generator" VSCode task (from
+[`tasks.json`](./.vscode/tasks.json)), or
+
+```bash
+npm run gen
 ```
 
 ### Supabase
@@ -41,13 +46,10 @@ supabase, please see the [official guide](https://supabase.com/docs/guides/local
 
 #### SSO
 
-To enable SSO for your local environment, override the `SSO_<PROVIDER>_CLIENT_ID` and `SSO_<PROVIDER>_SECRET`
-in your local `.env.local` file (see [`.env.development`](./.env.development) for instructions) and rebuild
-the devcontainer. By default, SSO is disabled for local development builds.
+By default, SSO is disabled for local development builds. To enable SSO for your local environment,
+you need to do 2 things:
 
-Note that you will need to generate your own `CLIENT_ID` and `SECRET` for local testing.
-
-You also need to enable the SSO provider(s) of your choice in [`config.toml`](./supabase/config.toml) like this:
+1. Enable the SSO providers(s) of your choice in [`config.toml`](./supabase/config.toml):
 
 ```toml
 [auth.external.<provider>]
@@ -56,22 +58,37 @@ client_id = "env(SSO_<PROVIDER>_CLIENT_ID)"
 secret = "env(SSO_<PROVIDER>_SECRET)"
 ```
 
-### Storybook
+2. Ensure the relevant `SSO_<PROVIDER>_CLIENT_ID` and `SSO_<PROVIDER>_SECRET` variables are
+   available when running `supabase start`.
 
-Components are documented using [Storybook](https://storybook.js.org/).
+When using the devcontainer, this can easily be done by adding the necessary variables to a local
+[`.env`](./.env) file and rebuilding the container:
 
-You can view this documentation by running
+```dotenv
+# ------------------------------------------------
+# SSO (Single Sign On)
+# ------------------------------------------------
+#
+# Note!
+# You will need to rebuild the devcontainer and
+# restart your local supabase environment to
+# apply any changes to `.env`!
 
-```bash
-npm run storybook
+# See https://supabase.com/docs/guides/auth/auth-facebook
+SSO_FACEBOOK_SECRET=abc123
+SSO_FACEBOOK_CLIENT_ID=abc123
+
+# See https://supabase.com/docs/guides/auth/auth-github
+SSO_GITHUB_SECRET=abc123
+SSO_GITHUB_CLIENT_ID=abc123
+
+# See https://supabase.com/docs/guides/auth/auth-google
+SSO_GOOGLE_SECRET=abc123
+SSO_GOOGLE_CLIENT_ID=abc123
 ```
 
-Stories should be located next to their respective components in a `[component].stories.(mdx|tsx)` file.
-
-Note that VSCode likes to perform automatic port forwarding when opening links, which can sometimes
-cause issues when viewing storybook. If storybook opens with some content not loading properly,
-try checking if VSCode opened storybook on port e.g. `6007` despite running on `6006` as a first
-measure.
+Note that you will need to generate your own `CLIENT_ID` and `SECRET` for local testing!
+See https://supabase.com/docs/guides/auth for more info.
 
 ## About Dansdata.se
 
