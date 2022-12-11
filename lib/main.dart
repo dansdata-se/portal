@@ -1,5 +1,9 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app.dart";
+import "package:portal/gen/assets.gen.dart";
 import "package:portal/vercel/vercel_env.dart";
 
 // Note that <Primitive>.fromEnvironment loads its variables at build time!
@@ -33,6 +37,13 @@ class BuildConfig {
 }
 
 void main() async {
+  GoogleFonts.config.allowRuntimeFetching = false;
+
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString(Assets.googleFonts.ofl);
+    yield LicenseEntryWithLineBreaks(["google_fonts"], license);
+  });
+
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const DansdataPortalApp());
 }
