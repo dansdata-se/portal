@@ -1,11 +1,17 @@
 name: CI
 
 on:
+  push:
   pull_request:
   workflow_dispatch:
 
 env:
   DEBIAN_FRONTEND: noninteractive
+  NODE_VERSION: 18
+  FLUTTER_VERSION: 3.3.9
+  SUPABASE_CLI_VERSION: 1.22.1
+  POSTGRES_VERSION: 14
+  TBLS_VERSION: 1.56.9
 
 jobs:
   verify:
@@ -13,18 +19,48 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Configure CI Environment
-        uses: ./.github/actions/configure_environment
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: Ensure `format` and `fix` commands do not apply code changes
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
+
+      - name: Install pgformatter
+        shell: bash
         run: |
-          npm run format
+          sudo cp ./.devcontainer/pgdg.pref /etc/apt/preferences.d/pgdg.pref
+          echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main ${POSTGRES_VERSION}" | sudo tee -a /etc/apt/sources.list.d/pgdg.list >/dev/null
+          curl -sL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
+          sudo apt-get update
+          sudo apt-get -y install --no-install-recommends pgformatter
+
+      - name: Install [tbls](https://github.com/k1LoW/tbls)
+        shell: bash
+        run: |
+          curl -sL https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb --output /tmp/tbls.deb
+          sudo dpkg -i /tmp/tbls.deb
+
+      - name: Ensure `fix` command do not apply code changes
+        run: |
           npm run fix
           if [ "$(git diff --ignore-space-at-eol | wc -l)" -gt "0" ]; then
             echo "Detected code style issues. See status below:"
             git diff
             exit 1
           fi
+
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: ${{ env.SUPABASE_CLI_VERSION }}
 
       # Make sure supabase can start
       - name: Start Supabase local development setup
@@ -49,8 +85,202 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Configure CI Environment
-        uses: ./.github/actions/configure_environment
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
 
       - name: Run tests
         run: npm test
+
+  create-release:
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging'
+    needs:
+      - verify
+      - test
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
+
+      - name: Create Release
+        run: npx semantic-release
+
+  deploy-preview:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/staging'
+    needs:
+      - verify
+      - test
+
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_PREVIEW_DB_PASSWORD }}
+      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PREVIEW_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: |
+          vercel pull --scope=dansdata --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          export $(grep -v '^#' ./.vercel/.env.preview.local | xargs)
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      # Not for previews
+      # - name: Deploy Database Migrations
+      #   run: |
+      #     supabase link --project-ref $SUPABASE_PROJECT_ID
+      #     supabase db push
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    environment: Staging
+
+    if: github.ref == 'refs/heads/staging'
+    needs:
+      - create-release
+
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_PREVIEW_DB_PASSWORD }}
+      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PREVIEW_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
+
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: ${{ env.SUPABASE_CLI_VERSION }}
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: |
+          vercel pull --scope=dansdata --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          export $(grep -v '^#' ./.vercel/.env.preview.local | xargs)
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Database Migrations
+        run: |
+          supabase link --project-ref $SUPABASE_PROJECT_ID
+          supabase db push
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+  deploy-production:
+    runs-on: ubuntu-latest
+
+    environment: Production
+
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - create-release
+
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_PRODUCTION_DB_PASSWORD }}
+      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PRODUCTION_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Run `npm ci`
+        shell: bash
+        run: npm ci
+
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: ${{ env.SUPABASE_CLI_VERSION }}
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: |
+          vercel pull --scope=dansdata --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          export $(grep -v '^#' ./.vercel/.env.production.local | xargs)
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Database Migrations
+        run: |
+          supabase link --project-ref $SUPABASE_PROJECT_ID
+          supabase db push
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

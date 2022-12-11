@@ -6,6 +6,7 @@
   "scripts": {
     "prestart": "npm run gen",
     "start": "flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3000",
+    "build": "flutter build web --release --dart-define=\"NEXT_PUBLIC_VERCEL_URL=$NEXT_PUBLIC_VERCEL_URL\" --dart-define=\"NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL\" --dart-define=\"NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY\" --dart-define=\"NEXT_PUBLIC_VERCEL_ENV=$NEXT_PUBLIC_VERCEL_ENV\" --dart-define=\"NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF=$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" --dart-define=\"NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA=$NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA\"",
     "pretest": "npm run gen",
     "test": "flutter test",
     "gen": "flutter packages pub run build_runner build",
