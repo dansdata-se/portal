@@ -1,0 +1,34 @@
+{
+  "@loginWithProvider": {
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "createAccount": "Skapa konto",
+  "currentMaintainerNameWithLink": "<a href=\"https://fzy.se/sv/\">Felix Zedén Yverås</a>",
+  "deleteAccount": "Radera konto",
+  "email": "E-post",
+  "errorCheckCredentials": "Kontrollera dina inloggningsuppgifter.",
+  "errorFieldRequired": "Detta fält är obligatoriskt.",
+  "errorInvalidEmail": "Detta är inte en giltig e-postadress.",
+  "errorSomethingWentWrongTryAgain": "Något gick fel. Försök igen.",
+  "hide": "Dölj",
+  "labelAccount": "Konto",
+  "labelApi": "API",
+  "labelDashboard": "Över\u00ADblick",
+  "labelEvents": "Evene­\u00ADmang",
+  "labelProfiles": "Profiler",
+  "logIn": "Logga in",
+  "logOut": "Logga ut",
+  "loginWithProvider": "Logga in med {provider}",
+  "or": "eller",
+  "password": "Lösenord",
+  "resetPassword": "Återställ lösenord",
+  "semanticsSwitchLanguage": "In English",
+  "semanticsToggleThemeMode": "Byt mellan ljust och mörkt tema",
+  "show": "Visa",
+  "tagline": "Vi vet när Sverige dansar!",
+  "tosDisclaimer": "Genom att använda Dansdataportalen godkänner du <tos>användarvillkoren</tos> och <privacy>integritetspolicyn</privacy>."
+}

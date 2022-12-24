@@ -1,0 +1,34 @@
+{
+  "@loginWithProvider": {
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "createAccount": "Create account",
+  "currentMaintainerNameWithLink": "<a href=\"https://fzy.se/en/\">Felix Zedén Yverås</a>",
+  "deleteAccount": "Delete account",
+  "email": "Email",
+  "errorCheckCredentials": "Please check your credentials.",
+  "errorFieldRequired": "This field is required.",
+  "errorInvalidEmail": "This is not a valid email address.",
+  "errorSomethingWentWrongTryAgain": "Something went wrong. Please try again.",
+  "hide": "Hide",
+  "labelAccount": "Account",
+  "labelApi": "API",
+  "labelDashboard": "Dash\u00ADboard",
+  "labelEvents": "Events",
+  "labelProfiles": "Profiles",
+  "logIn": "Log in",
+  "logOut": "Log out",
+  "loginWithProvider": "Login with {provider}",
+  "or": "or",
+  "password": "Password",
+  "resetPassword": "Reset password",
+  "semanticsSwitchLanguage": "På Svenska",
+  "semanticsToggleThemeMode": "Toggle dark mode",
+  "show": "Show",
+  "tagline": "In the swing with Swedish dance!",
+  "tosDisclaimer": "By using the Dansdata Portal you agree to the <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>."
+}

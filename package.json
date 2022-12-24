@@ -6,17 +6,21 @@
   "scripts": {
     "prestart": "npm run gen",
     "start": "flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3000",
-    "build": "flutter build web --release --dart-define=\"NEXT_PUBLIC_VERCEL_URL=$NEXT_PUBLIC_VERCEL_URL\" --dart-define=\"NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL\" --dart-define=\"NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY\" --dart-define=\"NEXT_PUBLIC_VERCEL_ENV=$NEXT_PUBLIC_VERCEL_ENV\" --dart-define=\"NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF=$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" --dart-define=\"NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA=$NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA\"",
+    "build": "flutter build web --release --dart-define=\"VERCEL_URL=$VERCEL_URL\" --dart-define=\"SUPABASE_URL=$SUPABASE_URL\" --dart-define=\"SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY\" --dart-define=\"VERCEL_ENV=$VERCEL_ENV\" --dart-define=\"GIT_COMMIT_REF=$GIT_COMMIT_REF\" --dart-define=\"GIT_COMMIT_SHA=$GIT_COMMIT_SHA\"",
     "pretest": "npm run gen",
-    "test": "flutter test",
-    "gen": "flutter packages pub run build_runner build",
+    "test": "npm run test:unit",
+    "test:smoke": "flutter test --dart-define=\"TEST_SUITE=smoke\"",
+    "test:unit": "flutter test --dart-define=\"TEST_SUITE=unit\"",
+    "test:integration": "flutter test --dart-define=\"TEST_SUITE=integration\"",
+    "test:full": "flutter test --dart-define=\"TEST_SUITE=full\"",
+    "gen": "flutter gen-l10n && flutter packages pub run build_runner build",
     "lint": "flutter analyze && tbls lint",
     "fix": "dart fix --apply && npm run format",
-    "format": "prettier --write . && flutter format lib/ && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
-    "format-check": "prettier --check . && flutter format --set-exit-if-changed -o none lib/",
+    "format": "prettier --write . && flutter format lib/ test/ && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
+    "format-check": "prettier --check . && flutter format --set-exit-if-changed -o none lib/ test/",
     "prepare": "husky install && flutter pub get && npm run gen",
     "docs": "tbls doc --rm-dist",
-    "precommit": "flutter analyze && npm run format-check && npm test"
+    "precommit": "flutter analyze && npm run format-check && npm run test:smoke"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
