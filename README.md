@@ -5,7 +5,9 @@ An administration interface for managing API keys and data presented via the dan
 ## Getting Started
 
 The project utilizes a [devcontainer](https://code.visualstudio.com/docs/remote/containers)
-with most dependencies, including `supabase-cli`, already included.
+with most dependencies, including `supabase-cli`, already included. The devcontainer loads
+environment variables from [`.env`](./.env) when created (**you must create this file!**). See
+[`.env.template`](./.env.template) for a file template.
 
 `npm` is used to assist with some scripts and tools. See the `scripts` section of
 [`package.json`](./package.json) for information. Make sure to run `npm i` on first setup to install
@@ -61,31 +63,8 @@ secret = "env(SSO_<PROVIDER>_SECRET)"
 2. Ensure the relevant `SSO_<PROVIDER>_CLIENT_ID` and `SSO_<PROVIDER>_SECRET` variables are
    available when running `supabase start`.
 
-When using the devcontainer, this can easily be done by adding the necessary variables to a local
-[`.env`](./.env) file and rebuilding the container:
-
-```dotenv
-# ------------------------------------------------
-# SSO (Single Sign On)
-# ------------------------------------------------
-#
-# Note!
-# You will need to rebuild the devcontainer and
-# restart your local supabase environment to
-# apply any changes to `.env`!
-
-# See https://supabase.com/docs/guides/auth/auth-facebook
-SSO_FACEBOOK_SECRET=abc123
-SSO_FACEBOOK_CLIENT_ID=abc123
-
-# See https://supabase.com/docs/guides/auth/auth-github
-SSO_GITHUB_SECRET=abc123
-SSO_GITHUB_CLIENT_ID=abc123
-
-# See https://supabase.com/docs/guides/auth/auth-google
-SSO_GOOGLE_SECRET=abc123
-SSO_GOOGLE_CLIENT_ID=abc123
-```
+When using the devcontainer, this can easily be done by adding the necessary variables to your local
+[`.env`](./.env) file and rebuilding the container.
 
 Note that you will need to generate your own `CLIENT_ID` and `SECRET` for local testing!
 See https://supabase.com/docs/guides/auth for more info.
