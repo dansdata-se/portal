@@ -15,7 +15,8 @@
     "format": "prettier --write . && flutter format lib/ && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
     "format-check": "prettier --check . && flutter format --set-exit-if-changed -o none lib/",
     "prepare": "husky install && flutter pub get && npm run gen",
-    "docs": "tbls doc --rm-dist"
+    "docs": "tbls doc --rm-dist",
+    "precommit": "flutter analyze && npm run format-check && npm test"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
