@@ -48,7 +48,7 @@ jobs:
           curl -sL https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb --output /tmp/tbls.deb
           sudo dpkg -i /tmp/tbls.deb
 
-      - name: Ensure `fix` command do not apply code changes
+      - name: Ensure `fix` command does not apply code changes
         run: |
           npm run fix
           if [ "$(git diff --ignore-space-at-eol | wc -l)" -gt "0" ]; then
