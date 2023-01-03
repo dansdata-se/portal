@@ -16,7 +16,7 @@ env:
   GIT_COMMIT_SHA: ${{ github.sha }}
 
 jobs:
-  verify:
+  verify-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -82,35 +82,15 @@ jobs:
             exit 1
           fi
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - name: Run `npm ci`
-        shell: bash
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
+      - name: Run full test suite
+        run: npm run test:full
 
   create-release:
     runs-on: ubuntu-latest
 
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging'
     needs:
-      - verify
-      - test
+      - verify-and-test
 
     steps:
       - uses: actions/checkout@v3
@@ -132,8 +112,7 @@ jobs:
 
     if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/staging'
     needs:
-      - verify
-      - test
+      - verify-and-test
 
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}

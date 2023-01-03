@@ -8,7 +8,11 @@
     "start": "flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3000",
     "build": "flutter build web --release --dart-define=\"SUPABASE_URL=$SUPABASE_URL\" --dart-define=\"SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY\" --dart-define=\"VERCEL_ENV=$VERCEL_ENV\" --dart-define=\"GIT_COMMIT_REF=$GIT_COMMIT_REF\" --dart-define=\"GIT_COMMIT_SHA=$GIT_COMMIT_SHA\"",
     "pretest": "npm run gen",
-    "test": "flutter test",
+    "test": "npm run test:unit",
+    "test:smoke": "flutter test --dart-define=\"TEST_SUITE=smoke\"",
+    "test:unit": "flutter test --dart-define=\"TEST_SUITE=unit\"",
+    "test:integration": "flutter test --dart-define=\"TEST_SUITE=integration\"",
+    "test:full": "flutter test --dart-define=\"TEST_SUITE=full\"",
     "gen": "flutter packages pub run build_runner build",
     "lint": "flutter analyze && tbls lint",
     "fix": "dart fix --apply && npm run format",
@@ -16,7 +20,7 @@
     "format-check": "prettier --check . && flutter format --set-exit-if-changed -o none lib/ test/",
     "prepare": "husky install && flutter pub get && npm run gen",
     "docs": "tbls doc --rm-dist",
-    "precommit": "flutter analyze && npm run format-check && npm test"
+    "precommit": "flutter analyze && npm run format-check && npm run test:smoke"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
