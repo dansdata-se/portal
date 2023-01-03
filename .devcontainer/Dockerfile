@@ -5,7 +5,7 @@ ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 ARG VARIANT
 ARG POSTGRES_VERSION="14"
-ARG SUPABASE_CLI_VERSION="1.22.1"
+ARG SUPABASE_CLI_VERSION="1.27.10"
 ARG TBLS_VERSION="1.56.9"
 # https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
 ARG FLUTTER_VERSION="3.3.9"
