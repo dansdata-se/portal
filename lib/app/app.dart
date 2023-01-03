@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:portal/app/theme/theme.dart";
 
 class DansdataPortalApp extends StatelessWidget {
@@ -11,6 +12,8 @@ class DansdataPortalApp extends StatelessWidget {
       title: "Dansdata Portal",
       theme: dansdataThemeLight,
       darkTheme: dansdataThemeDark,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const MyHomePage(title: "Flutter Demo Home Page"),
     );
   }
