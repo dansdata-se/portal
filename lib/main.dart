@@ -2,8 +2,10 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:portal/app/app.dart";
-import "package:portal/app/app_module.dart";
+import "package:portal/app/app.dart" deferred as app;
+import "package:portal/app/app_module.dart" deferred as app_module;
+import "package:portal/app/splash/splash_module.dart";
+import "package:portal/app/splash/splash_screen.dart";
 import "package:portal/gen/assets.gen.dart";
 import "package:portal/vercel/vercel_env.dart";
 import "package:provider/provider.dart";
@@ -39,20 +41,36 @@ class BuildConfig {
 }
 
 void main() async {
+  // Minimal initialization only!
+  // This is to allow the splash screen to appear as early as possible.
   GoogleFonts.config.allowRuntimeFetching = false;
+  final splashModule = await SplashModule.initialize();
+  runApp(
+    MultiProvider(
+      providers: splashModule.providers,
+      child: const SplashScreen(),
+    ),
+  );
 
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString(Assets.googleFonts.ofl);
     yield LicenseEntryWithLineBreaks(["google_fonts"], license);
   });
 
-  final appModule = await AppModule.initialize();
+  dynamic appModule;
+  await Future.wait([
+    // Minimum time to show splash screen for
+    Future.delayed(const Duration(seconds: 2)),
+    app.loadLibrary(),
+    app_module.loadLibrary().then((_) async {
+      appModule = await app_module.AppModule.initialize();
+    }),
+  ]);
 
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: appModule.providers,
-      child: const DansdataPortalApp(),
+      child: app.DansdataPortalApp(),
     ),
   );
 }
