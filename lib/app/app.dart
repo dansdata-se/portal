@@ -1,6 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import "package:portal/app/settings/language_setting.dart";
+import "package:portal/app/settings/theme_mode_setting.dart";
 import "package:portal/app/theme/theme.dart";
+import "package:provider/provider.dart";
 
 class DansdataPortalApp extends StatelessWidget {
   const DansdataPortalApp({super.key});
@@ -10,8 +13,10 @@ class DansdataPortalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Dansdata Portal",
+      themeMode: context.watch<ThemeModeSetting>().value,
       theme: dansdataThemeLight,
       darkTheme: dansdataThemeDark,
+      locale: context.watch<LanguageSetting>().locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const MyHomePage(title: "Flutter Demo Home Page"),

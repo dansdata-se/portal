@@ -49,6 +49,7 @@ app.*.map.json
 # Generated code
 /lib/gen
 *.g.dart
+/test/**/*.mocks.dart
 
 # vercel
 .vercel
