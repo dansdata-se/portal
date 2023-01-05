@@ -20,6 +20,7 @@ class DansdataPortalApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const MyHomePage(title: "Flutter Demo Home Page"),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
