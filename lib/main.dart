@@ -2,14 +2,11 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:logger/logger.dart";
 import "package:portal/app/app.dart";
-import "package:portal/app/settings/language_setting.dart";
-import "package:portal/app/settings/theme_mode_setting.dart";
+import "package:portal/app/app_module.dart";
 import "package:portal/gen/assets.gen.dart";
 import "package:portal/vercel/vercel_env.dart";
 import "package:provider/provider.dart";
-import "package:shared_preferences/shared_preferences.dart";
 
 // Note that <Primitive>.fromEnvironment loads its variables at build time!
 // https://github.com/dart-lang/sdk/issues/27585
@@ -49,26 +46,12 @@ void main() async {
     yield LicenseEntryWithLineBreaks(["google_fonts"], license);
   });
 
-  final logger = Logger(
-    printer: PrettyPrinter(printTime: true, lineLength: 72, colors: true),
-  );
-  final prefs = await SharedPreferences.getInstance();
-
-  final languageSetting = LanguageSetting(logger, prefs);
-  final themeModeSetting = ThemeModeSetting(prefs);
-
-  await Future.wait([
-    languageSetting.initialize(),
-    themeModeSetting.initialize(),
-  ]);
+  final appModule = await AppModule.initialize();
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: languageSetting),
-        ChangeNotifierProvider.value(value: themeModeSetting),
-      ],
+      providers: appModule.providers,
       child: const DansdataPortalApp(),
     ),
   );
