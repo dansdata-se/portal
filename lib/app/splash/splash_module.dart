@@ -1,6 +1,7 @@
 import "package:logger/logger.dart";
 import "package:portal/app/settings/language_setting.dart";
 import "package:portal/app/settings/theme_mode_setting.dart";
+import "package:portal/logger/portal_log_filter.dart";
 import "package:portal/provider/provider_module.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
@@ -36,6 +37,7 @@ class SplashModule extends ProviderModule {
     List<Future<void>> futures = [];
 
     logger ??= Logger(
+      filter: PortalLogFilter(),
       printer: PrettyPrinter(printTime: true, lineLength: 72, colors: true),
     );
     if (sharedPreferences == null) {
