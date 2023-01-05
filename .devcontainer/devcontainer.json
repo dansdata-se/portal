@@ -30,9 +30,6 @@
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
-    },
-    "ghcr.io/devcontainers/features/go:1": {
-      "version": "latest"
     }
   },
 
@@ -48,7 +45,6 @@
         "ms-ossdata.vscode-postgresql",
         "esbenp.prettier-vscode",
         "bungcip.better-toml",
-        "golang.go",
         "dart-code.dart-code",
         "dart-code.flutter"
       ]
