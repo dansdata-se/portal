@@ -1,6 +1,7 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_web_plugins/url_strategy.dart" deferred as url_strategy;
 import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app.dart" deferred as app;
 import "package:portal/app/app_module.dart" deferred as app_module;
@@ -61,11 +62,14 @@ void main() async {
   await Future.wait([
     // Minimum time to show splash screen for
     Future.delayed(const Duration(seconds: 2)),
+    url_strategy.loadLibrary(),
     app.loadLibrary(),
     app_module.loadLibrary().then((_) async {
       appModule = await app_module.AppModule.initialize();
     }),
   ]);
+
+  url_strategy.usePathUrlStrategy();
 
   runApp(
     MultiProvider(
