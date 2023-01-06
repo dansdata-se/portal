@@ -5,8 +5,8 @@ import "package:flutter_web_plugins/url_strategy.dart" deferred as url_strategy;
 import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app.dart" deferred as app;
 import "package:portal/app/app_module.dart" deferred as app_module;
+import "package:portal/app/splash/splash_fader.dart";
 import "package:portal/app/splash/splash_module.dart";
-import "package:portal/app/splash/splash_screen.dart";
 import "package:portal/gen/assets.gen.dart";
 import "package:portal/vercel/vercel_env.dart";
 import "package:provider/provider.dart";
@@ -49,7 +49,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: splashModule.providers,
-      child: const SplashScreen(),
+      child: const SplashFader(),
     ),
   );
 
@@ -74,7 +74,10 @@ void main() async {
   runApp(
     MultiProvider(
       providers: appModule.providers,
-      child: app.DansdataPortalApp(),
+      child:
+          // Cannot use const constructor as DansdataPortalApp is dynamically loaded.
+          // ignore: prefer_const_constructors
+          SplashFader(child: app.DansdataPortalApp(key: SplashFader.childKey)),
     ),
   );
 }
