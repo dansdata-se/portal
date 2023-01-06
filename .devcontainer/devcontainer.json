@@ -46,7 +46,9 @@
         "esbenp.prettier-vscode",
         "bungcip.better-toml",
         "dart-code.dart-code",
-        "dart-code.flutter"
+        "dart-code.flutter",
+        "ryanluker.vscode-coverage-gutters",
+        "flutterando.flutter-coverage"
       ]
     }
   }

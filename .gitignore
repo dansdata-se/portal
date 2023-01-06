@@ -57,3 +57,6 @@ app.*.map.json
 # Supabase
 **/supabase/.branches
 **/supabase/.temp
+
+# Code coverage
+/coverage/

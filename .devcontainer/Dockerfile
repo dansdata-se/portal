@@ -20,7 +20,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
     zip\
     unzip\
     xz-utils\
-    libglu1-mesa
+    libglu1-mesa\
+    lcov
 
 # Install supabase CLI
 COPY supabase_${SUPABASE_CLI_VERSION}_checksums.txt .
