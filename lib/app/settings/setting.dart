@@ -30,7 +30,9 @@ abstract class Setting<T> with ChangeNotifier {
     _value = await loadValue();
   }
 
-  /// Initializes and loads the initial value of this setting
+  /// Removes any registered listeners and disposes of this setting.
+  ///
+  /// A disposed setting cannot be re-initialized.
   @override
   @mustCallSuper
   Future<void> dispose() async {

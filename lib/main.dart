@@ -45,6 +45,9 @@ void main() async {
   // Minimal initialization only!
   // This is to allow the splash screen to appear as early as possible.
   GoogleFonts.config.allowRuntimeFetching = false;
+  // Required to fetch the current dark mode setting before runApp() is
+  // completed.
+  WidgetsFlutterBinding.ensureInitialized();
   final splashModule = await SplashModule.initialize();
   runApp(
     MultiProvider(

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:portal/app/settings/language_setting.dart";
 import "package:portal/app/settings/theme_mode_setting.dart";
+import "package:portal/app/theme/color_schemes.dart";
 import "package:portal/app/theme/theme.dart";
 import "package:provider/provider.dart";
 
@@ -16,6 +17,9 @@ class DansdataPortalApp extends StatelessWidget {
       themeMode: context.watch<ThemeModeSetting>().value,
       theme: dansdataThemeLight,
       darkTheme: dansdataThemeDark,
+      color: context.watch<ThemeModeSetting>().isDarkTheme
+          ? darkColorScheme.background
+          : lightColorScheme.primary,
       locale: context.watch<LanguageSetting>().locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
