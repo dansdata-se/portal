@@ -4,8 +4,8 @@ import "package:intl/intl.dart";
 import "package:intl/intl_standalone.dart"
     if (dart.library.html) "package:intl/intl_browser.dart";
 import "package:logger/logger.dart";
-import "package:portal/app/settings/language.dart";
-import "package:portal/app/settings/setting.dart";
+import "package:portal/app/state/settings/language.dart";
+import "package:portal/app/state/settings/setting.dart";
 import "package:portal/shared_preferences/enum_extensions.dart";
 import "package:shared_preferences/shared_preferences.dart";
 

@@ -3,11 +3,11 @@ import "package:intl/intl.dart";
 @GenerateNiceMocks([MockSpec<Logger>()])
 import "package:logger/logger.dart";
 import "package:mockito/annotations.dart";
-import "package:portal/app/settings/language.dart";
-import "package:portal/app/settings/language_setting.dart";
+import "package:portal/app/state/settings/language.dart";
+import "package:portal/app/state/settings/language_setting.dart";
 
-import "../../shared_preferences/mock_prefs.dart";
-import "../../test_environment.dart";
+import "../../../shared_preferences/mock_prefs.dart";
+import "../../../test_environment.dart";
 import "language_setting_test.mocks.dart";
 
 void main() {

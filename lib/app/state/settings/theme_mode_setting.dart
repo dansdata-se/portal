@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:portal/app/settings/setting.dart";
+import "package:portal/app/state/settings/setting.dart";
 import "package:portal/shared_preferences/enum_extensions.dart";
 import "package:shared_preferences/shared_preferences.dart";
 

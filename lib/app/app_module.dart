@@ -1,6 +1,7 @@
 import "package:logger/logger.dart";
-import "package:portal/app/settings/language_setting.dart";
-import "package:portal/app/settings/theme_mode_setting.dart";
+import "package:portal/app/state/page_title_state.dart";
+import "package:portal/app/state/settings/language_setting.dart";
+import "package:portal/app/state/settings/theme_mode_setting.dart";
 import "package:portal/logger/portal_log_filter.dart";
 import "package:portal/provider/provider_module.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -10,23 +11,27 @@ class AppModule extends ProviderModule {
   AppModule._(
     this.logger,
     this.sharedPreferences,
+    this.pageTitleState,
     this.themeModeSetting,
     this.languageSetting,
   ) {
     registerValue<Logger>(logger);
     registerValue<SharedPreferences>(sharedPreferences);
+    registerChangeNotifier<PageTitleState>(pageTitleState);
     registerChangeNotifier<ThemeModeSetting>(themeModeSetting);
     registerChangeNotifier<LanguageSetting>(languageSetting);
   }
 
   final Logger logger;
   final SharedPreferences sharedPreferences;
+  final PageTitleState pageTitleState;
   final ThemeModeSetting themeModeSetting;
   final LanguageSetting languageSetting;
 
   static Future<AppModule> initialize({
     Logger? logger,
     SharedPreferences? sharedPreferences,
+    PageTitleState? pageTitleState,
     ThemeModeSetting? themeModeSetting,
     LanguageSetting? languageSetting,
   }) async {
@@ -41,6 +46,10 @@ class AppModule extends ProviderModule {
         SharedPreferences.getInstance()
             .then((value) => sharedPreferences = value),
       );
+    }
+    if (pageTitleState == null) {
+      pageTitleState = PageTitleState();
+      futures.add(pageTitleState.initialize());
     }
 
     await Future.wait(futures);
@@ -61,6 +70,7 @@ class AppModule extends ProviderModule {
     return AppModule._(
       logger,
       sharedPreferences!,
+      pageTitleState,
       themeModeSetting,
       languageSetting,
     );
