@@ -23,11 +23,19 @@ class DansdataLogo extends StatelessWidget {
   /// The text style to use for the "Dansdata Portal" text.
   ///
   /// `null` means the "Dansdata Portal" text will be excluded.
+  ///
+  /// [Colors.transparent] can be used to reset the [TextStyle.color] of a given
+  /// [TextStyle] (since `.copyWith(color: null)` is not supported at this
+  /// time).
   final TextStyle? titleStyle;
 
   /// The text style to use for the tagline text.
   ///
   /// `null` means the tagline text will be excluded.
+  ///
+  /// [Colors.transparent] can be used to reset the [TextStyle.color] of a given
+  /// [TextStyle] (since `.copyWith(color: null)` is not supported at this
+  /// time).
   final TextStyle? taglineStyle;
   final Axis direction;
   final bool border;
@@ -76,14 +84,21 @@ class DansdataLogo extends StatelessWidget {
                         style: brandTextStyle(
                           textStyle: theme.textTheme.headlineMedium,
                           color: theme.colorScheme.primary,
-                        ).merge(titleStyle),
+                        ).merge(
+                          titleStyle
+                              ?.withDefaultColor(theme.colorScheme.primary),
+                        ),
                       ),
                       TextSpan(
                         text: "Portal",
                         style: brandTextStyle(
                           textStyle: theme.textTheme.headlineMedium,
                           color: theme.colorScheme.onSurfaceVariant,
-                        ).merge(titleStyle),
+                        ).merge(
+                          titleStyle?.withDefaultColor(
+                            theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -95,11 +110,23 @@ class DansdataLogo extends StatelessWidget {
                   style: plainTextStyle(
                     textStyle: theme.textTheme.labelSmall,
                     color: theme.colorScheme.onSurface,
-                  ).merge(taglineStyle),
+                  ).merge(
+                    taglineStyle?.withDefaultColor(theme.colorScheme.onSurface),
+                  ),
                 ),
             ],
           )
       ],
     );
+  }
+}
+
+extension _DefaultColor on TextStyle {
+  TextStyle withDefaultColor(Color color) {
+    if (this.color == null || this.color == Colors.transparent) {
+      return copyWith(color: color);
+    } else {
+      return this;
+    }
   }
 }
