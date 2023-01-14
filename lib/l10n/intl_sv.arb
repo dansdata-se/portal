@@ -1,3 +1,11 @@
 {
-  "tagline": "Vi vet när Sverige dansar!"
+  "tagline": "Vi vet när Sverige dansar!",
+  "labelAccount": "Konto",
+  "labelApi": "API",
+  "labelCreateAccount": "Skapa konto",
+  "labelDashboard": "Över\u00ADblick",
+  "labelEvents": "Evene­\u00ADmang",
+  "labelLogin": "Logga in",
+  "labelProfiles": "Profiler",
+  "labelResetPassword": "Lösenordsåterställning"
 }

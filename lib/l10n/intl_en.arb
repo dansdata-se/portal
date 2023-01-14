@@ -1,3 +1,11 @@
 {
-  "tagline": "In the swing with Swedish dance!"
+  "tagline": "In the swing with Swedish dance!",
+  "labelAccount": "Account",
+  "labelApi": "API",
+  "labelCreateAccount": "Create Account",
+  "labelDashboard": "Dash\u00ADboard",
+  "labelEvents": "Events",
+  "labelLogin": "Log in",
+  "labelProfiles": "Profiles",
+  "labelResetPassword": "Reset Password"
 }
