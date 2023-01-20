@@ -8,6 +8,7 @@ import "package:portal/gen/assets.gen.dart";
 class DansdataLogo extends StatelessWidget {
   static const Key titleKey = Key("dansdataLogo.title");
   static const Key taglineKey = Key("dansdataLogo.tagline");
+  static const double _innerSpacing = Paddings.medium;
 
   const DansdataLogo({
     super.key,
@@ -16,6 +17,7 @@ class DansdataLogo extends StatelessWidget {
     this.taglineStyle = const TextStyle(),
     this.direction = Axis.horizontal,
     this.border = false,
+    this.wrap = true,
   });
 
   final double? logoSize;
@@ -42,16 +44,15 @@ class DansdataLogo extends StatelessWidget {
   /// Whether a border should be rendered around the logo image.
   final bool border;
 
+  /// Whether the text in this widget should automatically wrap if there is not
+  /// enough space along the given [direction].
+  final bool wrap;
+
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    return Wrap(
-      alignment: WrapAlignment.center,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      direction: direction,
-      spacing: Paddings.medium,
-      runSpacing: Paddings.medium,
+    return _directionalContainer(
       children: [
         Container(
           decoration: BoxDecoration(
@@ -68,6 +69,11 @@ class DansdataLogo extends StatelessWidget {
             ),
           ),
         ),
+        if (!wrap)
+          SizedBox(
+            width: direction == Axis.horizontal ? _innerSpacing : 0,
+            height: direction == Axis.vertical ? _innerSpacing : 0,
+          ),
         if (titleStyle != null || taglineStyle != null)
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -119,6 +125,33 @@ class DansdataLogo extends StatelessWidget {
             ],
           )
       ],
+    );
+  }
+
+  Widget _directionalContainer({required List<Widget> children}) {
+    if (wrap) {
+      return Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        direction: direction,
+        spacing: _innerSpacing,
+        runSpacing: _innerSpacing,
+        children: children,
+      );
+    }
+
+    if (direction == Axis.horizontal) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: children,
+      );
+    }
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
     );
   }
 }
