@@ -38,6 +38,8 @@ class DansdataLogo extends StatelessWidget {
   /// time).
   final TextStyle? taglineStyle;
   final Axis direction;
+
+  /// Whether a border should be rendered around the logo image.
   final bool border;
 
   @override
