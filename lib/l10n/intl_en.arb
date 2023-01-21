@@ -7,5 +7,7 @@
   "labelEvents": "Events",
   "labelLogin": "Log in",
   "labelProfiles": "Profiles",
-  "labelResetPassword": "Reset Password"
+  "labelResetPassword": "Reset Password",
+  "semanticsSwitchLanguage": "På Svenska",
+  "semanticsToggleThemeMode": "Toggle dark mode"
 }

@@ -7,5 +7,7 @@
   "labelEvents": "Evene­\u00ADmang",
   "labelLogin": "Logga in",
   "labelProfiles": "Profiler",
-  "labelResetPassword": "Lösenordsåterställning"
+  "labelResetPassword": "Lösenordsåterställning",
+  "semanticsSwitchLanguage": "In English",
+  "semanticsToggleThemeMode": "Byt mellan ljust och mörkt tema"
 }
