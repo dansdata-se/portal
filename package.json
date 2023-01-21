@@ -16,8 +16,8 @@
     "gen": "flutter gen-l10n && flutter packages pub run build_runner build",
     "lint": "flutter analyze && tbls lint",
     "fix": "dart fix --apply && npm run format",
-    "format": "prettier --write . && flutter format lib/ test/ && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
-    "format-check": "prettier --check . && flutter format --set-exit-if-changed -o none lib/ test/",
+    "format": "prettier --write . && dart format lib/ test/ && find ./supabase/ -type f -name '*.sql' -exec pg_format -c ./.pg_format -i {} \\;",
+    "format-check": "prettier --check . && dart format --set-exit-if-changed -o none lib/ test/",
     "prepare": "husky install && flutter pub get && npm run gen",
     "docs": "tbls doc --rm-dist",
     "precommit": "flutter analyze && npm run format-check && npm run test:smoke"
