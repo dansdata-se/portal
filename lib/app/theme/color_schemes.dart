@@ -30,8 +30,8 @@ const lightColorScheme = ColorScheme(
   inversePrimary: Color(0xFF52D7F0),
   shadow: Color(0xFF000000),
   surfaceTint: Color(0xFF006877),
-  // outlineVariant: Color(0xFFBFC8CB), // Not available
-  // scrim: Color(0xFF000000), // Not available
+  outlineVariant: Color(0xFFBFC8CB),
+  scrim: Color(0xFF000000),
 );
 
 const darkColorScheme = ColorScheme(
@@ -64,6 +64,6 @@ const darkColorScheme = ColorScheme(
   inversePrimary: Color(0xFF006877),
   shadow: Color(0xFF000000),
   surfaceTint: Color(0xFF52D7F0),
-  // outlineVariant: Color(0xFF3F484B), // Not available
-  // scrim: Color(0xFF000000), // Not available
+  outlineVariant: Color(0xFF3F484B),
+  scrim: Color(0xFF000000),
 );

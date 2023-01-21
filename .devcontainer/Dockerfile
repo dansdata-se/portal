@@ -8,7 +8,8 @@ ARG POSTGRES_VERSION="14"
 ARG SUPABASE_CLI_VERSION="1.27.10"
 ARG TBLS_VERSION="1.56.9"
 # https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
-ARG FLUTTER_VERSION="3.3.9"
+ARG FLUTTER_VERSION="3.7.0-1.4.pre"
+ARG FLUTTER_CHANNEL="beta"
 
 # Generic requirements
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
@@ -62,7 +63,7 @@ USER vscode
 # Install [Flutter SDK](https://flutter.dev/)
 WORKDIR /home/vscode
 ENV PATH=${PATH}:/home/vscode/flutter/bin
-ADD --chown=vscode:vscode https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz ./flutter.tar.xz
+ADD --chown=vscode:vscode https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_${FLUTTER_VERSION}-${FLUTTER_CHANNEL}.tar.xz ./flutter.tar.xz
 RUN tar xf ./flutter.tar.xz\
     && rm ./flutter.tar.xz\
     && flutter config --no-analytics \

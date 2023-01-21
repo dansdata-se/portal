@@ -8,7 +8,8 @@ on:
 env:
   DEBIAN_FRONTEND: noninteractive
   NODE_VERSION: 18
-  FLUTTER_VERSION: 3.3.9
+  FLUTTER_VERSION: 3.7.0-1.4.pre
+  FLUTTER_CHANNEL: beta
   SUPABASE_CLI_VERSION: 1.27.10
   POSTGRES_VERSION: 14
   TBLS_VERSION: 1.56.9
@@ -30,6 +31,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: Run `npm ci`
         shell: bash
@@ -131,6 +133,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: Run `npm ci`
         shell: bash
@@ -182,6 +185,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: Run `npm ci`
         shell: bash
@@ -237,6 +241,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: Run `npm ci`
         shell: bash

@@ -44,6 +44,5 @@ linter:
     unnecessary_parenthesis: true
     secure_pubspec_urls: true
     sort_pub_dependencies: true
-    invalid_use_of_protected_member: true
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
