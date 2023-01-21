@@ -4,23 +4,12 @@
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
-| [_realtime.extensions](_realtime.extensions.md) | 6 |  | BASE TABLE |
-| [_realtime.schema_migrations](_realtime.schema_migrations.md) | 2 |  | BASE TABLE |
-| [_realtime.tenants](_realtime.tenants.md) | 9 |  | BASE TABLE |
 | [api_auth.log](api_auth.log.md) | 9 | Log for API token usage | BASE TABLE |
 | [api_auth.token_ip_rules](api_auth.token_ip_rules.md) | 3 | Whitelist for IP addresses from which an API key may be used. No entries means allowed from all. | BASE TABLE |
 | [api_auth.token_origin_rules](api_auth.token_origin_rules.md) | 3 | Whitelist for origins from which an API key may be used. No entries means allowed from all. | BASE TABLE |
 | [api_auth.tokens](api_auth.tokens.md) | 5 | Listing of known API tokens | BASE TABLE |
 | [api_auth.usage](api_auth.usage.md) | 6 |  | VIEW |
 | [api_auth.user_config](api_auth.user_config.md) | 9 | API Key restrictions and other API related configuration | BASE TABLE |
-| [auth.mfa_amr_claims](auth.mfa_amr_claims.md) | 5 | auth: stores authenticator method reference claims for multi factor authentication | BASE TABLE |
-| [auth.mfa_challenges](auth.mfa_challenges.md) | 5 | auth: stores metadata about challenge requests made | BASE TABLE |
-| [auth.mfa_factors](auth.mfa_factors.md) | 8 | auth: stores metadata about factors | BASE TABLE |
-| [auth.saml_providers](auth.saml_providers.md) | 8 | Auth: Manages SAML Identity Provider connections. | BASE TABLE |
-| [auth.saml_relay_states](auth.saml_relay_states.md) | 8 | Auth: Contains SAML Relay State information for each Service Provider initiated login. | BASE TABLE |
-| [auth.sso_domains](auth.sso_domains.md) | 5 | Auth: Manages SSO email address domain mapping to an SSO Identity Provider. | BASE TABLE |
-| [auth.sso_providers](auth.sso_providers.md) | 4 | Auth: Manages SSO identity provider information; see saml_providers for SAML. | BASE TABLE |
-| [auth.sso_sessions](auth.sso_sessions.md) | 8 | Auth: A session initiated by an SSO Identity Provider | BASE TABLE |
 | [auth.users](auth.users.md) | 32 | Auth: Stores user login data within a secure schema. | BASE TABLE |
 
 ## Stored procedures and functions

@@ -2,6 +2,7 @@ name: Dansdata
 # DSN (Database Source Name) to connect database
 dsn: postgresql://postgres:postgres@localhost:54322/postgres?sslmode=disable
 docPath: docs/database
+disableOutputSchema: true
 format:
   # Sort the order of table list and columns
   # Default is false
@@ -15,15 +16,13 @@ er:
   # Add table/column comment to ER diagram
   # Default is false
   comment: true
-# Waiting for answers to https://github.com/k1LoW/tbls/issues/369
-# in order to replace specific selectors with wildcards.
+include:
+  - api_auth.*
+  - auth.users
+  - internal.*
+  - public.*
 exclude:
-  - auth.audit_log_entries
-  - auth.identities
-  - auth.instances
-  - auth.refresh_tokens
-  - auth.schema_migrations
-  - auth.sessions
+  - auth.*
   - pgsodium.*
   - extensions.*
   - graphql.*
