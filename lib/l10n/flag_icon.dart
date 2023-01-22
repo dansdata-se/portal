@@ -1,9 +1,9 @@
 import "package:flutter/widgets.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "package:portal/app/state/settings/language.dart";
-import "package:portal/app/state/settings/language_setting.dart";
 import "package:portal/app/theme/radii.dart";
 import "package:portal/gen/assets.gen.dart";
+import "package:portal/l10n/language.dart";
+import "package:portal/l10n/language_setting.dart";
 import "package:provider/provider.dart";
 
 /// An icon with a flag for use in "change language" buttons.

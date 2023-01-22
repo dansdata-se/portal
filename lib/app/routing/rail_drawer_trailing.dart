@@ -1,11 +1,11 @@
 import "dart:async";
 
 import "package:flutter/material.dart";
-import "package:portal/app/state/settings/language_setting.dart";
-import "package:portal/app/state/settings/theme_mode_setting.dart";
 import "package:portal/app/theme/paddings.dart";
 import "package:portal/app/theme/theme_mode_icon.dart";
+import "package:portal/app/theme/theme_mode_setting.dart";
 import "package:portal/l10n/flag_icon.dart";
+import "package:portal/l10n/language_setting.dart";
 import "package:provider/provider.dart";
 
 /// Trailing widget for [PortalNavigationDrawer] and [PortalNavigationRail]

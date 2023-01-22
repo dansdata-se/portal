@@ -1,7 +1,7 @@
 import "package:logger/logger.dart";
 import "package:portal/app/state/page_title_state.dart";
-import "package:portal/app/state/settings/language_setting.dart";
-import "package:portal/app/state/settings/theme_mode_setting.dart";
+import "package:portal/app/theme/theme_mode_setting.dart";
+import "package:portal/l10n/language_setting.dart";
 import "package:portal/logger/portal_log_filter.dart";
 import "package:portal/provider/provider_module.dart";
 import "package:shared_preferences/shared_preferences.dart";

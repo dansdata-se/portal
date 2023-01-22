@@ -3,7 +3,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app_module.dart";
 import "package:portal/app/routing/rail_drawer_trailing.dart";
-import "package:portal/app/state/settings/language.dart";
+import "package:portal/l10n/language.dart";
 
 import "../../google_fonts/preload_fonts.dart";
 import "../../shared_preferences/mock_prefs.dart";
