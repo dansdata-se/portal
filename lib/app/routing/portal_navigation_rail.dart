@@ -20,10 +20,22 @@ class PortalNavigationRail extends PortalNavigationWidget {
     BuildContext context,
   ) {
     final t = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
     return NavigationRailDestination(
       icon: Icon(entry.icon),
       selectedIcon: entry.selectedIcon?.let((it) => Icon(it)),
-      label: Text(entry.destination.getLabel(t), textAlign: TextAlign.center),
+      label: Text(
+        entry.destination.getLabel(t),
+        textAlign: TextAlign.center,
+        // NavigationRail seems to use font properties that violate MD3 spec...
+        // Override to fix this, without messing up the color.
+        style: TextStyle(
+          fontFamily: theme.textTheme.labelMedium!.fontFamily,
+          fontSize: theme.textTheme.labelMedium!.fontSize,
+          fontWeight: theme.textTheme.labelMedium!.fontWeight,
+          letterSpacing: theme.textTheme.labelMedium!.letterSpacing,
+        ),
+      ),
     );
   }
 
