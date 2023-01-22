@@ -41,7 +41,7 @@ void main() {
         isIn([ThemeMode.light, ThemeMode.dark]),
       );
     },
-    skip: !TestEnvironment.testSuite.smoke,
+    skip: !TestEnvironment.testSuite.unit,
   );
 
   testWidgets(
@@ -73,7 +73,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(appModule.themeModeSetting.value, ThemeMode.light);
     },
-    skip: !TestEnvironment.testSuite.smoke,
+    skip: !TestEnvironment.testSuite.unit,
   );
 
   testWidgets(
@@ -105,6 +105,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(appModule.languageSetting.value, Language.english);
     },
-    skip: !TestEnvironment.testSuite.smoke,
+    skip: !TestEnvironment.testSuite.unit,
   );
 }
