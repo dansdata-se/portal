@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:go_router/go_router.dart";
+import "package:portal/app/auth/layout/auth_layout.dart";
 import "package:portal/app/routing/destination.dart";
 import "package:portal/app/routing/page.dart";
 
@@ -32,9 +33,8 @@ class LoginPage extends StatelessPage {
     final t = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
-    return Container(
+    return AuthLayout(
       key: pageKey,
-      color: theme.colorScheme.background,
       child: Text(
         t.labelLogin,
         style: theme.textTheme.displayLarge,
