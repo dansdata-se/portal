@@ -25,10 +25,7 @@ void main() {
       await tester.pumpWidget(
         WidgetTestWrapper(
           appModule: appModule,
-          child: Flex(
-            direction: Axis.vertical,
-            children: const [RailDrawerTrailing()],
-          ),
+          child: const RailDrawerTrailing(),
         ),
       );
       await tester.pumpAndSettle();
@@ -57,10 +54,7 @@ void main() {
       await tester.pumpWidget(
         WidgetTestWrapper(
           appModule: appModule,
-          child: Flex(
-            direction: Axis.vertical,
-            children: const [RailDrawerTrailing()],
-          ),
+          child: const RailDrawerTrailing(),
         ),
       );
       await tester.pumpAndSettle();
@@ -89,10 +83,7 @@ void main() {
       await tester.pumpWidget(
         WidgetTestWrapper(
           appModule: appModule,
-          child: Flex(
-            direction: Axis.vertical,
-            children: const [RailDrawerTrailing()],
-          ),
+          child: const RailDrawerTrailing(),
         ),
       );
       await tester.pumpAndSettle();

@@ -59,7 +59,18 @@ class PortalNavigationDrawer extends PortalNavigationWidget {
                 ...destinations
                     .map((e) => _toNavigationDrawerDestination(e, context))
                     .toList(growable: false),
-                const RailDrawerTrailing(),
+                const Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: Paddings.extraExtraLarge,
+                        bottom: Paddings.large,
+                      ),
+                      child: RailDrawerTrailing(),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

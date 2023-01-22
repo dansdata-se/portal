@@ -71,7 +71,18 @@ class PortalNavigationRail extends PortalNavigationWidget {
                   const SizedBox(height: Paddings.extraExtraLarge),
                 ],
               ),
-              trailing: const RailDrawerTrailing(),
+              trailing: const Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: Paddings.extraExtraLarge,
+                      bottom: Paddings.large,
+                    ),
+                    child: RailDrawerTrailing(),
+                  ),
+                ),
+              ),
             ),
           ),
         ),

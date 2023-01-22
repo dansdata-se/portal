@@ -16,41 +16,30 @@ class RailDrawerTrailing extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: Paddings.extraExtraLarge,
-            bottom: Paddings.large,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      runSpacing: Paddings.medium,
+      children: [
+        OutlinedButton(
+          key: themeModeToggleKey,
+          onPressed: () => onToggleThemeClick(context),
+          style: OutlinedButton.styleFrom(
+            shape: const CircleBorder(),
+            fixedSize: const Size.square(40),
+            foregroundColor: theme.colorScheme.onSurfaceVariant,
           ),
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            runSpacing: Paddings.medium,
-            children: [
-              OutlinedButton(
-                key: themeModeToggleKey,
-                onPressed: () => onToggleThemeClick(context),
-                style: OutlinedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  fixedSize: const Size.square(40),
-                  foregroundColor: theme.colorScheme.onSurfaceVariant,
-                ),
-                child: const ThemeModeIcon(size: 18),
-              ),
-              OutlinedButton(
-                key: languageToggleKey,
-                onPressed: () => onToggleLanguageClick(context),
-                style: OutlinedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  fixedSize: const Size.square(40),
-                ),
-                child: const FlagIcon(size: 18),
-              ),
-            ],
-          ),
+          child: const ThemeModeIcon(size: 18),
         ),
-      ),
+        OutlinedButton(
+          key: languageToggleKey,
+          onPressed: () => onToggleLanguageClick(context),
+          style: OutlinedButton.styleFrom(
+            shape: const CircleBorder(),
+            fixedSize: const Size.square(40),
+          ),
+          child: const FlagIcon(size: 18),
+        ),
+      ],
     );
   }
 }
