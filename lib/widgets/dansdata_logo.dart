@@ -143,6 +143,7 @@ class DansdataLogo extends StatelessWidget {
     if (direction == Axis.horizontal) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: children,
       );
@@ -150,6 +151,7 @@ class DansdataLogo extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: children,
     );
