@@ -6,8 +6,8 @@ import "package:provider/provider.dart";
 
 /// A wrapper which configures an [AppModule]-based [MultiProvider] and a
 /// [DansdataPortalApp] around a widget for testing.
-class AppWidgetTestScaffold extends StatelessWidget {
-  const AppWidgetTestScaffold({
+class WidgetTestWrapper extends StatelessWidget {
+  const WidgetTestWrapper({
     super.key,
     this.locale = const Locale("en"),
     required this.appModule,

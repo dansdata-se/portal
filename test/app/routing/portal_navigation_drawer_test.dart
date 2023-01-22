@@ -11,7 +11,7 @@ import "package:portal/widgets/dansdata_logo.dart";
 import "../../google_fonts/preload_fonts.dart";
 import "../../shared_preferences/mock_prefs.dart";
 import "../../test_environment.dart";
-import "../widget_test_scaffold.dart";
+import "../widget_test_wrapper.dart";
 
 void main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -32,7 +32,7 @@ void main() async {
       const drawerKey = Key("drawer");
 
       await tester.pumpWidget(
-        AppWidgetTestScaffold(
+        WidgetTestWrapper(
           appModule: appModule,
           child: Scaffold(
             body: AdaptiveLayout(

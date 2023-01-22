@@ -8,7 +8,7 @@ import "package:portal/l10n/language.dart";
 import "../../google_fonts/preload_fonts.dart";
 import "../../shared_preferences/mock_prefs.dart";
 import "../../test_environment.dart";
-import "../widget_test_scaffold.dart";
+import "../widget_test_wrapper.dart";
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -23,7 +23,7 @@ void main() {
       await preloadFonts(tester);
 
       await tester.pumpWidget(
-        AppWidgetTestScaffold(
+        WidgetTestWrapper(
           appModule: appModule,
           child: Builder(
             builder: (context) => Scaffold(appBar: PortalAppBar.of(context)),
@@ -54,7 +54,7 @@ void main() {
       await preloadFonts(tester);
 
       await tester.pumpWidget(
-        AppWidgetTestScaffold(
+        WidgetTestWrapper(
           appModule: appModule,
           child: Builder(
             builder: (context) => Scaffold(appBar: PortalAppBar.of(context)),
@@ -85,7 +85,7 @@ void main() {
       await preloadFonts(tester);
 
       await tester.pumpWidget(
-        AppWidgetTestScaffold(
+        WidgetTestWrapper(
           appModule: appModule,
           child: Builder(
             builder: (context) => Scaffold(appBar: PortalAppBar.of(context)),
