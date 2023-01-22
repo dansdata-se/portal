@@ -13,6 +13,7 @@ analyzer:
   exclude:
     - lib/gen/**
     - lib/**.g.dart
+    - test/**.mocks.dart
 
 linter:
   # The lint rules applied to this project can be customized in the
