@@ -56,3 +56,6 @@ app.*.map.json
 # auto generated database documentation
 /docs/database
 /types/supabase
+
+# Code coverage
+/coverage/
