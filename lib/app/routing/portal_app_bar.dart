@@ -23,6 +23,7 @@ class PortalAppBar extends AppBar {
         titleStyle:
             theme.textTheme.titleLarge!.copyWith(color: Colors.transparent),
         taglineStyle: null,
+        wrap: false,
         border: theme.brightness == Brightness.light,
       ),
       actions: _actions(context),
