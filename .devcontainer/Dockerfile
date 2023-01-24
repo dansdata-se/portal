@@ -8,8 +8,8 @@ ARG POSTGRES_VERSION="14"
 ARG SUPABASE_CLI_VERSION="1.27.10"
 ARG TBLS_VERSION="1.58.0"
 # https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
-ARG FLUTTER_VERSION="3.7.0-1.4.pre"
-ARG FLUTTER_CHANNEL="beta"
+ARG FLUTTER_VERSION="3.7.0"
+ARG FLUTTER_CHANNEL="stable"
 
 # Generic requirements
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive\
