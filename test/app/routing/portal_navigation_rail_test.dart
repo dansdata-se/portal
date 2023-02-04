@@ -1,38 +1,31 @@
 import "package:flutter/material.dart";
 import "package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart";
 import "package:flutter_test/flutter_test.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app_module.dart";
 import "package:portal/app/routing/portal_navigation_rail.dart";
 import "package:portal/app/routing/primary_navigation_entries.dart";
 import "package:portal/app/routing/rail_drawer_trailing.dart";
 import "package:portal/widgets/dansdata_logo.dart";
 
-import "../../google_fonts/preload_fonts.dart";
-import "../../shared_preferences/mock_prefs.dart";
+import "../../test_app_widgets.dart";
 import "../../test_environment.dart";
-import "../widget_test_wrapper.dart";
 
 void main() async {
-  GoogleFonts.config.allowRuntimeFetching = false;
-
-  testWidgets(
+  testAppWidgets(
     "can be scrolled if content is overflowing height",
-    (WidgetTester tester) async {
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       tester.binding.window.physicalSizeTestValue = const Size(100, 150);
       addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-
-      final appModule = await AppModule.initialize(
-        sharedPreferences: MockPrefs({}),
-      );
-
-      await preloadFonts(tester);
 
       const containerKey = Key("parent");
       const railKey = Key("rail");
 
       await tester.pumpWidget(
-        WidgetTestWrapper(
+        wrapper(
           appModule: appModule,
           child: Scaffold(
             body: AdaptiveLayout(

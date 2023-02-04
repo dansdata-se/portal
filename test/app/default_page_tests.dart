@@ -3,31 +3,29 @@ import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_gen/gen_l10n/app_localizations_en.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:go_router/go_router.dart";
+import "package:meta/meta.dart";
 import "package:portal/app/app.dart";
 import "package:portal/app/app_module.dart";
 import "package:portal/app/routing/destination.dart";
 import "package:provider/provider.dart";
 
 import "../go_router/navigation_helper.dart";
-import "../google_fonts/preload_fonts.dart";
-import "../shared_preferences/mock_prefs.dart";
+import "../test_app_widgets.dart";
 import "../test_environment.dart";
 
+@isTest
 void defaultPageTests(
   DestinationWithoutParams destination,
   Key pageKey,
   String Function(AppLocalizations) pageLabel,
 ) {
-  testWidgets(
+  testAppWidgets(
     "Sets page title when used as initial location",
-    (WidgetTester tester) async {
-      await preloadFonts(tester);
-
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       final testRouter = GoRouter(
         initialLocation: destination.location,
         routes: [
@@ -56,16 +54,13 @@ void defaultPageTests(
     skip: !TestEnvironment.testSuite.unit,
   );
 
-  testWidgets(
+  testAppWidgets(
     "Sets page title on navigation",
-    (WidgetTester tester) async {
-      await preloadFonts(tester);
-
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       final testRouter = GoRouter(
         initialLocation: "/",
         routes: [

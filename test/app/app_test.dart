@@ -7,18 +7,17 @@ import "package:portal/app/app_module.dart";
 import "package:provider/provider.dart";
 
 import "../go_router/navigation_helper.dart";
-import "../shared_preferences/mock_prefs.dart";
+import "../test_app_widgets.dart";
 import "../test_environment.dart";
 
 void main() {
-  testWidgets(
+  testAppWidgets(
     "Test app can navigate between routes",
-    (WidgetTester tester) async {
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       final testRouter = GoRouter(
         initialLocation: "/a",
         routes: [

@@ -1,35 +1,27 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app_module.dart";
 import "package:portal/app/auth/layout/auth_layout.dart";
 import "package:portal/app/auth/layout/large_layout.dart";
 import "package:portal/app/auth/layout/small_layout.dart";
 import "package:portal/app/routing/portal_app_bar.dart";
 
-import "../../../google_fonts/preload_fonts.dart";
-import "../../../shared_preferences/mock_prefs.dart";
+import "../../../test_app_widgets.dart";
 import "../../../test_environment.dart";
-import "../../widget_test_wrapper.dart";
 
 void main() {
-  GoogleFonts.config.allowRuntimeFetching = false;
-
-  testWidgets(
+  testAppWidgets(
     "switches layout and buttons when screen is resized down",
-    (WidgetTester tester) async {
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-
-      final appModule = await AppModule.initialize(
-        sharedPreferences: MockPrefs({}),
-      );
-
       tester.binding.window.physicalSizeTestValue = const Size(1920, 1080);
 
-      await preloadFonts(tester);
-
       await tester.pumpWidget(
-        WidgetTestWrapper(
+        wrapper(
           appModule: appModule,
           child: Builder(
             builder: (context) => AuthLayout(child: Container()),
@@ -70,21 +62,18 @@ void main() {
     skip: !TestEnvironment.testSuite.unit,
   );
 
-  testWidgets(
+  testAppWidgets(
     "switches layout and buttons when screen is resized up",
-    (WidgetTester tester) async {
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-
-      final appModule = await AppModule.initialize(
-        sharedPreferences: MockPrefs({}),
-      );
-
       tester.binding.window.physicalSizeTestValue = const Size(320, 840);
 
-      await preloadFonts(tester);
-
       await tester.pumpWidget(
-        WidgetTestWrapper(
+        wrapper(
           appModule: appModule,
           child: Builder(
             builder: (context) => AuthLayout(child: Container()),

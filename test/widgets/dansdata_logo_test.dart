@@ -1,28 +1,21 @@
 import "package:flutter/widgets.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_test/flutter_test.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:portal/app/app_module.dart";
 import "package:portal/widgets/dansdata_logo.dart";
 import "package:provider/provider.dart";
 
-import "../google_fonts/preload_fonts.dart";
-import "../shared_preferences/mock_prefs.dart";
+import "../test_app_widgets.dart";
 import "../test_environment.dart";
 
 void main() async {
-  GoogleFonts.config.allowRuntimeFetching = false;
-
-  testWidgets(
+  testAppWidgets(
     "Displays title and tagline by default",
-    (WidgetTester tester) async {
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
-      await preloadFonts(tester);
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       await tester.pumpWidget(
         MultiProvider(
           providers: appModule.providers,
@@ -39,16 +32,13 @@ void main() async {
     skip: !TestEnvironment.testSuite.smoke,
   );
 
-  testWidgets(
+  testAppWidgets(
     "Can hide title",
-    (WidgetTester tester) async {
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
-      await preloadFonts(tester);
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       await tester.pumpWidget(
         MultiProvider(
           providers: appModule.providers,
@@ -67,16 +57,13 @@ void main() async {
     skip: !TestEnvironment.testSuite.smoke,
   );
 
-  testWidgets(
+  testAppWidgets(
     "Can hide tagline",
-    (WidgetTester tester) async {
-      final mockPrefs = MockPrefs({});
-      final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
-      );
-
-      await preloadFonts(tester);
-
+    (
+      WidgetTester tester,
+      AppTestWrapper wrapper,
+      AppModule appModule,
+    ) async {
       await tester.pumpWidget(
         MultiProvider(
           providers: appModule.providers,
