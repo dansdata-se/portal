@@ -50,6 +50,7 @@ app.*.map.json
 /lib/gen
 *.g.dart
 /test/**/*.mocks.dart
+*.freezed.dart
 
 # vercel
 .vercel

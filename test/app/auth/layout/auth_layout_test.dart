@@ -6,6 +6,7 @@ import "package:portal/app/auth/layout/large_layout.dart";
 import "package:portal/app/auth/layout/small_layout.dart";
 import "package:portal/app/routing/portal_app_bar.dart";
 
+import "../../../device.dart";
 import "../../../test_app_widgets.dart";
 import "../../../test_environment.dart";
 
@@ -17,8 +18,7 @@ void main() {
       AppTestWrapper wrapper,
       AppModule appModule,
     ) async {
-      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-      tester.binding.window.physicalSizeTestValue = const Size(1920, 1080);
+      await tester.simulateDevice(Devices.desktop);
 
       await tester.pumpWidget(
         wrapper(
@@ -43,7 +43,7 @@ void main() {
       expect(find.byKey(PortalAppBar.themeModeToggleKey), findsNothing);
       expect(find.byKey(PortalAppBar.languageToggleKey), findsNothing);
 
-      tester.binding.window.physicalSizeTestValue = const Size(320, 840);
+      await tester.simulateDevice(Devices.mobile);
       await tester.pumpAndSettle();
 
       // Verify layout switch
@@ -69,8 +69,7 @@ void main() {
       AppTestWrapper wrapper,
       AppModule appModule,
     ) async {
-      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-      tester.binding.window.physicalSizeTestValue = const Size(320, 840);
+      await tester.simulateDevice(Devices.mobile);
 
       await tester.pumpWidget(
         wrapper(
@@ -95,7 +94,7 @@ void main() {
       expect(find.byKey(PortalAppBar.themeModeToggleKey), findsOneWidget);
       expect(find.byKey(PortalAppBar.languageToggleKey), findsOneWidget);
 
-      tester.binding.window.physicalSizeTestValue = const Size(1920, 1080);
+      await tester.simulateDevice(Devices.desktop);
       await tester.pumpAndSettle();
 
       // Verify layout switch

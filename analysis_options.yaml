@@ -13,6 +13,9 @@ analyzer:
   exclude:
     - lib/gen/**
     - lib/**.g.dart
+    - lib/**.freezed.dart
+    - test/**.g.dart
+    - test/**.freezed.dart
     - test/**.mocks.dart
 
 linter:

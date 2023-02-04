@@ -7,6 +7,7 @@ import "package:portal/app/routing/primary_navigation_entries.dart";
 import "package:portal/app/routing/rail_drawer_trailing.dart";
 import "package:portal/widgets/dansdata_logo.dart";
 
+import "../../device.dart";
 import "../../test_app_widgets.dart";
 import "../../test_environment.dart";
 
@@ -18,8 +19,9 @@ void main() async {
       AppTestWrapper wrapper,
       AppModule appModule,
     ) async {
-      tester.binding.window.physicalSizeTestValue = const Size(100, 150);
-      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+      await tester.simulateDevice(
+        const Device(name: "100x150", width: 100, height: 150),
+      );
 
       const containerKey = Key("parent");
       const railKey = Key("rail");
