@@ -3,12 +3,16 @@ import "package:flutter_test/flutter_test.dart";
 import "package:go_router/go_router.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:meta/meta.dart";
+import "package:mockito/annotations.dart";
 import "package:portal/app/app.dart";
 import "package:portal/app/app_module.dart";
+@GenerateNiceMocks([MockSpec<AuthService>()])
+import "package:portal/app/auth/auth_service.dart";
 import "package:provider/provider.dart";
 
 import "google_fonts/preload_fonts.dart";
 import "shared_preferences/mock_prefs.dart";
+import "test_app_widgets.mocks.dart";
 
 typedef AppTestWrapper = Widget Function({
   required AppModule appModule,
@@ -41,9 +45,9 @@ void testAppWidgets(
   testWidgets(
     description,
     (WidgetTester tester) async {
-      final mockPrefs = MockPrefs({});
       final appModule = await AppModule.initialize(
-        sharedPreferences: mockPrefs,
+        sharedPreferences: MockPrefs({}),
+        authService: MockAuthService(),
       );
 
       await preloadFonts(tester);
