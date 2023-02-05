@@ -8,6 +8,7 @@
   "labelLogin": "Logga in",
   "labelProfiles": "Profiler",
   "labelResetPassword": "Lösenordsåterställning",
+  "semanticsLogOut": "Logga ut",
   "semanticsSwitchLanguage": "In English",
   "semanticsToggleThemeMode": "Byt mellan ljust och mörkt tema"
 }
