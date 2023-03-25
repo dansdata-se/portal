@@ -30,12 +30,11 @@ class PortalNavigationDrawer extends PortalNavigationWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
-        restorationId: "portalNavigationDrawer.scroll",
-        child: Container(
-          constraints: BoxConstraints(minHeight: constraints.maxHeight),
-          child: IntrinsicHeight(
+    return IntrinsicWidth(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
             child: NavigationDrawer(
               elevation: 0,
               selectedIndex: selectedIndex,
@@ -59,22 +58,20 @@ class PortalNavigationDrawer extends PortalNavigationWidget {
                 ...destinations
                     .map((e) => _toNavigationDrawerDestination(e, context))
                     .toList(growable: false),
-                const Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: Paddings.extraExtraLarge,
-                        bottom: Paddings.large,
-                      ),
-                      child: RailDrawerTrailing(),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
-        ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: Paddings.extraExtraLarge,
+                bottom: Paddings.large,
+              ),
+              child: RailDrawerTrailing(),
+            ),
+          ),
+        ],
       ),
     );
   }

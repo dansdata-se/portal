@@ -8,7 +8,7 @@ ARG POSTGRES_VERSION="14"
 ARG SUPABASE_CLI_VERSION="1.45.2"
 ARG TBLS_VERSION="1.64.0"
 # https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
-ARG FLUTTER_VERSION="3.7.0"
+ARG FLUTTER_VERSION="3.7.8"
 ARG FLUTTER_CHANNEL="stable"
 
 # Generic requirements
