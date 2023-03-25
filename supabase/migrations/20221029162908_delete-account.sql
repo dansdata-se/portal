@@ -14,7 +14,7 @@ BEGIN
 END;
 $BODY$;
 
-COMMENT ON FUNCTION public.api_auth_log_request IS $$Delete the current user''s account.$$;
+COMMENT ON FUNCTION public.delete_account IS $$Delete the current user''s account.$$;
 
 ALTER FUNCTION public.delete_account () OWNER TO postgres;
 
