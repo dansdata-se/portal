@@ -17,9 +17,7 @@ er:
   # Default is false
   comment: true
 include:
-  - api_auth.*
   - auth.users
-  - internal.*
   - public.*
 exclude:
   - auth.*

@@ -195,18 +195,3 @@ VALUES (
   '2022-08-05 14:06:47.337+00',
   '2022-08-05 14:06:47.337002+00');
 
--- Set up test user API token for quicker testing
--- Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aWQiIDogImE3OTQxMDUyLTNkNWQtNDUwYS04YThlLTgzYzlmNjM5ODQ2YSIsICJpc3MiIDogInN1cGFiYXNlIiwgInN1YiIgOiAiZjc5YTViYTYtN2VhZi00MDBlLThmNzAtYzFlOGNiZDk2MzFiIiwgInJvbGUiIDogInRva2VuYXV0aGVkIiwgImlhdCIgOiAxNjYwMzk1ODA1LjIzMjEzNn0.CNf_cN1_rK77hAXnHsNr7wZB-XkThSGhp_d1RqWhIQI
-INSERT INTO api_auth.tokens (
-  id,
-  title,
-  user_id,
-  revoked,
-  created_at)
-VALUES (
-  'a7941052-3d5d-450a-8a8e-83c9f639846a',
-  'Test',
-  'f79a5ba6-7eaf-400e-8f70-c1e8cbd9631b',
-  FALSE,
-  '2022-08-08 17:49:35.722249+00');
-

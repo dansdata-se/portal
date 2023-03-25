@@ -22,11 +22,8 @@ REVOKE EXECUTE ON FUNCTION public.delete_account () FROM PUBLIC;
 
 REVOKE EXECUTE ON FUNCTION public.delete_account () FROM anon;
 
-REVOKE EXECUTE ON FUNCTION public.delete_account () FROM tokenauthed;
-
 GRANT EXECUTE ON FUNCTION public.delete_account () TO authenticated;
 
 GRANT EXECUTE ON FUNCTION public.delete_account () TO postgres;
 
 GRANT EXECUTE ON FUNCTION public.delete_account () TO service_role;
-
