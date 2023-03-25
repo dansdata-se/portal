@@ -14,6 +14,7 @@ Auth: Stores user login data within a secure schema.
 | confirmation_token | varchar(255) |  | true |  |  |  |  |
 | confirmed_at | timestamp with time zone |  | true | GENERATED ALWAYS AS LEAST(email_confirmed_at, phone_confirmed_at) STORED |  |  |  |
 | created_at | timestamp with time zone |  | true |  |  |  |  |
+| deleted_at | timestamp with time zone |  | true |  |  |  |  |
 | email | varchar(255) |  | true |  |  |  |  |
 | email_change | varchar(255) |  | true |  |  |  |  |
 | email_change_confirm_status | smallint | 0 | true |  |  |  |  |
@@ -22,13 +23,14 @@ Auth: Stores user login data within a secure schema.
 | email_change_token_new | varchar(255) |  | true |  |  |  |  |
 | email_confirmed_at | timestamp with time zone |  | true |  |  |  |  |
 | encrypted_password | varchar(255) |  | true |  |  |  |  |
-| id | uuid |  | false |  | [api_auth.user_config](api_auth.user_config.md) |  |  |
+| id | uuid |  | false |  |  |  |  |
 | instance_id | uuid |  | true |  |  |  |  |
 | invited_at | timestamp with time zone |  | true |  |  |  |  |
+| is_sso_user | boolean | false | false |  |  |  | Auth: Set this column to true when the account comes from SSO. These accounts can have duplicate emails. |
 | is_super_admin | boolean |  | true |  |  |  |  |
 | last_sign_in_at | timestamp with time zone |  | true |  |  |  |  |
-| phone | varchar(15) | NULL::character varying | true |  |  |  |  |
-| phone_change | varchar(15) | ''::character varying | true |  |  |  |  |
+| phone | text | NULL::character varying | true |  |  |  |  |
+| phone_change | text | ''::character varying | true |  |  |  |  |
 | phone_change_sent_at | timestamp with time zone |  | true |  |  |  |  |
 | phone_change_token | varchar(255) | ''::character varying | true |  |  |  |  |
 | phone_confirmed_at | timestamp with time zone |  | true |  |  |  |  |
@@ -46,31 +48,23 @@ Auth: Stores user login data within a secure schema.
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | users_email_change_confirm_status_check | CHECK | CHECK (((email_change_confirm_status >= 0) AND (email_change_confirm_status <= 2))) |
-| users_email_key | UNIQUE | UNIQUE (email) |
 | users_phone_key | UNIQUE | UNIQUE (phone) |
 | users_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
-| Name | Definition |
-| ---- | ---------- |
-| confirmation_token_idx | CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text) |
-| email_change_token_current_idx | CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text) |
-| email_change_token_new_idx | CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text) |
-| reauthentication_token_idx | CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text) |
-| recovery_token_idx | CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text) |
-| users_email_key | CREATE UNIQUE INDEX users_email_key ON auth.users USING btree (email) |
-| users_instance_id_email_idx | CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text)) |
-| users_instance_id_idx | CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id) |
-| users_phone_key | CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone) |
-| users_pkey | CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id) |
-
-## Triggers
-
-| Name | Definition |
-| ---- | ---------- |
-| api_auth_handle_deleted_user | CREATE TRIGGER api_auth_handle_deleted_user AFTER DELETE ON auth.users FOR EACH ROW EXECUTE FUNCTION api_auth.handle_deleted_user() |
-| api_handle_new_user | CREATE TRIGGER api_handle_new_user AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION api_auth.handle_new_user() |
+| Name | Definition | Comment |
+| ---- | ---------- | ------- |
+| confirmation_token_idx | CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text) |  |
+| email_change_token_current_idx | CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text) |  |
+| email_change_token_new_idx | CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text) |  |
+| reauthentication_token_idx | CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text) |  |
+| recovery_token_idx | CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text) |  |
+| users_email_partial_key | CREATE UNIQUE INDEX users_email_partial_key ON auth.users USING btree (email) WHERE (is_sso_user = false) | Auth: A partial unique index that applies only when is_sso_user is false |
+| users_instance_id_email_idx | CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text)) |  |
+| users_instance_id_idx | CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id) |  |
+| users_phone_key | CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone) |  |
+| users_pkey | CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id) |  |
 
 ## Relations
 
