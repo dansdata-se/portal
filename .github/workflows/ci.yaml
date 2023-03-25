@@ -47,10 +47,9 @@ jobs:
           sudo apt-get -y install --no-install-recommends pgformatter
 
       - name: Install [tbls](https://github.com/k1LoW/tbls)
-        shell: bash
-        run: |
-          curl -sL https://github.com/k1LoW/tbls/releases/download/v${TBLS_VERSION}/tbls_${TBLS_VERSION}-1_amd64.deb --output /tmp/tbls.deb
-          sudo dpkg -i /tmp/tbls.deb
+        uses: k1low/setup-tbls@v1
+        with:
+          version: v${{ env.TBLS_VERSION }}
 
       - name: Ensure `fix` command does not apply code changes
         run: |
