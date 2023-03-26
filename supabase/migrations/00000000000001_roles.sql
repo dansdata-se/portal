@@ -1,0 +1,12 @@
+--
+-- TODO: Something like the below. Further thinking around permissions and
+-- verification is required.
+--
+-- DO $$
+-- BEGIN
+--   CREATE ROLE editor NOLOGIN NOINHERIT;
+-- EXCEPTION
+--   WHEN duplicate_object THEN
+--     RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
+-- END
+-- $$;

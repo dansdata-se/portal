@@ -27,3 +27,4 @@ GRANT EXECUTE ON FUNCTION public.delete_account () TO authenticated;
 GRANT EXECUTE ON FUNCTION public.delete_account () TO postgres;
 
 GRANT EXECUTE ON FUNCTION public.delete_account () TO service_role;
+

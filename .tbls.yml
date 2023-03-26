@@ -19,6 +19,7 @@ er:
 include:
   - auth.users
   - public.*
+  - profiles.*
 exclude:
   - auth.*
   - pgsodium.*
