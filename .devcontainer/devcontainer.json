@@ -1,0 +1,24 @@
+{
+  "name": "Dansdata Rudimentary Portal",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "rudimentary-portal",
+  "workspaceFolder": "/workspaces/dansdata/portal",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "18"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "csstools.postcss",
+        "bradlc.vscode-tailwindcss",
+        "ms-azuretools.vscode-docker",
+        "firsttris.vscode-jest-runner"
+      ]
+    }
+  },
+  "postCreateCommand": "sudo chmod +x .devcontainer/post_create.sh && exec .devcontainer/post_create.sh"
+}

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  rudimentary-portal:
+    build:
+      dockerfile: ./.devcontainer/Dockerfile
+      context: ..
+    volumes:
+      - ..:/workspaces/dansdata/portal:cached
+    command: sleep infinity
+    networks:
+      - dansdata-net
+
+networks:
+  dansdata-net:
+    driver: bridge
