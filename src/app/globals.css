@@ -1,0 +1,39 @@
+:root {
+  --color-outline: 111, 121, 123;
+  @media (prefers-color-scheme: dark) {
+    --color-outline: 137, 146, 149;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+  * Workaround to allow proper bottom positioning for fixed
+  * elements in mobile browsers with collapsing url bars:
+  * https://stackoverflow.com/a/17555766/1137077
+  */
+  html {
+    @apply h-full;
+  }
+  body {
+    @apply min-h-full h-full;
+  }
+}
+
+@layer components {
+  .prose {
+    h1,
+    h2 {
+      @apply text-primary;
+    }
+
+    h1,
+    h2,
+    h3 {
+      @apply font-normal font-brand;
+    }
+  }
+}

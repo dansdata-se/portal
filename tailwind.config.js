@@ -3,8 +3,25 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      aspectRatio: {
+        cover: "1800 / 945",
+        poster: "1400 / 1960",
+      },
       colors: {
         outline: "rgba(var(--color-outline), <alpha-value>)",
+      },
+      screens: {
+        xs: "475px",
+      },
+    },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
       },
     },
     fontFamily: {
