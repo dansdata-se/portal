@@ -1,0 +1,32 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    invalid_use_of_protected_member: error
+  exclude:
+    - lib/gen/**
+    - lib/**.g.dart
+    - lib/**.freezed.dart
+    - test/**.g.dart
+    - test/**.freezed.dart
+    - test/**.mocks.dart
+
+linter:
+  rules:
+    prefer_double_quotes: true
+    always_declare_return_types: true
+    always_use_package_imports: true
+    require_trailing_commas: true
+    discarded_futures: true
+    avoid_js_rounded_ints: true
+    avoid_returning_null: true
+    cascade_invocations: true
+    directives_ordering: true
+    eol_at_end_of_file: true
+    flutter_style_todos: true
+    only_throw_errors: true
+    prefer_null_aware_method_calls: true
+    unawaited_futures: true
+    unnecessary_parenthesis: true
+    secure_pubspec_urls: true
+    sort_pub_dependencies: true
