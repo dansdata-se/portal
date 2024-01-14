@@ -1,4 +1,4 @@
-import "package:dansdata_portal/app/theme/color_schemes.dart";
+import "package:dansdata_portal/app/theme/theme.dart";
 import "package:flutter/material.dart";
 
 class MyApp extends StatelessWidget {
@@ -9,8 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Flutter Demo",
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      theme: dansdataThemeLight,
+      darkTheme: dansdataThemeDark,
       home: const MyHomePage(title: "Flutter Demo Home Page"),
     );
   }
