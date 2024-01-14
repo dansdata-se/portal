@@ -1,4 +1,5 @@
 import "package:dansdata_portal/app/theme/theme.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
 class MyApp extends StatelessWidget {
@@ -11,7 +12,11 @@ class MyApp extends StatelessWidget {
       title: "Flutter Demo",
       theme: dansdataThemeLight,
       darkTheme: dansdataThemeDark,
-      home: const MyHomePage(title: "Flutter Demo Home Page"),
+      home: kIsWeb
+          ? const SelectionArea(
+              child: MyHomePage(title: "Flutter Demo Home Page"),
+            )
+          : const MyHomePage(title: "Flutter Demo Home Page"),
     );
   }
 }
