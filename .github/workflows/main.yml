@@ -91,6 +91,9 @@ jobs:
           npm install commitlint conventional-changelog-conventionalcommits
           npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
+      - name: Validate code formatting
+        run: dart format --set-exit-if-changed .
+
       - name: Perform code analysis
         run: flutter analyze
 
