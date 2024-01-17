@@ -4,6 +4,15 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
 void main() {
+  _setup();
+  runApp(const MyApp());
+}
+
+void _setup() {
+  _configureFonts();
+}
+
+void _configureFonts() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks(
       ["assets/fonts"],
@@ -14,6 +23,4 @@ void main() {
       await rootBundle.loadString("fonts/RobotoFlex.OFL.txt"),
     );
   });
-
-  runApp(const MyApp());
 }
