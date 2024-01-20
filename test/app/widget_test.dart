@@ -1,29 +1,42 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import "package:dansdata_portal/app/app.dart";
-import "package:flutter/material.dart";
+import "package:dansdata_portal/app/context.dart";
+import "package:dansdata_portal/dependency_injection/dependencies.dart";
+import "package:dansdata_portal/dependency_injection/singleton_component.dart"
+    as singleton_component;
 import "package:flutter_test/flutter_test.dart";
+import "package:get_it/get_it.dart";
 
 void main() {
-  testWidgets("Counter increments smoke test", (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets("Navigation smoke test", (WidgetTester tester) async {
+    GetIt injector = GetIt.asNewInstance();
+    singleton_component.register(injector);
 
-    // Verify that our counter starts at 0.
-    expect(find.text("0"), findsOneWidget);
-    expect(find.text("1"), findsNothing);
+    await tester.pumpWidget(
+      Dependencies(injector: injector, child: const MyApp()),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    expect(find.text("Dashboard Page"), findsOneWidget);
+    expect(
+      injector.get<ApplicationContext>().appTitle.value,
+      equals("Dashboard"),
+    );
+
+    await tester.tap(find.text("Account"));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text("0"), findsNothing);
-    expect(find.text("1"), findsOneWidget);
+    expect(find.text("Account Page"), findsOneWidget);
+    expect(
+      injector.get<ApplicationContext>().appTitle.value,
+      equals("Account"),
+    );
+
+    await tester.tap(find.text("Dashboard"));
+    await tester.pump();
+
+    expect(find.text("Dashboard Page"), findsOneWidget);
+    expect(
+      injector.get<ApplicationContext>().appTitle.value,
+      equals("Dashboard"),
+    );
   });
 }

@@ -1,4 +1,6 @@
+import "package:dansdata_portal/app/context.dart";
 import "package:dansdata_portal/app/view_model/view_model.dart";
+import "package:dansdata_portal/dependency_injection/inject.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/widgets.dart";
 
@@ -13,20 +15,29 @@ abstract class ViewModelWidget<VM extends ViewModel> extends StatefulWidget {
   @nonVirtual
   State<StatefulWidget> createState() => _ViewModelWidgetState<VM>();
 
-  VM createViewModel();
+  VM createViewModel(ApplicationContext appContext);
 
   Widget build(BuildContext context, VM viewModel);
 }
 
 class _ViewModelWidgetState<VM extends ViewModel>
     extends State<ViewModelWidget<VM>> {
-  late VM viewModel;
+  late final VM viewModel;
+  bool isInitialized = false;
 
   @override
-  void initState() {
-    super.initState();
-    viewModel = widget.createViewModel();
-    viewModel.init();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    assert(
+      !isInitialized,
+      "Unexpected dependency change",
+    );
+    if (!isInitialized) {
+      isInitialized = true;
+      final appContext = inject<ApplicationContext>(context);
+      viewModel = widget.createViewModel(appContext);
+      WidgetsBinding.instance.addPostFrameCallback((_) => viewModel.init());
+    }
   }
 
   @override
