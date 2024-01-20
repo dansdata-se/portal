@@ -13,6 +13,13 @@ on:
           This setting has no effect if `release` is true.
           
           Note! iOS builds cost 10x more CI minutes since a mac runner is required.
+
+      web_preview:
+        type: boolean
+        default: false
+        description: |
+          Create a web preview deployment.
+
       release:
         type: boolean
         default: false
@@ -217,7 +224,7 @@ jobs:
 
   release_web:
     name: Create Web Deployment
-    if: inputs.release
+    if: inputs.release || inputs.web_preview
     runs-on: ubuntu-latest
     needs:
       - build_web
@@ -239,14 +246,14 @@ jobs:
         run: npm install vercel@latest
 
       - name: Create Preview Deployment
-        if: github.ref_name != 'main'
+        if: inputs.web_preview || github.ref_name != 'main'
         run: |
           vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
           vercel build --token=$VERCEL_TOKEN
           vercel deploy --prebuilt --token=$VERCEL_TOKEN
 
       - name: Create Production Deployment
-        if: github.ref_name == 'main'
+        if: inputs.release && github.ref_name == 'main'
         run: |
           vercel pull --yes --environment=production --token=$VERCEL_TOKEN
           vercel build --token=$VERCEL_TOKEN
