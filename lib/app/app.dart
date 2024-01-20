@@ -1,4 +1,5 @@
 import "package:dansdata_portal/app/app.viewmodel.dart";
+import "package:dansdata_portal/app/conditional_wrapper.dart";
 import "package:dansdata_portal/app/theme/theme.dart";
 import "package:dansdata_portal/app/view_model/widget.dart";
 import "package:flutter/foundation.dart";
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
       title: "Flutter Demo",
       theme: dansdataThemeLight,
       darkTheme: dansdataThemeDark,
-      home: kIsWeb
-          ? const SelectionArea(
-              child: MyHomePage(title: "Flutter Demo Home Page"),
-            )
-          : const MyHomePage(title: "Flutter Demo Home Page"),
+      home: ConditionalWrapper(
+        shouldWrap: kIsWeb,
+        wrapper: (child) => SelectionArea(child: child),
+        child: const MyHomePage(title: "Flutter Demo Home Page"),
+      ),
     );
   }
 }
