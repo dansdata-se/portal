@@ -101,6 +101,9 @@ jobs:
       - name: Validate code formatting
         run: dart format --set-exit-if-changed .
 
+      - name: Install flutter packages
+        run: flutter pub get
+
       - name: Generate translations
         run: flutter gen-l10n
 
