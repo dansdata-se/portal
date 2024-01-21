@@ -15,28 +15,30 @@ void main() {
       Dependencies(injector: injector, child: const MyApp()),
     );
 
+    final appContext = injector.get<ApplicationContext>();
+
     expect(find.text("Dashboard Page"), findsOneWidget);
     expect(
-      injector.get<ApplicationContext>().appTitle.value,
-      equals("Dashboard"),
+      appContext.appTitle.value,
+      appContext.l10n.value.appTitleDashboard,
     );
 
-    await tester.tap(find.text("Account"));
+    await tester.tap(find.text(appContext.l10n.value.appTitleAccount));
     await tester.pump();
 
     expect(find.text("Account Page"), findsOneWidget);
     expect(
-      injector.get<ApplicationContext>().appTitle.value,
-      equals("Account"),
+      appContext.appTitle.value,
+      appContext.l10n.value.appTitleAccount,
     );
 
-    await tester.tap(find.text("Dashboard"));
+    await tester.tap(find.text(appContext.l10n.value.appTitleDashboard));
     await tester.pump();
 
     expect(find.text("Dashboard Page"), findsOneWidget);
     expect(
-      injector.get<ApplicationContext>().appTitle.value,
-      equals("Dashboard"),
+      appContext.appTitle.value,
+      appContext.l10n.value.appTitleDashboard,
     );
   });
 }

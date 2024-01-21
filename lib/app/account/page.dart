@@ -2,6 +2,7 @@ import "package:dansdata_portal/app/account/viewmodel.dart";
 import "package:dansdata_portal/app/view_model/widget.dart";
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+import "package:signals/signals_flutter.dart";
 
 class AccountPage extends ViewModelWidget<AccountViewModel> {
   const AccountPage({super.key});
@@ -24,7 +25,7 @@ class AccountPage extends ViewModelWidget<AccountViewModel> {
           ),
           FilledButton(
             onPressed: () => viewModel.gotoDashboard(),
-            child: const Text("Dashboard"),
+            child: Text(watchSignal(context, viewModel.buttonText)),
           ),
         ],
       ),

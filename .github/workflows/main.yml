@@ -101,6 +101,29 @@ jobs:
       - name: Validate code formatting
         run: dart format --set-exit-if-changed .
 
+      - name: Generate translations
+        run: flutter gen-l10n
+
+      - name: Check for missing translations
+        run: cat build/l10n_errors.json | tee /dev/tty | jq -e '.=={}' > /dev/null
+
+      - name: Validate that keys are sorted in translation files
+        run: |
+          for f in lib/app/l10n/*.arb
+          do
+            echo "$f"
+            cat "$f" | jq -e '
+              keys_unsorted == (
+                keys_unsorted | sort_by(
+                  # put `@@locale` first
+                  sub("^@@"; "\u0000")
+                  # put `key` before `@key`
+                  | sub("^@(?<name>.+)"; "\(.name)_")
+                )
+              )
+            '
+          done
+
       - name: Perform code analysis
         run: flutter analyze
 

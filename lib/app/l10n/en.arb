@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitleAccount": "Account",
+  "@appTitleAccount": {
+    "description": "appTitle (i.e. html title) to use for the account page."
+  },
+  "appTitleDashboard": "Dashboard",
+  "@appTitleDashboard": {
+    "description": "appTitle (i.e. html title) to use for the dashboard page."
+  }
+}
