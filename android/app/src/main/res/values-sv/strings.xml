@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This file is necessary for gradle to pick up on the swedish translations. -->
+</resources>

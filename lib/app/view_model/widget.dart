@@ -28,10 +28,6 @@ class _ViewModelWidgetState<VM extends ViewModel>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    assert(
-      !isInitialized,
-      "Unexpected dependency change",
-    );
     if (!isInitialized) {
       isInitialized = true;
       final appContext = inject<ApplicationContext>(context);

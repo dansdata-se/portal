@@ -1,5 +1,6 @@
 import "package:dansdata_portal/app/router.dart";
 import "package:flutter/material.dart";
+import "package:flutter/scheduler.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:get_it/get_it.dart";
 import "package:go_router/go_router.dart";
@@ -18,15 +19,17 @@ class ApplicationContext {
   final Signal<double> contentHeight = signal(0.0);
   final Signal<double> contentWidth = signal(0.0);
 
-  bool _initialized = false;
+  bool _l10nInitialized = false;
   late final Signal<AppLocalizations> l10n;
 
   void onAppBuild(BuildContext context) {
-    if (_initialized) {
-      l10n.value = AppLocalizations.of(context)!;
+    if (_l10nInitialized) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        l10n.value = AppLocalizations.of(context)!;
+      });
     } else {
       _logger.d("Initializing ${(ApplicationContext).toString()}");
-      _initialized = true;
+      _l10nInitialized = true;
       l10n = signal(AppLocalizations.of(context)!);
     }
   }
