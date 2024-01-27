@@ -1,4 +1,4 @@
-import "package:dansdata_portal/app/account/viewmodel.dart";
+import "package:dansdata_portal/app/account/view_model.dart";
 import "package:dansdata_portal/app/view_model/widget.dart";
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
