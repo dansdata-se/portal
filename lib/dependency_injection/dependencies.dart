@@ -13,8 +13,10 @@ class Dependencies extends InheritedWidget {
   T get<T extends Object>() => _injector.get<T>();
 
   @override
-  bool updateShouldNotify(covariant Dependencies oldWidget) =>
-      _injector != oldWidget._injector;
+  bool updateShouldNotify(covariant Dependencies oldWidget) {
+    assert(_injector == oldWidget._injector);
+    return _injector != oldWidget._injector;
+  }
 
   static Dependencies? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Dependencies>();
