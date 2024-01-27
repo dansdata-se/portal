@@ -13,5 +13,5 @@ void register(GetIt getIt) {
         printer: PrettyPrinter(),
       ),
     )
-    ..registerSingleton(ApplicationContext(injector: getIt));
+    ..registerSingleton(ApplicationContext(logger: getIt.get()));
 }

@@ -8,10 +8,11 @@ import "package:logger/logger.dart";
 import "package:signals/signals_flutter.dart";
 
 class ApplicationContext {
-  ApplicationContext({required this.injector});
+  ApplicationContext({required Logger logger}) {
+    _logger = logger;
+  }
 
-  final GetIt injector;
-  late final Logger _logger = injector.get();
+  late final Logger _logger;
 
   final Signal<GoRouter> router = signal(mainRouter);
   final Signal<String> appTitle = signal("Dansdata Portal");
