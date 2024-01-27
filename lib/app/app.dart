@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appContext = inject<ApplicationContext>(context);
+    final appContext = context.inject<ApplicationContext>();
     return MaterialApp.router(
       title: watchSignal(context, appContext.appTitle),
       theme: dansdataThemeLight,

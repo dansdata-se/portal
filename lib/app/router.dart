@@ -21,7 +21,7 @@ final mainRouter = GoRouter(
           builder: (context, state, child) => Scaffold(
             body: LayoutBuilder(
               builder: (context, constraints) {
-                final appContext = inject<ApplicationContext>(context);
+                final appContext = context.inject<ApplicationContext>();
                 batch(() {
                   appContext.contentWidth.value = constraints.maxWidth;
                   appContext.contentHeight.value = constraints.maxHeight;

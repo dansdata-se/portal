@@ -30,7 +30,7 @@ class _ViewModelWidgetState<VM extends ViewModel>
     super.didChangeDependencies();
     if (!isInitialized) {
       isInitialized = true;
-      final appContext = inject<ApplicationContext>(context);
+      final appContext = context.inject<ApplicationContext>();
       viewModel = widget.createViewModel(appContext);
       WidgetsBinding.instance.addPostFrameCallback((_) => viewModel.init());
     }
