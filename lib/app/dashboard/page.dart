@@ -11,6 +11,7 @@ class DashboardPage extends ViewModelWidget<DashboardViewModel> {
   @override
   DashboardViewModel createViewModel(context) => DashboardViewModel(
         appContext: context.inject(),
+        localizationService: context.inject(),
         navigationService: context.inject(),
       );
 

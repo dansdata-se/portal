@@ -1,5 +1,6 @@
 import "package:dansdata_portal/app/app.dart";
 import "package:dansdata_portal/app/context.dart";
+import "package:dansdata_portal/app/l10n/localization_service.dart";
 import "package:dansdata_portal/dependency_injection/dependencies.dart";
 import "package:dansdata_portal/dependency_injection/singleton_component.dart"
     as singleton_component;
@@ -16,29 +17,31 @@ void main() {
     );
 
     final appContext = injector.get<ApplicationContext>();
+    final localizationService = injector.get<LocalizationService>();
 
     expect(find.text("Dashboard Page"), findsOneWidget);
     expect(
       appContext.appTitle.value,
-      appContext.l10n.value.appTitleDashboard,
+      localizationService.l10n.value.appTitleDashboard,
     );
 
-    await tester.tap(find.text(appContext.l10n.value.appTitleAccount));
+    await tester.tap(find.text(localizationService.l10n.value.appTitleAccount));
     await tester.pump();
 
     expect(find.text("Account Page"), findsOneWidget);
     expect(
       appContext.appTitle.value,
-      appContext.l10n.value.appTitleAccount,
+      localizationService.l10n.value.appTitleAccount,
     );
 
-    await tester.tap(find.text(appContext.l10n.value.appTitleDashboard));
+    await tester
+        .tap(find.text(localizationService.l10n.value.appTitleDashboard));
     await tester.pump();
 
     expect(find.text("Dashboard Page"), findsOneWidget);
     expect(
       appContext.appTitle.value,
-      appContext.l10n.value.appTitleDashboard,
+      localizationService.l10n.value.appTitleDashboard,
     );
   });
 }

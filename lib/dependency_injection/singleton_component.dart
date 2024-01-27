@@ -1,4 +1,5 @@
 import "package:dansdata_portal/app/context.dart";
+import "package:dansdata_portal/app/l10n/localization_service.dart";
 import "package:dansdata_portal/app/routing/navigation_service.dart";
 import "package:get_it/get_it.dart";
 import "package:logger/logger.dart";
@@ -14,8 +15,11 @@ Future<void> register(GetIt getIt) async {
         printer: PrettyPrinter(),
       ),
     )
-    ..registerSingleton(ApplicationContext(logger: getIt.get()))
-    ..registerSingleton(NavigationService());
+    ..registerSingleton(ApplicationContext())
+    ..registerSingleton(NavigationService())
+    ..registerSingletonAsync(
+      () => LocalizationService.initialize(logger: getIt.get()),
+    );
 
   await getIt.allReady();
 }

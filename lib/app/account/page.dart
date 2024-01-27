@@ -11,6 +11,7 @@ class AccountPage extends ViewModelWidget<AccountViewModel> {
   @override
   AccountViewModel createViewModel(context) => AccountViewModel(
         appContext: context.inject(),
+        localizationService: context.inject(),
         navigationService: context.inject(),
       );
 
