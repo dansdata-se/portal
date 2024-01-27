@@ -1,4 +1,5 @@
 import "package:dansdata_portal/app/context.dart";
+import "package:dansdata_portal/app/routing/navigation_service.dart";
 import "package:dansdata_portal/app/theme/theme.dart";
 import "package:dansdata_portal/dependency_injection/inject.dart";
 import "package:flutter/material.dart";
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appContext = context.inject<ApplicationContext>();
+    final navigationService = context.inject<NavigationService>();
     return MaterialApp.router(
       title: watchSignal(context, appContext.appTitle),
       theme: dansdataThemeLight,
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: watchSignal(context, appContext.appTheme),
-      routerConfig: watchSignal(context, appContext.router),
+      routerConfig: watchSignal(context, navigationService.router),
       builder: (context, child) {
         appContext.onAppBuild(context);
         return child ?? Container();

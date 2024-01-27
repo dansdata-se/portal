@@ -9,8 +9,10 @@ class DashboardPage extends ViewModelWidget<DashboardViewModel> {
   const DashboardPage({super.key});
 
   @override
-  DashboardViewModel createViewModel(context) =>
-      DashboardViewModel(appContext: context.inject());
+  DashboardViewModel createViewModel(context) => DashboardViewModel(
+        appContext: context.inject(),
+        navigationService: context.inject(),
+      );
 
   @override
   Widget build(BuildContext context, DashboardViewModel viewModel) {
@@ -25,7 +27,7 @@ class DashboardPage extends ViewModelWidget<DashboardViewModel> {
             style: theme.textTheme.displayLarge,
           ),
           FilledButton(
-            onPressed: () => viewModel.gotoAccount(),
+            onPressed: () => viewModel.goToAccount(),
             child: Text(watchSignal(context, viewModel.buttonText)),
           ),
         ],

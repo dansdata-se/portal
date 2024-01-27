@@ -9,8 +9,10 @@ class AccountPage extends ViewModelWidget<AccountViewModel> {
   const AccountPage({super.key});
 
   @override
-  AccountViewModel createViewModel(context) =>
-      AccountViewModel(appContext: context.inject());
+  AccountViewModel createViewModel(context) => AccountViewModel(
+        appContext: context.inject(),
+        navigationService: context.inject(),
+      );
 
   @override
   Widget build(BuildContext context, AccountViewModel viewModel) {
@@ -25,7 +27,7 @@ class AccountPage extends ViewModelWidget<AccountViewModel> {
             style: theme.textTheme.displayLarge,
           ),
           FilledButton(
-            onPressed: () => viewModel.gotoDashboard(),
+            onPressed: () => viewModel.goToDashboard(),
             child: Text(watchSignal(context, viewModel.buttonText)),
           ),
         ],

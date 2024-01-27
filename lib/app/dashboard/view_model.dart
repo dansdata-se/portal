@@ -1,12 +1,16 @@
-import "package:dansdata_portal/app/account/page.dart";
 import "package:dansdata_portal/app/context.dart";
+import "package:dansdata_portal/app/routing/navigation_service.dart";
 import "package:dansdata_portal/app/view_model/view_model.dart";
 import "package:signals/signals.dart";
 
 class DashboardViewModel extends ViewModel {
-  DashboardViewModel({required this.appContext});
+  DashboardViewModel({
+    required this.appContext,
+    required this.navigationService,
+  });
 
   final ApplicationContext appContext;
+  final NavigationService navigationService;
 
   late final Computed<String> buttonText =
       computed(() => appContext.l10n.value.appTitleAccount);
@@ -19,5 +23,5 @@ class DashboardViewModel extends ViewModel {
     });
   }
 
-  void gotoAccount() => appContext.router.value.go(AccountPage.route.path);
+  void goToAccount() => navigationService.goToAccount();
 }
