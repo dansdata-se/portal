@@ -5,7 +5,7 @@ import "package:logger/logger.dart";
 
 const scopeName = "SingletonScope";
 
-void register(GetIt getIt) {
+Future<void> register(GetIt getIt) async {
   getIt
     ..pushNewScope(scopeName: scopeName)
     // Registrations
@@ -16,4 +16,6 @@ void register(GetIt getIt) {
     )
     ..registerSingleton(ApplicationContext(logger: getIt.get()))
     ..registerSingleton(NavigationService());
+
+  await getIt.allReady();
 }

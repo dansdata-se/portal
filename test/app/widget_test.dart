@@ -9,7 +9,7 @@ import "package:get_it/get_it.dart";
 void main() {
   testWidgets("Navigation smoke test", (WidgetTester tester) async {
     GetIt injector = GetIt.asNewInstance();
-    singleton_component.register(injector);
+    await singleton_component.register(injector);
 
     await tester.pumpWidget(
       Dependencies(injector: injector, child: const MyApp()),

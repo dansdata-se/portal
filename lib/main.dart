@@ -8,17 +8,17 @@ import "package:flutter/services.dart";
 import "package:flutter_web_plugins/url_strategy.dart";
 import "package:get_it/get_it.dart";
 
-void main() {
-  _setup();
+Future<void> main() async {
+  await _setup();
   runApp(
     Dependencies(injector: GetIt.instance, child: const MyApp()),
   );
 }
 
-void _setup() {
+Future<void> _setup() async {
   usePathUrlStrategy();
   _configureFonts();
-  singleton_component.register(GetIt.instance);
+  await singleton_component.register(GetIt.instance);
 }
 
 void _configureFonts() {
