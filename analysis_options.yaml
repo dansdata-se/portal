@@ -10,6 +10,7 @@ analyzer:
     - test/**.g.dart
     - test/**.freezed.dart
     - test/**.mocks.dart
+    - lib/firebase_options.dart
 
 linter:
   rules:

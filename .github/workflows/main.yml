@@ -98,40 +98,18 @@ jobs:
           npm install commitlint conventional-changelog-conventionalcommits
           npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
-      - name: Validate code formatting
-        run: dart format --set-exit-if-changed .
-
       - name: Install flutter packages
         run: flutter pub get
 
-      - name: Generate translations
-        run: flutter gen-l10n
-
-      - name: Check for missing translations
-        run: cat build/l10n_errors.json | tee /dev/tty | jq -e '.=={}' > /dev/null
-
-      - name: Validate that keys are sorted in translation files
+      # Otherwise checks fail due to missing import of lib/firebase_options.dart
+      - name: Apply Firebase configuration
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
         run: |
-          for f in lib/app/l10n/*.arb
-          do
-            echo "$f"
-            cat "$f" | jq -e '
-              keys_unsorted == (
-                keys_unsorted | sort_by(
-                  # put `@@locale` first
-                  sub("^@@"; "\u0000")
-                  # put `key` before `@key`
-                  | sub("^@(?<name>.+)"; "\(.name)_")
-                )
-              )
-            '
-          done
+          echo $FIREBASE_OPTIONS_DART | base64 --decode > lib/firebase_options.dart
 
-      - name: Perform code analysis
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
+      - name: Run checks
+        run: make check
 
   build_android:
     name: Build Android
@@ -160,10 +138,16 @@ jobs:
           echo "Release Version: ${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}"
           yq --inplace '.version = "${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}"' pubspec.yaml
 
-      - name: Create Production Build
+      - name: Apply Firebase configuration
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
-          flutter build appbundle --obfuscate --split-debug-info=build/app/debug-info
-          flutter build apk --obfuscate --split-per-abi --split-debug-info=build/app/debug-info
+          echo $FIREBASE_OPTIONS_DART | base64 --decode > lib/firebase_options.dart
+          echo $GOOGLE_SERVICES_JSON | base64 --decode > android/app/google-services.json
+
+      - name: Create Production Build
+        run: make build-android
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
@@ -208,8 +192,18 @@ jobs:
           flutter precache --ios
           flutter pub get
 
+      - name: Apply Firebase configuration
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.GOOGLE_SERVICE_INFO_PLIST }}
+          FIREBASE_APP_ID_FILE_JSON: ${{ secrets.FIREBASE_APP_ID_FILE_JSON }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | base64 --decode > lib/firebase_options.dart
+          echo $GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ios/Runner/GoogleService-Info.plist
+          echo $FIREBASE_APP_ID_FILE_JSON | base64 --decode > ios/firebase_app_id_file.json
+
       - name: Create Production Build
-        run: flutter build ipa --obfuscate --split-debug-info=build/ios/debug-info
+        run: make build-ios
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
@@ -239,8 +233,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Apply Firebase configuration
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | base64 --decode > lib/firebase_options.dart
+
       - name: Create Production Build
-        run: flutter build web
+        run: make build-web
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

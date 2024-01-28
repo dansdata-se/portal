@@ -6,28 +6,28 @@ The portal is based on [Flutter](https://flutter.dev) and available for Android,
 
 ## Getting Started
 
+First time setup:
+
+```
+$ make get-started
+```
+
 To start the application:
 
 ```
 $ flutter run
 ```
 
-To build for web:
+To run tests and checks:
 
 ```
-$ flutter build web
+$ make check
 ```
 
-To build for android:
+For more help, see the [Makefile](./Makefile) or
 
 ```
-$ flutter build appbundle
-```
-
-To build for iOS:
-
-```
-$ flutter build ipa
+$ make help
 ```
 
 ## Contributing
