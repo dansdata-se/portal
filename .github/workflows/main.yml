@@ -130,6 +130,13 @@ jobs:
           channel: stable
           cache: true
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Firebase CLI
+        run: npm i firebase-tools
+
       - name: Set Release Version
         run: |
           echo "Release Version: ${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}"
@@ -144,6 +151,8 @@ jobs:
           echo $GOOGLE_SERVICES_JSON | base64 --decode > android/app/google-services.json
 
       - name: Create Production Build
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
         run: make build-android
 
       - name: Upload Build Artifacts

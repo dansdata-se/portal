@@ -83,6 +83,8 @@ build-android:                      ## Build for Android
 build-android: generate
 	flutter build apk --obfuscate --split-per-abi --split-debug-info=build/app/debug-info
 	flutter build appbundle --obfuscate --split-debug-info=build/app/debug-info
+	# Upload symbols to crashlytics
+	npx firebase crashlytics:symbols:upload --app="$(FIREBASE_APP_ID)" build/app/debug-info
 
 build-ios:                          ## Build for iOS
 build-ios: generate
