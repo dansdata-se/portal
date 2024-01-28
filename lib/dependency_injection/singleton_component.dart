@@ -4,6 +4,7 @@ import "package:dansdata_portal/app/routing/navigation_service.dart";
 import "package:dansdata_portal/firebase/crashlytics_logger.dart";
 import "package:firebase_analytics/firebase_analytics.dart";
 import "package:firebase_crashlytics/firebase_crashlytics.dart";
+import "package:firebase_performance/firebase_performance.dart";
 import "package:get_it/get_it.dart";
 import "package:logger/logger.dart";
 
@@ -13,12 +14,14 @@ Future<void> register(
   GetIt getIt,
   FirebaseAnalytics analytics,
   FirebaseCrashlytics crashlytics,
+  FirebasePerformance performance,
 ) async {
   getIt
     ..pushNewScope(scopeName: scopeName)
     // Registrations
     ..registerSingleton<FirebaseAnalytics>(analytics)
     ..registerSingleton<FirebaseCrashlytics>(crashlytics)
+    ..registerSingleton<FirebasePerformance>(performance)
     ..registerSingleton(
       Logger(
         printer: PrettyPrinter(),

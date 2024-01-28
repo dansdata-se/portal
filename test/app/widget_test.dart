@@ -6,6 +6,7 @@ import "package:dansdata_portal/dependency_injection/singleton_component.dart"
     as singleton_component;
 import "package:firebase_analytics/firebase_analytics.dart";
 import "package:firebase_crashlytics/firebase_crashlytics.dart";
+import "package:firebase_performance/firebase_performance.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:get_it/get_it.dart";
 import "package:mockito/annotations.dart";
@@ -15,14 +16,17 @@ import "widget_test.mocks.dart";
 @GenerateNiceMocks([
   MockSpec<FirebaseAnalytics>(),
   MockSpec<FirebaseCrashlytics>(),
+  MockSpec<FirebasePerformance>(),
 ])
 void main() {
   late FirebaseAnalytics analytics;
   late FirebaseCrashlytics crashlytics;
+  late FirebasePerformance performance;
 
   setUp(() {
     analytics = MockFirebaseAnalytics();
     crashlytics = MockFirebaseCrashlytics();
+    performance = MockFirebasePerformance();
   });
 
   testWidgets("Navigation smoke test", (WidgetTester tester) async {
@@ -31,6 +35,7 @@ void main() {
       injector,
       analytics,
       crashlytics,
+      performance,
     );
 
     await tester.pumpWidget(
