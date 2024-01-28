@@ -5,21 +5,24 @@
 
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Dansdataportalen låter dig administrera dina evenemang och annat innehåll i Dansdatas databas.">
+    <meta name="description"
+          content="Dansdataportalen låter dig administrera dina evenemang och annat innehåll i Dansdatas databas.">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Portal">
 
+    <meta name="color-scheme" content="dark light">
+
     <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-touch-icon.png"
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
     />
     <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
         href="/favicon-32x32.png"
     />
     <link
@@ -46,20 +49,33 @@
         content="Portal"
     />
     <meta
-        name="msapplication-TileColor"
-        content="#008395"
+            name="msapplication-TileColor"
+            content="#008395"
     />
     <meta
-        name="theme-color"
-        content="#008395"
+            name="theme-color"
+            content="#008395"
     />
 
     <title>Dansdata Portal</title>
     <link rel="manifest" href="manifest.json">
 
+    <style>
+        html {
+            background-color: #F8FBFC;
+        }
+        @media (prefers-color-scheme: dark) {
+            html {
+                background-color: #091215;
+            }
+        }
+
+    </style>
+
     <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
+
 
     </script>
     <!-- This script adds the flutter initialization JS code -->
