@@ -31,7 +31,6 @@ on:
 env:
   FLUTTER_VERSION: 3.16.x
   NODE_VERSION: 20
-  YQ_VERSION: v4.40.5
 
 jobs:
   calculate_version:
@@ -48,10 +47,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - uses: chrisdickinson/setup-yq@latest
-        with:
-          yq-version: ${{ env.YQ_VERSION }}
 
       - name: Add Current Branch to .releaserc.yml
         if: ${{ !contains(fromJSON('["main"]'), github.ref_name) }}
@@ -129,10 +124,6 @@ jobs:
           channel: stable
           cache: true
 
-      - uses: chrisdickinson/setup-yq@latest
-        with:
-          yq-version: ${{ env.YQ_VERSION }}
-
       - name: Set Release Version
         run: |
           echo "Release Version: ${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}"
@@ -177,10 +168,6 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
-
-      - uses: chrisdickinson/setup-yq@latest
-        with:
-          yq-version: ${{ env.YQ_VERSION }}
 
       - name: Set Release Version
         run: |
@@ -321,10 +308,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - uses: chrisdickinson/setup-yq@latest
-        with:
-          yq-version: ${{ env.YQ_VERSION }}
 
       - name: Add Current Branch to .releaserc.yml
         if: ${{ !contains(fromJSON('["main"]'), github.ref_name) }}
