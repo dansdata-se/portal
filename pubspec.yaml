@@ -1,7 +1,7 @@
 name: dansdata_portal
 description: "Dansdataportalen låter dig administrera dina evenemang och annat innehåll i Dansdatas databas."
 publish_to: none
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: ">=3.2.4 <4.0.0"
