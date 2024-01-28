@@ -21,5 +21,5 @@ Future<void> register(GetIt getIt) async {
       () => LocalizationService.initialize(logger: getIt.get()),
     );
 
-  await getIt.allReady();
+  await getIt.allReady(timeout: const Duration(seconds: 5));
 }
