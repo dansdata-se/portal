@@ -150,6 +150,19 @@ jobs:
           echo $FIREBASE_OPTIONS_DART | base64 --decode > lib/firebase_options.dart
           echo $GOOGLE_SERVICES_JSON | base64 --decode > android/app/google-services.json
 
+      - name: Configure keystore
+        env:
+          UPLOAD_KEYSTORE_JKS: ${{ secrets.UPLOAD_KEYSTORE_JKS }}
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEYSTORE_KEY_ALIAS: ${{ secrets.UPLOAD_KEYSTORE_KEY_ALIAS }}
+          UPLOAD_KEYSTORE_KEY_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_KEY_PASSWORD }}
+        run: |
+          echo $UPLOAD_KEYSTORE_JKS | base64 --decode > android/upload-keystore.jks
+          echo "storePassword=${UPLOAD_KEYSTORE_PASSWORD}" > android/key.properties
+          echo "keyAlias=${UPLOAD_KEYSTORE_KEY_ALIAS}" >> android/key.properties
+          echo "keyPassword=${UPLOAD_KEYSTORE_KEY_PASSWORD}" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
+
       - name: Create Production Build
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
