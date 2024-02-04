@@ -21,8 +21,9 @@ class AccountViewModel extends ViewModel {
       computed(() => _localizationService.l10n.value.appTitleDashboard);
 
   @override
-  void init() {
-    super.init();
+  void initGlobalState() {
+    super.initGlobalState();
+
     viewModelEffect(() {
       _appContext.appTitle.value =
           _localizationService.l10n.value.appTitleAccount;

@@ -4,7 +4,19 @@ abstract class ViewModel {
   final _disposeEffectCallbacks =
       List<signals.EffectCleanup>.empty(growable: true);
 
-  void init() {}
+  /// Called once on startup, allowing this [ViewModel] to configure local
+  /// bindings and effects.
+  ///
+  /// Note that this method is invoked during the initial widget build.
+  /// Therefore, you must not perform actions here that would require parent
+  /// components to rebuild. Instead, see [initGlobalState] for such use-cases.
+  void initLocalState() {}
+
+  /// Called once on startup, allowing this [ViewModel] to configure global
+  /// bindings and effects.
+  ///
+  /// This method is invoked as part of a post-frame callback.
+  void initGlobalState() {}
 
   void dispose() {
     for (var dispose in _disposeEffectCallbacks) {
