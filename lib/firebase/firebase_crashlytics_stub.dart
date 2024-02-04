@@ -1,8 +1,12 @@
+import "package:dansdata_portal/dependency_injection/environments.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:firebase_crashlytics/firebase_crashlytics.dart";
 import "package:flutter/foundation.dart";
+import "package:injectable/injectable.dart";
 
 /// Stub for [FirebaseCrashlytics] as that library is not yet available on web.
+@web
+@Singleton(as: FirebaseCrashlytics)
 class FirebaseCrashlyticsStub implements FirebaseCrashlytics {
   FirebaseCrashlyticsStub({required this.app});
 
@@ -29,29 +33,25 @@ class FirebaseCrashlyticsStub implements FirebaseCrashlytics {
 
   @override
   Map get pluginConstants => {
-        isCrashlyticsCollectionEnabled: false,
-      };
+    isCrashlyticsCollectionEnabled: false,
+  };
 
   @override
-  Future<void> recordError(
-    exception,
-    StackTrace? stack, {
-    reason,
-    Iterable<Object> information = const [],
-    bool? printDetails,
+  Future<void> recordError(exception,
+      StackTrace? stack, {
+        reason,
+        Iterable<Object> information = const [],
+        bool? printDetails,
+        bool fatal = false,
+      }) async {}
+
+  @override
+  Future<void> recordFlutterError(FlutterErrorDetails flutterErrorDetails, {
     bool fatal = false,
   }) async {}
 
   @override
-  Future<void> recordFlutterError(
-    FlutterErrorDetails flutterErrorDetails, {
-    bool fatal = false,
-  }) async {}
-
-  @override
-  Future<void> recordFlutterFatalError(
-    FlutterErrorDetails flutterErrorDetails,
-  ) async {}
+  Future<void> recordFlutterFatalError(FlutterErrorDetails flutterErrorDetails,) async {}
 
   @override
   Future<void> sendUnsentReports() async {}

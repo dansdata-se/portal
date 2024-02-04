@@ -6,9 +6,12 @@ import "package:dansdata_portal/app/routing/router.dart";
 import "package:firebase_analytics/firebase_analytics.dart";
 import "package:flutter/scheduler.dart";
 import "package:go_router/go_router.dart";
+import "package:injectable/injectable.dart";
 import "package:logger/logger.dart";
 import "package:signals/signals.dart";
 
+@singleton
+@injectable
 class NavigationService {
   NavigationService({
     required Logger logger,

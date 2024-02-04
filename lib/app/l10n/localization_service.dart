@@ -4,9 +4,12 @@ import "package:dansdata_portal/async/cancellation_token.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import "package:injectable/injectable.dart";
 import "package:logger/logger.dart";
 import "package:signals/signals.dart";
 
+@singleton
+@injectable
 class LocalizationService with WidgetsBindingObserver {
   LocalizationService._({
     required Logger logger,
@@ -63,8 +66,9 @@ class LocalizationService with WidgetsBindingObserver {
   // https://api.flutter.dev/flutter/dart-core/Finalizer-class.html
   // ignore: unused_field
   static final Finalizer<LocalizationService> _finalizer =
-      Finalizer((instance) => instance._dispose());
+  Finalizer((instance) => instance._dispose());
 
+  @factoryMethod
   static Future<LocalizationService> initialize({
     required Logger logger,
   }) async {

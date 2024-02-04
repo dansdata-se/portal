@@ -47,6 +47,7 @@ lib/gen/**
 *.g.dart
 *.freezed.dart
 *.mocks.dart
+injectable.config.dart
 
 # Firebase configuration
 #
