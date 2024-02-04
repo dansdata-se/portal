@@ -6,26 +6,28 @@ import "package:signals/signals.dart";
 
 class DashboardViewModel extends ViewModel {
   DashboardViewModel({
-    required this.appContext,
-    required this.localizationService,
-    required this.navigationService,
-  });
+    required ApplicationContext appContext,
+    required LocalizationService localizationService,
+    required NavigationService navigationService,
+  })  : _appContext = appContext,
+        _localizationService = localizationService,
+        _navigationService = navigationService;
 
-  final ApplicationContext appContext;
-  final LocalizationService localizationService;
-  final NavigationService navigationService;
+  final ApplicationContext _appContext;
+  final LocalizationService _localizationService;
+  final NavigationService _navigationService;
 
   late final Computed<String> buttonText =
-      computed(() => localizationService.l10n.value.appTitleAccount);
+      computed(() => _localizationService.l10n.value.appTitleAccount);
 
   @override
   void init() {
     super.init();
     viewModelEffect(() {
-      appContext.appTitle.value =
-          localizationService.l10n.value.appTitleDashboard;
+      _appContext.appTitle.value =
+          _localizationService.l10n.value.appTitleDashboard;
     });
   }
 
-  void goToAccount() => navigationService.goToAccount();
+  void goToAccount() => _navigationService.goToAccount();
 }
